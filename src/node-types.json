@@ -16,7 +16,11 @@
           "named": true
         },
         {
-          "type": "text_expr",
+          "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "text",
           "named": true
         }
       ]
@@ -59,6 +63,10 @@
         },
         {
           "type": "expr_pair",
+          "named": true
+        },
+        {
+          "type": "function_call",
           "named": true
         },
         {
@@ -121,6 +129,10 @@
       "types": [
         {
           "type": "expr",
+          "named": true
+        },
+        {
+          "type": "function_call",
           "named": true
         },
         {
@@ -255,23 +267,11 @@
       "required": true,
       "types": [
         {
-          "type": "any_expr",
-          "named": true
-        },
-        {
           "type": "expr",
           "named": true
         },
         {
-          "type": "func0",
-          "named": true
-        },
-        {
-          "type": "func1",
-          "named": true
-        },
-        {
-          "type": "func2",
+          "type": "function_call",
           "named": true
         },
         {
@@ -303,7 +303,21 @@
   {
     "type": "filename",
     "named": true,
-    "fields": {}
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "text",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "for",
@@ -329,14 +343,36 @@
     }
   },
   {
-    "type": "func1",
+    "type": "func",
     "named": true,
     "fields": {}
   },
   {
-    "type": "func2",
+    "type": "function_call",
     "named": true,
-    "fields": {}
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "any_expr",
+          "named": true
+        },
+        {
+          "type": "expr",
+          "named": true
+        },
+        {
+          "type": "func",
+          "named": true
+        },
+        {
+          "type": "text",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "if",
@@ -564,6 +600,10 @@
           "named": true
         },
         {
+          "type": "function_call",
+          "named": true
+        },
+        {
           "type": "text",
           "named": true
         }
@@ -580,6 +620,10 @@
       "types": [
         {
           "type": "expr",
+          "named": true
+        },
+        {
+          "type": "function_call",
           "named": true
         },
         {
@@ -646,21 +690,6 @@
     "type": "text",
     "named": true,
     "fields": {}
-  },
-  {
-    "type": "text_expr",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "text",
-          "named": true
-        }
-      ]
-    }
   },
   {
     "type": "\n",
@@ -1035,20 +1064,16 @@
     "named": false
   },
   {
-    "type": "func0",
-    "named": true
-  },
-  {
     "type": "if",
     "named": false
   },
   {
     "type": "int",
-    "named": true
+    "named": false
   },
   {
     "type": "int",
-    "named": false
+    "named": true
   },
   {
     "type": "last",

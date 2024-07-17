@@ -86,12 +86,12 @@ module.exports = grammar({
 
     command: $ => prec.left(seq(
       'command',
-      repeat1(prec.left(PREC.HIGH, choice($.text, $.expr, $.position))),
+      repeat1(prec.left(PREC.HIGH, choice($._text, $.expr, $.position))),
     )),
 
     print: $ => prec.left(seq(
       'print',
-      repeat1(prec.left(PREC.HIGH, choice($.text, $.expr, $.position))),
+      repeat1(prec.left(PREC.HIGH, choice($._text, $.expr, $.position))),
     )),
 
     sh: $ => seq(
@@ -102,9 +102,9 @@ module.exports = grammar({
     copy: $ => seq(
       'copy',
       choice(
-        alias($.text, $.filename),
+        alias($._text, $.filename),
         seq(
-          optional(alias($.text, $.filename)),
+          optional(alias($._text, $.filename)),
           'thru',
           choice(
             $.macroname,
@@ -149,8 +149,8 @@ module.exports = grammar({
       'arrow',
       'spline',
       'move',
-      repeat1($.text),
-      seq('plot', $.expr, $.text),
+      repeat1($._text),
+      seq('plot', $.expr, $._text),
       seq('[', repeat($.element), ']')
     )),
 
@@ -174,15 +174,15 @@ module.exports = grammar({
       /invis(ible)?/,
       'solid',
       seq(/fill(ed)?/, optional($.expr)),
-      seq(/colou?r(ed)?/, $.text),
-      seq(/outlined?/, $.text),
-      seq('shaded', $.text),
+      seq(/colou?r(ed)?/, $._text),
+      seq(/outlined?/, $._text),
+      seq('shaded', $._text),
       'same',
       /cc?w/,
       /[lr]just/,
       'above', 'below',
       'aligned',
-      repeat1($.text),
+      repeat1($._text),
       $.expr,
     )),
 
@@ -287,18 +287,13 @@ module.exports = grammar({
 
     any_expr: $ => choice(
       $.expr,
-      $.text_expr,
+      prec.left(PREC.CMP, seq($._text, '==', $._text)),
+      prec.left(PREC.CMP, seq($._text, '!=', $._text)),
       prec.left(PREC.CMP, seq($.any_expr, '==', $.any_expr)),
       prec.left(PREC.CMP, seq($.any_expr, '!=', $.any_expr)),
       prec.left(PREC.AND, seq($.any_expr, '&&', $.any_expr)),
       prec.left(PREC.OR, seq($.any_expr, '||', $.any_expr)),
       prec.right(PREC.NOT, seq('!', $.any_expr)),
-    ),
-
-    text_expr: $ => seq(
-      $.text,
-      choice('==', '!='),
-      $.text,
     ),
 
     expr: $ => choice(
@@ -316,9 +311,7 @@ module.exports = grammar({
       prec.right(PREC.EXP, seq($.expr, '^', $.expr)),
       prec.right(PREC.NOT, seq('!', $.expr)),
       prec(PREC.UMINUS, seq('-', $.expr)),
-      seq($.func0, '(', optional($.any_expr), ')',),
-      seq($.func1, '(', $.any_expr, ')'),
-      seq($.func2, '(', $.any_expr, ',', $.any_expr, ')'),
+      $.function_call,
     ),
 
     place_attribute: $ => choice(
@@ -331,9 +324,28 @@ module.exports = grammar({
       '.rad',
     ),
 
+    function_call: $ => choice(
+      seq(alias($.func0, $.func), '(', optional($.any_expr), ')',),
+      seq(alias($.func1, $.func), '(', $.any_expr, ')'),
+      seq(alias($.func2, $.func), '(', $.any_expr, ',', $.any_expr, ')'),
+    ),
+
     func0: $ => 'rand',
     func1: $ => choice('sin', 'cos', 'log', 'exp', 'sqrt', 'int', 'srand'),
     func2: $ => choice('atan2', 'max', 'min'),
+
+    _text: $ => choice(
+      $.text,
+      alias($._sprintf, $.function_call),
+    ),
+
+    _sprintf: $ => seq(
+      alias('sprintf', $.func),
+      '(',
+      $.text,
+      repeat(seq(',', $.expr)),
+      ')',
+    ),
 
     // a positive integer
     int: $ => /[1-9][0-9]*/,
