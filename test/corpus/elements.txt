@@ -93,3 +93,56 @@ Box: box
     (placename)
     (element
       (primitive))))
+
+================================================================================
+lines and splines
+================================================================================
+.PS
+line dashed right 1 then down .5 left 1 then right 1
+spline from start of last line right 1 then down .5 left 1 then right 1
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (primitive)
+    (attribute_list
+      (attribute)
+      (attribute
+        (expr
+          (number)))
+      (attribute)
+      (attribute
+        (expr
+          (number)))
+      (attribute
+        (expr
+          (number)))
+      (attribute)
+      (attribute
+        (expr
+          (number)))))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (position
+          (place
+            (corner)
+            (label
+              (nth_primitive
+                (object_type))))))
+      (attribute
+        (expr
+          (number)))
+      (attribute)
+      (attribute
+        (expr
+          (number)))
+      (attribute
+        (expr
+          (number)))
+      (attribute)
+      (attribute
+        (expr
+          (number))))))

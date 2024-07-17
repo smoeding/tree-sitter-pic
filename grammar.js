@@ -156,7 +156,7 @@ module.exports = grammar({
 
     attribute_list: $ => prec.left(repeat1($.attribute)),
 
-    attribute: $ => prec.left(choice(
+    attribute: $ => prec.right(choice(
       seq(/h(eigh)?t/, $.expr),
       seq(/wid(th)?/, $.expr),
       seq(/rad(ius)?/, $.expr),

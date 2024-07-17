@@ -39,8 +39,7 @@ ellipse "PostScript"
         (expr
           (number)))
       (attribute
-        (text))
-      (attribute
+        (text)
         (text))
       (attribute)))
   (element
@@ -91,8 +90,7 @@ arc; down; move; "arc"
     (primitive)
     (attribute_list
       (attribute
-        (text))
-      (attribute
+        (text)
         (text))))
   (element
     (primitive))
@@ -100,8 +98,7 @@ arc; down; move; "arc"
     (primitive)
     (attribute_list
       (attribute
-        (text))
-      (attribute
+        (text)
         (text))))
   (element
     (primitive))
@@ -151,39 +148,29 @@ line "1" "2" "3" "4" "5";
     (primitive)
     (attribute_list
       (attribute
-        (text))
-      (attribute
+        (text)
         (text))))
   (element
     (primitive)
     (attribute_list
       (attribute
-        (text))
-      (attribute
-        (text))
-      (attribute
+        (text)
+        (text)
         (text))))
   (element
     (primitive)
     (attribute_list
       (attribute
-        (text))
-      (attribute
-        (text))
-      (attribute
-        (text))
-      (attribute
+        (text)
+        (text)
+        (text)
         (text))))
   (element
     (primitive)
     (attribute_list
       (attribute
-        (text))
-      (attribute
-        (text))
-      (attribute
-        (text))
-      (attribute
-        (text))
-      (attribute
+        (text)
+        (text)
+        (text)
+        (text)
         (text)))))
