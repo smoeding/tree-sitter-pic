@@ -1,0 +1,74 @@
+================================================================================
+box width and height
+================================================================================
+.PS
+box wid 2.0 ht 1
+box width 2.0 height 1
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (expr
+          (number)))
+      (attribute
+        (expr
+          (number)))))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (expr
+          (number)))
+      (attribute
+        (expr
+          (number))))))
+
+================================================================================
+circle diameter
+================================================================================
+.PS
+circle diam 1
+circle diameter 0.5
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (expr
+          (number)))))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (expr
+          (number))))))
+
+================================================================================
+arc radius
+================================================================================
+.PS
+arc rad 1
+arc radius 0.5
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (expr
+          (number)))))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (expr
+          (number))))))
