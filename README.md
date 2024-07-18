@@ -3,7 +3,7 @@
 [![License](https://img.shields.io/github/license/smoeding/tree-sitter-pic.svg)](https://raw.githubusercontent.com/smoeding/tree-sitter-pic/master/LICENSE)
 [![Build Status](https://github.com/smoeding/tree-sitter-pic/actions/workflows/ci.yaml/badge.svg)](https://github.com/smoeding/tree-sitter-pic/actions/workflows/ci.yaml)
 
-Pic is a domain-specific language by Brian W. Kernighan for specifying diagrams.
+Pic is a domain-specific language by Brian W. Kernighan for specifying diagrams. It is mostly used in combination with the [groff](https://www.gnu.org/software/groff/) typesetting system but is also a valid input format for some programs found in the [plotutils](https://www.gnu.org/software/plotutils/) package.
 
 ## References
 
