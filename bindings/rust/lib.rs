@@ -5,6 +5,9 @@
 //!
 //! ```
 //! let code = r#"
+//! .PS
+//! box
+//! .PE
 //! "#;
 //! let mut parser = tree_sitter::Parser::new();
 //! parser.set_language(&tree_sitter_pic::language()).expect("Error loading Pic grammar");
