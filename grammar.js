@@ -48,21 +48,20 @@ module.exports = grammar({
   // keyword extraction optimization
   word: $ => $.variable,
 
+  conflicts: $ => [
+    [ $.block ],
+  ],
+
   rules: {
     picture: $ => seq(
       '.PS', optional(seq($.number, optional($.number))), "\n",
-      repeat($._element_list),
+      repeat(seq(optional($.element), $._eoe)),
       choice('.PE', '.PF', '.PY'), "\n",
-    ),
-
-    _element_list: $ => choice(
-      seq($.element, ";"),
-      seq($.element, "\n"),
-      "\n",
     ),
 
     element: $ => prec.left(choice(
       seq($.primitive, optional($.attribute_list)),
+      seq($.block, optional($.attribute_list)),
       seq($.placename, ':', optional(';'), $.element, optional($.position)),
       $.balanced_body,
       $.assignment,
@@ -151,8 +150,20 @@ module.exports = grammar({
       'move',
       repeat1($._text),
       seq('plot', $.expr, $._text),
-      seq('[', repeat($.element), ']')
     )),
+
+    // In contrast to the $._element_list the final element in a $.block does
+    // not need to end with a newline or a semicolon.
+    block: $ => seq(
+      '[',
+      repeat(seq(
+        optional($.element),
+        $._eoe,
+      )),
+      $.element,
+      repeat($._eoe),
+      ']',
+    ),
 
     attribute_list: $ => prec.left(repeat1($.attribute)),
 
@@ -370,10 +381,13 @@ module.exports = grammar({
     balanced_text: $ => seq('{', /[^}]*/, '}'),
 
     // FIXME:
-    balanced_body: $ => seq('{', repeat($._element_list), '}'),
+    balanced_body: $ => seq('{', repeat(seq(optional($.element), $._eoe)), '}'),
 
     macroname: $ => choice($.variable, $.placename),
 
-    comment: _ => token(seq('#', /.*/, "\n")),
+    comment: _ => token(seq('#', /.*/)),
+
+    // End of element
+    _eoe: $ => choice(";", "\n"),
   },
 })

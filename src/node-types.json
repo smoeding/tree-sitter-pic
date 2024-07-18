@@ -120,6 +120,21 @@
     "fields": {}
   },
   {
+    "type": "block",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "element",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "command",
     "named": true,
     "fields": {},
@@ -201,6 +216,10 @@
         },
         {
           "type": "balanced_body",
+          "named": true
+        },
+        {
+          "type": "block",
           "named": true
         },
         {
@@ -591,10 +610,6 @@
       "multiple": true,
       "required": false,
       "types": [
-        {
-          "type": "element",
-          "named": true
-        },
         {
           "type": "expr",
           "named": true
@@ -1069,11 +1084,11 @@
   },
   {
     "type": "int",
-    "named": false
+    "named": true
   },
   {
     "type": "int",
-    "named": true
+    "named": false
   },
   {
     "type": "last",
