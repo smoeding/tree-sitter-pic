@@ -1,5 +1,8 @@
 * text eol=lf
 
+doc/*.png binary
+doc/*.pdf binary
+
 src/*.json linguist-generated
 src/parser.c linguist-generated
 src/tree_sitter/* linguist-generated
