@@ -5,6 +5,26 @@
 
 Pic is a domain-specific language by Brian W. Kernighan for specifying diagrams. It is mostly used in combination with the [groff](https://www.gnu.org/software/groff/) typesetting system but is also a valid input format for some programs found in the [plotutils](https://www.gnu.org/software/plotutils/) package.
 
+A typical document preparation workflow using the PIC preprocessor could look like this:
+
+![PIC demo](doc/demo.png)
+
+The following input was used to create this picture:
+
+``` pic
+.PS
+ellipse "document"
+arrow
+box "PIC"
+arrow
+box "TBL/EQN" "(optional)" dashed
+arrow
+box "TROFF"
+arrow
+ellipse "typesetter"
+.PE
+```
+
 ## References
 
 1. Brian W. Kernighan, [PIC - A Graphics Language for Typesetting - User Manual](https://raw.githubusercontent.com/smoeding/tree-sitter-pic/main/doc/PIC_-_A_Graphics_Language_for_Typesetting_-_User_Manual.pdf)
