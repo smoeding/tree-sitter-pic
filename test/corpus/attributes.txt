@@ -9,6 +9,8 @@ box width 2.0 height 1
 --------------------------------------------------------------------------------
 (picture
   (element
+    (command_line))
+  (element
     (primitive)
     (attribute_list
       (attribute
@@ -25,7 +27,9 @@ box width 2.0 height 1
           (number)))
       (attribute
         (expr
-          (number))))))
+          (number)))))
+  (element
+    (command_line)))
 
 ================================================================================
 circle diameter
@@ -38,6 +42,8 @@ circle diameter 0.5
 --------------------------------------------------------------------------------
 (picture
   (element
+    (command_line))
+  (element
     (primitive)
     (attribute_list
       (attribute
@@ -48,7 +54,9 @@ circle diameter 0.5
     (attribute_list
       (attribute
         (expr
-          (number))))))
+          (number)))))
+  (element
+    (command_line)))
 
 ================================================================================
 arc radius
@@ -61,6 +69,8 @@ arc radius 0.5
 --------------------------------------------------------------------------------
 (picture
   (element
+    (command_line))
+  (element
     (primitive)
     (attribute_list
       (attribute
@@ -71,4 +81,6 @@ arc radius 0.5
     (attribute_list
       (attribute
         (expr
-          (number))))))
+          (number)))))
+  (element
+    (command_line)))

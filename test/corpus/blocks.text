@@ -8,9 +8,13 @@ block with one primitive
 --------------------------------------------------------------------------------
 (picture
   (element
+    (command_line))
+  (element
     (block
       (element
-        (primitive)))))
+        (primitive))))
+  (element
+    (command_line)))
 
 ================================================================================
 block with one primitive and newline
@@ -23,9 +27,13 @@ block with one primitive and newline
 --------------------------------------------------------------------------------
 (picture
   (element
+    (command_line))
+  (element
     (block
       (element
-        (primitive)))))
+        (primitive))))
+  (element
+    (command_line)))
 
 ================================================================================
 block with one primitive and two newlines
@@ -39,9 +47,13 @@ box
 --------------------------------------------------------------------------------
 (picture
   (element
+    (command_line))
+  (element
     (block
       (element
-        (primitive)))))
+        (primitive))))
+  (element
+    (command_line)))
 
 ================================================================================
 block with two primitives and two newlines
@@ -55,11 +67,15 @@ box; arrow
 --------------------------------------------------------------------------------
 (picture
   (element
+    (command_line))
+  (element
     (block
       (element
         (primitive))
       (element
-        (primitive)))))
+        (primitive))))
+  (element
+    (command_line)))
 
 ================================================================================
 block with two primitive and semicolon + two newlines
@@ -73,11 +89,15 @@ box; arrow;
 --------------------------------------------------------------------------------
 (picture
   (element
+    (command_line))
+  (element
     (block
       (element
         (primitive))
       (element
-        (primitive)))))
+        (primitive))))
+  (element
+    (command_line)))
 
 ================================================================================
 block with two primitives and semicolon + newline
@@ -90,11 +110,15 @@ block with two primitives and semicolon + newline
 --------------------------------------------------------------------------------
 (picture
   (element
+    (command_line))
+  (element
     (block
       (element
         (primitive))
       (element
-        (primitive)))))
+        (primitive))))
+  (element
+    (command_line)))
 
 ================================================================================
 block with two primitives and semicolon
@@ -106,8 +130,12 @@ block with two primitives and semicolon
 --------------------------------------------------------------------------------
 (picture
   (element
+    (command_line))
+  (element
     (block
       (element
         (primitive))
       (element
-        (primitive)))))
+        (primitive))))
+  (element
+    (command_line)))

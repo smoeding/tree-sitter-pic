@@ -16,6 +16,8 @@ ellipse "PostScript"
 --------------------------------------------------------------------------------
 (picture
   (element
+    (command_line))
+  (element
     (primitive)
     (attribute_list
       (attribute
@@ -39,7 +41,8 @@ ellipse "PostScript"
         (expr
           (number)))
       (attribute
-        (text)
+        (text))
+      (attribute
         (text))
       (attribute)))
   (element
@@ -58,7 +61,9 @@ ellipse "PostScript"
     (primitive)
       (attribute_list
         (attribute
-          (text)))))
+          (text))))
+  (element
+    (command_line)))
 
 ================================================================================
 figure 3-2
@@ -80,6 +85,8 @@ arc; down; move; "arc"
 --------------------------------------------------------------------------------
 (picture
   (element
+    (command_line))
+  (element
     (primitive)
     (attribute_list
       (attribute
@@ -90,7 +97,8 @@ arc; down; move; "arc"
     (primitive)
     (attribute_list
       (attribute
-        (text)
+        (text))
+      (attribute
         (text))))
   (element
     (primitive))
@@ -98,7 +106,8 @@ arc; down; move; "arc"
     (primitive)
     (attribute_list
       (attribute
-        (text)
+        (text))
+      (attribute
         (text))))
   (element
     (primitive))
@@ -124,7 +133,9 @@ arc; down; move; "arc"
     (primitive))
   (element
     (primitive
-      (text))))
+      (text)))
+  (element
+    (command_line)))
 
 ================================================================================
 figure 3-4
@@ -140,6 +151,8 @@ line "1" "2" "3" "4" "5";
 --------------------------------------------------------------------------------
 (picture
   (element
+    (command_line))
+  (element
     (primitive)
     (attribute_list
       (attribute
@@ -148,29 +161,41 @@ line "1" "2" "3" "4" "5";
     (primitive)
     (attribute_list
       (attribute
-        (text)
+        (text))
+      (attribute
         (text))))
   (element
     (primitive)
     (attribute_list
       (attribute
-        (text)
-        (text)
+        (text))
+      (attribute
+        (text))
+      (attribute
         (text))))
   (element
     (primitive)
     (attribute_list
       (attribute
-        (text)
-        (text)
-        (text)
+        (text))
+      (attribute
+        (text))
+      (attribute
+        (text))
+      (attribute
         (text))))
   (element
     (primitive)
     (attribute_list
       (attribute
-        (text)
-        (text)
-        (text)
-        (text)
-        (text)))))
+        (text))
+      (attribute
+        (text))
+      (attribute
+        (text))
+      (attribute
+        (text))
+      (attribute
+        (text))))
+  (element
+    (command_line)))

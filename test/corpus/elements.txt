@@ -5,7 +5,11 @@ empty picture
 .PE
 
 --------------------------------------------------------------------------------
-(picture)
+(picture
+  (element
+    (command_line))
+  (element
+    (command_line)))
 
 ================================================================================
 empty picture with comment
@@ -16,7 +20,29 @@ empty picture with comment
 
 --------------------------------------------------------------------------------
 (picture
-  (comment))
+  (element
+    (command_line))
+  (comment)
+  (element
+    (command_line)))
+
+================================================================================
+empty picture with comments and empty lines
+================================================================================
+.PS
+# empty
+
+# empty
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (command_line))
+  (comment)
+  (comment)
+  (element
+    (command_line)))
 
 ================================================================================
 elements with newline
@@ -30,11 +56,15 @@ box
 --------------------------------------------------------------------------------
 (picture
   (element
+    (command_line))
+  (element
+    (primitive))
+  (element
     (primitive))
   (element
     (primitive))
   (element
-    (primitive)))
+    (command_line)))
 
 ================================================================================
 elements with semicolon
@@ -46,11 +76,15 @@ box; arrow; box
 --------------------------------------------------------------------------------
 (picture
   (element
+    (command_line))
+  (element
+    (primitive))
+  (element
     (primitive))
   (element
     (primitive))
   (element
-    (primitive)))
+    (command_line)))
 
 ================================================================================
 element with backslash
@@ -63,10 +97,14 @@ box solid \
 --------------------------------------------------------------------------------
 (picture
   (element
+    (command_line))
+  (element
     (primitive)
     (attribute_list
       (attribute)
-      (attribute))))
+      (attribute)))
+  (element
+    (command_line)))
 
 ================================================================================
 primitive
@@ -78,7 +116,11 @@ box
 --------------------------------------------------------------------------------
 (picture
   (element
-    (primitive)))
+    (command_line))
+  (element
+    (primitive))
+  (element
+    (command_line)))
 
 ================================================================================
 primitive with placename
@@ -90,9 +132,13 @@ Box: box
 --------------------------------------------------------------------------------
 (picture
   (element
-    (placename)
+    (command_line))
+  (element
+    (label)
     (element
-      (primitive))))
+      (primitive)))
+  (element
+    (command_line)))
 
 ================================================================================
 lines and splines
@@ -104,6 +150,8 @@ spline from start of last line right 1 then down .5 left 1 then right 1
 
 --------------------------------------------------------------------------------
 (picture
+  (element
+    (command_line))
   (element
     (primitive)
     (attribute_list
@@ -129,9 +177,8 @@ spline from start of last line right 1 then down .5 left 1 then right 1
         (position
           (place
             (corner)
-            (label
-              (nth_primitive
-                (object_type))))))
+            (nth_primitive
+              (object_type)))))
       (attribute
         (expr
           (number)))
@@ -145,4 +192,6 @@ spline from start of last line right 1 then down .5 left 1 then right 1
       (attribute)
       (attribute
         (expr
-          (number))))))
+          (number)))))
+  (element
+    (command_line)))

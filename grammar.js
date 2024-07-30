@@ -25,15 +25,126 @@
 //
 
 const PREC = {
-  OR: 10,
-  AND: 11,
-  CMP: 20,
-  ADD: 21,
-  MUL: 22,
-  UMINUS: 25,
-  NOT: 27,
-  EXP: 28,
-  HIGH: 99,
+  DOT: 10,                      // '.'
+
+  PLOT: 11,
+
+  TEXT: 12,
+  SPRINTF: 12,
+
+  LJUST: 13,
+  RJUST: 13,
+  ABOVE: 13,
+  BELOW: 13,
+
+  LEFT: 14,
+  RIGHT: 14,
+
+  CHOP: 15,
+  SOLID: 15,
+  DASHED: 15,
+  DOTTED: 15,
+  UP: 15,
+  DOWN: 15,
+  FILL: 15,
+  COLORED: 15,
+  OUTLINED: 15,
+
+  XSLANTED: 16,
+  YSLANTED: 16,
+
+  LABEL: 17,
+
+  VARIABLE: 18,
+  NUMBER: 18,
+  BRACKET: 18,                  // '('
+  FUN: 18,
+  SIN: 18,
+  COS: 18,
+  ATAN2: 18,
+  LOG: 18,
+  EXP: 18,
+  SQRT: 18,
+  K_MAX: 18,
+  K_MIN: 18,
+  INT: 18,
+  RAND: 18,
+  SRAND: 18,
+  LAST: 18,
+
+  ORDINAL: 19,
+  HERE: 19,
+  GRAVEACCENT: 19,              // '`'
+
+  BOX: 20,
+  CIRCLE: 20,
+  ELLIPSE: 20,
+  ARC: 20,
+  LINE: 20,
+  ARROW: 20,
+  SPLINE: 20,
+  SQUAREBRACKET: 20,            // '['
+
+  HEIGHT: 21,
+  RADIUS: 21,
+  WIDTH: 21,
+  DIAMETER: 21,
+  FROM: 21,
+  TO: 21,
+  AT: 21,
+  THICKNESS: 21,
+
+  DOT_N: 22,
+  DOT_E: 22,
+  DOT_W: 22,
+  DOT_S: 22,
+  DOT_NE: 22,
+  DOT_SE: 22,
+  DOT_NW: 22,
+  DOT_SW: 22,
+  DOT_C: 22,
+
+  DOT_START: 23,
+  DOT_END: 23,
+  TOP: 23,
+  BOTTOM: 23,
+  LEFT_CORNER: 23,
+  RIGHT_CORNER: 23,
+
+  UPPER: 24,
+  LOWER: 24,
+  NORTH: 24,
+  SOUTH: 24,
+  EAST: 24,
+  WEST: 24,
+  CENTER: 24,
+  START: 24,
+  END: 24,
+
+  COMMA: 25,                    // ','
+
+  OROR: 26,                     // '||'
+
+  ANDAND: 27,                   // '&&'
+
+  EQUALEQUAL: 28,               // '=='
+  NOTEQUAL: 28,                 // '!='
+
+  LESS: 29,                     // '<'
+  GREATER: 29,                  // '>'
+  LESSEQUAL: 29,                // '<='
+  GREATEREQUAL: 29,             // '>='
+
+  BETWEEN: 30,
+  OF: 30,
+
+  AND: 31,
+
+  ADD: 32,                      // '+' '-'
+  MUL: 33,                      // '*' '/' '%'
+  UMINUS: 34,                   // unary '-'
+  NOT: 34,                      // '!' right associative
+  EXP: 35,                      // '^' right associative
 };
 
 module.exports = grammar({
@@ -45,25 +156,32 @@ module.exports = grammar({
     $.comment,
   ],
 
+  externals: $ => [
+    $._side,
+    $._side_corner,
+  ],
+
   // keyword extraction optimization
   word: $ => $.variable,
 
-  conflicts: $ => [
-    [ $.block ],
-  ],
-
   rules: {
     picture: $ => seq(
-      '.PS', optional(seq($.number, optional($.number))), "\n",
-      repeat(seq(optional($.element), $._eoe)),
-      choice('.PE', '.PF', '.PY'), "\n",
+      repeat(seq($._element_list, repeat1("\n"))),
     ),
 
-    element: $ => prec.left(choice(
-      seq($.primitive, optional($.attribute_list)),
-      seq($.block, optional($.attribute_list)),
-      seq($.placename, ':', optional(';'), $.element, optional($.position)),
-      $.balanced_body,
+    _element_list: $ => seq(
+      $.element,
+      repeat(seq(repeat1(";"), $.element)),
+      repeat(";"),
+    ),
+
+    block: $ => seq(
+      '[',
+      $._element_list,
+      ']',
+    ),
+
+    _placeless_element: $ => choice(
       $.assignment,
       $.direction,
       $.command_line,
@@ -74,7 +192,234 @@ module.exports = grammar({
       $.for,
       $.if,
       $.reset,
+    ),
+
+    reset: $ => seq(
+      'reset',
+      optional(prec.left(seq(
+        $.variable,
+        repeat(seq(optional(','), $.variable))
+      ))),
+    ),
+
+    print_args: $ => repeat1($.print_arg),
+
+    print_arg: $ => choice(
+      prec.left(PREC.COMMA, $.expr),     // prec ','
+      $._text,
+      prec.left(PREC.COMMA, $.position), // prec ','
+    ),
+
+    if: $ => seq(
+      'if',
+      $.any_expr,
+      'then',
+      $.delimited,
+      optional(seq('else', $.delimited)),
+    ),
+
+    any_expr: $ => choice(
+      $.expr,
+      $.text_expr,
+    ),
+
+    text_expr: $ => choice(
+      prec.left(PREC.EQUALEQUAL, seq($._text, '==', $._text)),
+      prec.left(PREC.NOTEQUAL, seq($._text, '!=', $._text)),
+      prec.left(PREC.ANDAND, seq($.text_expr, '&&', $.text_expr)),
+      prec.left(PREC.ANDAND, seq($.text_expr, '&&', $.expr)),
+      prec.left(PREC.ANDAND, seq($.expr, '&&', $.text_expr)),
+      prec.left(PREC.OROR, seq($.text_expr, '||', $.text_expr)),
+      prec.left(PREC.OROR, seq($.text_expr, '||', $.expr)),
+      prec.left(PREC.OROR, seq($.expr, '||', $.text_expr)),
+      prec.right(PREC.NOT, seq('!', $.text_expr)),
+    ),
+
+    element: $ => choice(
+      seq($.primitive, optional($.attribute_list)),
+      seq($.block, optional($.attribute_list)),
+      seq($.label, ':', optional(';'), $.element),
+      seq($.label, ':', optional(';'), $.position_not_place),
+      seq($.label, ':', optional(';'), $.place),
+      seq('{', $._element_list, '}', optional($.element)),
+      $._placeless_element,
+    ),
+
+    primitive: $ => choice(
+      'box',
+      'circle',
+      'ellipse',
+      'arc',
+      'line',
+      'arrow',
+      'move',
+      'spline',
+      prec(PREC.TEXT, repeat1($._text)),
+      seq('plot', $.expr, $._text),
+    ),
+
+    attribute_list: $ => prec.left(repeat1($.attribute)),
+
+    attribute: $ => prec.left(choice(
+      seq(/h(eigh)?t/, $.expr),
+      seq(/rad(ius)?/, $.expr),
+      seq(/wid(th)?/, $.expr),
+      seq(/diam(eter)?/, $.expr),
+      $.expr,
+      prec.right(seq('up', optional($.expr))),
+      prec.right(seq('down', optional($.expr))),
+      prec.right(seq($._side, optional($.expr))),
+      seq('from', $.position),
+      seq('to', $.position),
+      seq('at', $.position),
+      //seq('with', $.path),
+      //seq('with', $.position),
+      seq('by', $.expr_pair),
+      'then',
+      'solid',
+      prec.right(seq('dotted', optional($.expr))),
+      prec.right(seq('dashed', optional($.expr))),
+      prec.right(seq(/fill(ed)?/, optional($.expr))),
+      seq('xslanted', $.expr),
+      seq('yslanted', $.expr),
+      seq('shaded', $._text),
+      seq(/colou?r(ed)?/, $._text),
+      seq(/outlined?/, $._text),
+      prec.right(seq('chop', optional($.expr))),
+      'same',
+      /invis(ible)?/,
+      choice('<-', '->', '<->'),
+      /cc?w/,
+      $._text,
+      /[lr]just/,
+      'above',
+      'below',
+      seq(/thick(ness)?/, $.expr),
+      'aligned',
     )),
+
+    _text: $ => choice(
+      prec.left(PREC.TEXT, $.text),
+      prec.left(PREC.SPRINTF, alias($._sprintf, $.function_call)),
+    ),
+
+    _sprintf: $ => seq(
+      alias('sprintf', $.func),
+      '(',
+      $.text,
+      repeat(prec.left(seq(',', $.expr))),
+      ')',
+    ),
+
+    position: $ => choice(
+      $.position_not_place,
+      $.place,
+      seq('(', $.place, ')'),
+    ),
+
+    position_not_place: $ => prec.left(choice(
+      $.expr_pair,
+      seq($.position, choice('+', '-'), $.expr_pair),
+      seq('(', $.position, choice('+', '-'), $.expr_pair, ')'),
+      seq('(', $.position, ',', $.position, ')'),
+      seq(
+        $.expr,
+        optional(seq('of', 'the', 'way')),
+        'between',
+        $.position,
+        'and',
+        $.position,
+      ),
+      seq(
+        '(',
+        $.expr,
+        optional(seq('of', 'the', 'way')),
+        'between',
+        $.position,
+        'and',
+        $.position,
+        ')',
+      ),
+      seq($.expr, '<', $.position, ',', $.position, '>'),
+    )),
+
+    expr_pair: $ => choice(
+      seq($.expr, ',', $.expr),
+      seq('(', $.expr_pair, ')'),
+    ),
+
+    place: $ => prec.right(choice(
+      $._label,
+      seq($._label, $.corner),
+      seq($.corner, optional('of'), $._label),
+      'Here',
+    )),
+
+    _label: $ => choice(
+      seq($.label, optional($.composite_label)),
+      $.nth_primitive,
+      //seq($._label, '.', $.label),
+    ),
+
+    ordinal: $ => choice(
+      prec(PREC.ORDINAL, /[1-9][0-9]*(th|st|nd|rd)/),
+      prec(PREC.GRAVEACCENT, seq('`', $.any_expr, '´th')),
+    ),
+
+    nth_primitive: $ => prec.left(choice(
+      seq($.ordinal, $.object_type),
+      prec(PREC.LAST, seq(optional($.ordinal), 'last', $.object_type)),
+    )),
+
+    object_type: $ => choice(
+      'box',
+      'circle',
+      'ellipse',
+      'arc',
+      'line',
+      'arrow',
+      'spline',
+      seq('[', ']'),
+      $._text,
+    ),
+
+    label_path: $ => prec.left(repeat1($.composite_label)),
+
+    relative_path: $ => prec.left(choice(
+      prec(PREC.CHOP, $.corner),
+      prec(PREC.TEXT, $.label_path),
+      seq($.label_path, $.corner),
+    )),
+
+    path: $ => choice(
+      $.relative_path,
+      seq('(', $.relative_path, ',', $.relative_path, ')'),
+      // The rest of these rules are a compatibility sop.
+      prec(PREC.LAST, seq($.ordinal, 'last', $.object_type, $.relative_path)),
+      prec(PREC.LAST, seq('last', $.object_type, $.relative_path)),
+      seq($.ordinal, $.object_type, $.relative_path),
+      seq($.label, $.relative_path),
+    ),
+
+    corner: $ => choice(
+      '.n', '.t', '.top',
+      '.e', '.r', '.right',
+      '.w', '.l', '.left',
+      '.s', '.b', '.bot', '.bottom',
+      '.ne', '.se', '.nw', '.sw',
+      /\.c(enter)?/,
+      '.start', '.end',
+      seq(
+        choice(
+          'top', 'bottom',
+          $._side_corner,       // left/right
+          'north', 'south', 'east', 'west',
+          'center', 'start', 'end'
+        ),
+        'of',
+      ),
+      seq(choice('upper', 'lower'), choice('left', 'right')),
+    ),
 
     assignment: $ => choice(
       seq($.variable, optional(':'), '=', $.any_expr),
@@ -83,15 +428,15 @@ module.exports = grammar({
 
     direction: $ => choice('up', 'down', 'left', 'right'),
 
-    command: $ => prec.left(seq(
+    command: $ => seq(
       'command',
-      repeat1(prec.left(PREC.HIGH, choice($._text, $.expr, $.position))),
-    )),
+      $.print_args,
+    ),
 
-    print: $ => prec.left(seq(
+    print: $ => seq(
       'print',
-      repeat1(prec.left(PREC.HIGH, choice($._text, $.expr, $.position))),
-    )),
+      $.print_args,
+    ),
 
     sh: $ => seq(
       'sh',
@@ -107,7 +452,7 @@ module.exports = grammar({
           'thru',
           choice(
             $.macroname,
-            $.balanced_body,
+            $.delimited,
           ),
           optional(seq('until', $.text)),
         ),
@@ -123,206 +468,41 @@ module.exports = grammar({
       $.expr,
       optional(seq('by', optional('*'), $.expr)),
       'do',
-      $.balanced_body,
+      $.delimited,
     ),
 
-    if: $ => seq(
-      'if',
-      $.any_expr,
-      'then',
-      $.balanced_body,
-      optional(seq('else', $.balanced_body)),
-    ),
-
-    reset: $ => prec.left(seq(
-      'reset',
-      optional(seq($.variable, repeat(seq(optional(','), $.variable)))),
-    )),
-
-    primitive: $ => prec.left(choice(
-      'box',
-      'circle',
-      'ellipse',
-      'arc',
-      'line',
-      'arrow',
-      'spline',
-      'move',
-      repeat1($._text),
-      seq('plot', $.expr, $._text),
-    )),
-
-    // In contrast to the $._element_list the final element in a $.block does
+    // In contrast to the $.__element_list the final element in a $.block does
     // not need to end with a newline or a semicolon.
-    block: $ => seq(
-      '[',
-      repeat(seq(
-        optional($.element),
-        $._eoe,
-      )),
-      $.element,
-      repeat($._eoe),
-      ']',
-    ),
-
-    attribute_list: $ => prec.left(repeat1($.attribute)),
-
-    attribute: $ => prec.right(choice(
-      seq(/h(eigh)?t/, $.expr),
-      seq(/wid(th)?/, $.expr),
-      seq(/rad(ius)?/, $.expr),
-      seq(/diam(eter)?/, $.expr),
-      seq(/up|down|left|right/, optional($.expr)),
-      seq(/from|to|at/, $.position),
-      seq('with', choice($.path, $.position)),
-      seq('by', $.expr_pair),
-      'then',
-      seq('dotted', optional($.expr)),
-      seq('dashed', optional($.expr)),
-      seq(/thick(ness)?/, $.expr),
-      seq('chop', optional($.expr)),
-      '->', '<-', '<->',
-      /invis(ible)?/,
-      'solid',
-      seq(/fill(ed)?/, optional($.expr)),
-      seq(/colou?r(ed)?/, $._text),
-      seq(/outlined?/, $._text),
-      seq('shaded', $._text),
-      'same',
-      /cc?w/,
-      /[lr]just/,
-      'above', 'below',
-      'aligned',
-      repeat1($._text),
-      $.expr,
-    )),
-
-    position: $ => prec.left(choice(
-      $.position_not_place,
-      $.place,
-      seq('(', $.position, ')'),
-    )),
-
-    position_not_place: $ => prec.left(choice(
-      $.expr_pair,
-      seq($.position, '+', $.expr_pair),
-      seq($.position, '-', $.expr_pair),
-      seq('(', $.position, ',', $.position, ')'),
-      seq(
-        $.expr,
-        optional(seq('of', 'the', 'way')),
-        'between',
-        $.position,
-        'and',
-        $.position,
-      ),
-      seq($.expr, '<', $.position, ',', $.position, '>'),
-    )),
-
-    expr_pair: $ => prec.left(choice(
-      seq($.expr, ',', $.expr),
-      '(', $.expr, ')',
-    )),
-
-    place: $ => prec.left(choice(
-      seq($.label, optional($.corner)),
-      seq($.corner, optional('of'), $.label),
-      'Here',
-    )),
-
-    label: $ => choice(
-      seq($.placename, repeat(seq('.', $.placename))),
-      $.nth_primitive,
-    ),
-
-    corner: $ => choice(
-      '.n', '.e', '.w', '.s',
-      '.ne', '.se', '.nw', '.sw',
-      '.c', '.center', '.start', '.end',
-      '.t', '.top', '.b', '.bot', '.bottom', '.l', '.left', '.r', '.right',
-      'left', 'right',
-      seq(
-        choice(
-          'top',
-          'bottom',
-          'north',
-          'south',
-          'east',
-          'west',
-          'center',
-          'start',
-          'end',
-        ),
-        'of'
-      ),
-      seq('upper', 'left'),
-      seq('lower', 'left'),
-      seq('upper', 'right'),
-      seq('lower', 'right'),
-    ),
-
-    nth_primitive: $ => choice(
-      seq($.ordinal, $.object_type),
-      seq(optional($.ordinal), 'last', $.object_type),
-    ),
-
-    ordinal: $ => choice(
-      seq($.int, choice('th', 'st', 'nd', 'rd')),
-      seq('`', $.any_expr, '´th'),
-    ),
-
-    object_type: $ => choice(
-      'box',
-      'circle',
-      'ellipse',
-      'arc',
-      'line',
-      'arrow',
-      'spline',
-      '[]',
-      $.text,
-    ),
-
-    path: $ => prec.left(PREC.HIGH, choice(
-      $.relative_path,
-      '(', $.relative_path, ',', $.relative_path, ')',
-    )),
-
-    relative_path: $ => prec.left(choice(
-      $.corner,
-      seq(
-        repeat1(seq('.', $.placename)),
-        optional($.corner),
-      ),
-    )),
-
-    any_expr: $ => choice(
-      $.expr,
-      prec.left(PREC.CMP, seq($._text, '==', $._text)),
-      prec.left(PREC.CMP, seq($._text, '!=', $._text)),
-      prec.left(PREC.CMP, seq($.any_expr, '==', $.any_expr)),
-      prec.left(PREC.CMP, seq($.any_expr, '!=', $.any_expr)),
-      prec.left(PREC.AND, seq($.any_expr, '&&', $.any_expr)),
-      prec.left(PREC.OR, seq($.any_expr, '||', $.any_expr)),
-      prec.right(PREC.NOT, seq('!', $.any_expr)),
-    ),
+    // block: $ => seq(
+    //   '[',
+    //   repeat(seq(
+    //     optional($.element),
+    //     $._eoe,
+    //   )),
+    //   $.element,
+    //   repeat($._eoe),
+    //   ']',
+    // ),
 
     expr: $ => choice(
       $.variable,
       $.number,
-      prec.left(PREC.CMP, seq($.expr, '<', $.expr)),
-      prec.left(PREC.CMP, seq($.expr, '>', $.expr)),
-      prec.left(PREC.CMP, seq($.expr, '<=', $.expr)),
-      prec.left(PREC.CMP, seq($.expr, '>=', $.expr)),
-      prec.left(PREC.ADD, seq($.expr, '+', $.expr)),
-      prec.left(PREC.ADD, seq($.expr, '-', $.expr)),
-      prec.left(PREC.MUL, seq($.expr, '*', $.expr)),
-      prec.left(PREC.MUL, seq($.expr, '/', $.expr)),
-      prec.left(PREC.MUL, seq($.expr, '%', $.expr)),
+      seq($.place, $.place_attribute),
+      prec.left(PREC.ADD, seq($.expr, choice('+', '-'), $.expr)),
+      prec.left(PREC.MUL, seq($.expr, choice('*', '/', '%', $.expr))),
       prec.right(PREC.EXP, seq($.expr, '^', $.expr)),
-      prec.right(PREC.NOT, seq('!', $.expr)),
       prec(PREC.UMINUS, seq('-', $.expr)),
+      seq('(', $.any_expr, ')'),
       $.function_call,
+      prec.left(PREC.LESS, seq($.expr, '<', $.expr)),
+      prec.left(PREC.LESSEQUAL, seq($.expr, '<=', $.expr)),
+      prec.left(PREC.GREATER, seq($.expr, '>', $.expr)),
+      prec.left(PREC.GREATEREQUAL, seq($.expr, '>=', $.expr)),
+      prec.left(PREC.EQUALEQUAL, seq($.expr, '==', $.expr)),
+      prec.left(PREC.NOTEQUAL, seq($.expr, '!=', $.expr)),
+      prec.left(PREC.ANDAND, seq($.expr, '&&', $.expr)),
+      prec.left(PREC.OROR, seq($.expr, '||', $.expr)),
+      prec.right(PREC.NOT, seq('!', $.expr)),
     ),
 
     place_attribute: $ => choice(
@@ -345,22 +525,6 @@ module.exports = grammar({
     func1: $ => choice('sin', 'cos', 'log', 'exp', 'sqrt', 'int', 'srand'),
     func2: $ => choice('atan2', 'max', 'min'),
 
-    _text: $ => choice(
-      $.text,
-      alias($._sprintf, $.function_call),
-    ),
-
-    _sprintf: $ => seq(
-      alias('sprintf', $.func),
-      '(',
-      $.text,
-      repeat(seq(',', $.expr)),
-      ')',
-    ),
-
-    // a positive integer
-    int: $ => /[1-9][0-9]*/,
-
     // a floating point numeric constant with optional trailing 'i'
     number: $ => /([0-9]+\.?[0-9]*|\.[0-9]+)([eE][+-]?[0-9]+)?[iI]?/,
 
@@ -373,7 +537,9 @@ module.exports = grammar({
 
     variable: $ => /[a-z][a-zA-Z0-9_]*/,
 
-    placename: $ => /[A-Z][a-zA-Z0-9_]*/,
+    label: $ => /[A-Z][a-zA-Z0-9_]*/,
+
+    composite_label: $ => /\.[A-Z][a-zA-Z0-9_]*/,
 
     command_line: $ => /[.\\].*/,
 
@@ -381,13 +547,16 @@ module.exports = grammar({
     balanced_text: $ => seq('{', /[^}]*/, '}'),
 
     // FIXME:
-    balanced_body: $ => seq('{', repeat(seq(optional($.element), $._eoe)), '}'),
+    delimited: $ => seq(
+      '{',
+      repeat(seq(optional($.element), $._separator)),
+      '}',
+    ),
 
-    macroname: $ => choice($.variable, $.placename),
+    macroname: $ => choice($.variable, $.label),
 
-    comment: _ => token(seq('#', /.*/)),
+    comment: _ => token(/#.*/),
 
-    // End of element
-    _eoe: $ => choice(";", "\n"),
+    _separator: $ => prec.left(repeat1(choice(";", "\n"))),
   },
 })

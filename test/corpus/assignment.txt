@@ -8,11 +8,15 @@ foo = 42
 --------------------------------------------------------------------------------
 (picture
   (element
+    (command_line))
+  (element
     (assignment
       (variable)
       (any_expr
         (expr
-          (number))))))
+          (number)))))
+  (element
+    (command_line)))
 
 ================================================================================
 float
@@ -24,11 +28,15 @@ foo = 42.1
 --------------------------------------------------------------------------------
 (picture
   (element
+    (command_line))
+  (element
     (assignment
       (variable)
       (any_expr
         (expr
-          (number))))))
+          (number)))))
+  (element
+    (command_line)))
 
 ================================================================================
 dimension
@@ -40,11 +48,15 @@ foo = 42.1i
 --------------------------------------------------------------------------------
 (picture
   (element
+    (command_line))
+  (element
     (assignment
       (variable)
       (any_expr
         (expr
-          (number))))))
+          (number)))))
+  (element
+    (command_line)))
 
 ================================================================================
 non-local
@@ -56,11 +68,15 @@ foo := 42
 --------------------------------------------------------------------------------
 (picture
   (element
+    (command_line))
+  (element
     (assignment
       (variable)
       (any_expr
         (expr
-          (number))))))
+          (number)))))
+  (element
+    (command_line)))
 
 ================================================================================
 built-in
@@ -72,8 +88,12 @@ scale = 42
 --------------------------------------------------------------------------------
 (picture
   (element
+    (command_line))
+  (element
     (assignment
       (variable)
       (any_expr
         (expr
-          (number))))))
+          (number)))))
+  (element
+    (command_line)))
