@@ -7,7 +7,7 @@ Pic is a domain-specific language by Brian W. Kernighan for specifying diagrams.
 
 A typical document preparation workflow using the PIC preprocessor could look like this:
 
-![PIC demo](doc/demo.png?raw=true)
+![PIC demo](https://github.com/smoeding/tree-sitter-pic/blob/main/doc/demo.png?raw=true)
 
 The following input was used to create this picture:
 
