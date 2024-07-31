@@ -157,8 +157,8 @@ module.exports = grammar({
   ],
 
   externals: $ => [
-    $._side,
-    $._side_corner,
+    $._side,                    // "left" or "right"
+    $._side_corner,             // "left of" or "right of"
   ],
 
   // keyword extraction optimization
@@ -470,19 +470,6 @@ module.exports = grammar({
       'do',
       $.delimited,
     ),
-
-    // In contrast to the $.__element_list the final element in a $.block does
-    // not need to end with a newline or a semicolon.
-    // block: $ => seq(
-    //   '[',
-    //   repeat(seq(
-    //     optional($.element),
-    //     $._eoe,
-    //   )),
-    //   $.element,
-    //   repeat($._eoe),
-    //   ']',
-    // ),
 
     expr: $ => choice(
       $.variable,
