@@ -97,3 +97,60 @@ scale = 42
           (number)))))
   (element
     (command_line)))
+
+================================================================================
+expression
+================================================================================
+.PS
+foo = (3 + 4) * 6
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (command_line))
+  (element
+    (assignment
+      (variable)
+      (any_expr
+        (expr
+          (expr
+            (expr
+              (any_expr
+                (expr
+                  (expr
+                    (number))
+                (expr
+                  (number))))))
+          (expr
+            (number))))))
+  (element
+    (command_line)))
+
+================================================================================
+function
+================================================================================
+.PS
+pi = atan2(0, -1)
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (command_line))
+  (element
+    (assignment
+      (variable)
+      (any_expr
+        (expr
+          (function_call
+            (func)
+            (any_expr
+              (expr
+                (number)))
+            (any_expr
+              (expr
+                (expr
+                  (number)))))))))
+  (element
+    (command_line)))
