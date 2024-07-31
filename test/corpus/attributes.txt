@@ -84,3 +84,57 @@ arc radius 0.5
           (number)))))
   (element
     (command_line)))
+
+================================================================================
+box using at positions
+================================================================================
+.PS
+box at (0,0)
+box at last box.se
+box at last box.se + (1,0)
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (command_line))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (position
+          (position_not_place
+            (expr_pair
+              (expr_pair
+                (expr
+                  (number))
+                (expr
+                  (number)))))))))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (position
+          (place
+            (nth_primitive
+              (object_type))
+            (corner))))))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (position
+          (position_not_place
+            (position
+              (place
+                (nth_primitive
+                  (object_type))
+            (corner)))
+        (expr_pair
+          (expr_pair
+            (expr
+              (number))
+            (expr
+              (number)))))))))
+  (element
+    (command_line)))
