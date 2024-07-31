@@ -2,28 +2,35 @@
   {
     "type": "assignment",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "expr",
-          "named": true
-        },
-        {
-          "type": "macroname",
-          "named": true
-        },
-        {
-          "type": "text_expr",
-          "named": true
-        },
-        {
-          "type": "variable",
-          "named": true
-        }
-      ]
+    "fields": {
+      "lhs": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "variable",
+            "named": true
+          }
+        ]
+      },
+      "rhs": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expr",
+            "named": true
+          },
+          {
+            "type": "macroname",
+            "named": true
+          },
+          {
+            "type": "text_expr",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -1103,10 +1110,6 @@
   },
   {
     "type": "exp",
-    "named": false
-  },
-  {
-    "type": "figname",
     "named": false
   },
   {

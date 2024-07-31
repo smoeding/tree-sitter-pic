@@ -421,8 +421,17 @@ module.exports = grammar({
     ),
 
     assignment: $ => choice(
-      seq($.variable, optional(':'), '=', $._any_expr),
-      seq('figname', '=', $.macroname),
+      seq(
+        field('lhs', $.variable),
+        optional(':'),
+        '=',
+        field('rhs', $._any_expr),
+      ),
+      seq(
+        field('lhs', alias('figname', $.variable)),
+        '=',
+        field('rhs', $.macroname),
+      ),
     ),
 
     direction: $ => choice('up', 'down', 'left', 'right'),

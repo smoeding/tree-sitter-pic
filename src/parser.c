@@ -11,9 +11,9 @@
 #define ALIAS_COUNT 1
 #define TOKEN_COUNT 154
 #define EXTERNAL_TOKEN_COUNT 2
-#define FIELD_COUNT 0
+#define FIELD_COUNT 2
 #define MAX_ALIAS_SEQUENCE_LENGTH 11
-#define PRODUCTION_ID_COUNT 2
+#define PRODUCTION_ID_COUNT 4
 
 enum ts_symbol_identifiers {
   sym_variable = 1,
@@ -341,7 +341,7 @@ static const char * const ts_symbol_names[] = {
   [anon_sym_left] = "left",
   [anon_sym_right] = "right",
   [anon_sym_EQ] = "=",
-  [anon_sym_figname] = "figname",
+  [anon_sym_figname] = "variable",
   [anon_sym_command] = "command",
   [anon_sym_print] = "print",
   [anon_sym_sh] = "sh",
@@ -556,7 +556,7 @@ static const TSSymbol ts_symbol_map[] = {
   [anon_sym_left] = anon_sym_left,
   [anon_sym_right] = anon_sym_right,
   [anon_sym_EQ] = anon_sym_EQ,
-  [anon_sym_figname] = anon_sym_figname,
+  [anon_sym_figname] = sym_variable,
   [anon_sym_command] = anon_sym_command,
   [anon_sym_print] = anon_sym_print,
   [anon_sym_sh] = anon_sym_sh,
@@ -1106,7 +1106,7 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
   },
   [anon_sym_figname] = {
     .visible = true,
-    .named = false,
+    .named = true,
   },
   [anon_sym_command] = {
     .visible = true,
@@ -1508,6 +1508,31 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
     .visible = true,
     .named = true,
   },
+};
+
+enum ts_field_identifiers {
+  field_lhs = 1,
+  field_rhs = 2,
+};
+
+static const char * const ts_field_names[] = {
+  [0] = NULL,
+  [field_lhs] = "lhs",
+  [field_rhs] = "rhs",
+};
+
+static const TSFieldMapSlice ts_field_map_slices[PRODUCTION_ID_COUNT] = {
+  [2] = {.index = 0, .length = 2},
+  [3] = {.index = 2, .length = 2},
+};
+
+static const TSFieldMapEntry ts_field_map_entries[] = {
+  [0] =
+    {field_lhs, 0},
+    {field_rhs, 2},
+  [2] =
+    {field_lhs, 0},
+    {field_rhs, 3},
 };
 
 static const TSSymbol ts_alias_sequences[PRODUCTION_ID_COUNT][MAX_ALIAS_SEQUENCE_LENGTH] = {
@@ -59445,7 +59470,7 @@ static const TSParseActionEntry ts_parse_actions[] = {
   [1589] = {.entry = {.count = 1, .reusable = true}}, SHIFT(569),
   [1591] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_if, 6, 0, 0),
   [1593] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_copy, 5, 0, 0),
-  [1595] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_assignment, 4, 0, 0),
+  [1595] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_assignment, 4, 0, 3),
   [1597] = {.entry = {.count = 1, .reusable = true}}, SHIFT(567),
   [1599] = {.entry = {.count = 1, .reusable = true}}, SHIFT(370),
   [1601] = {.entry = {.count = 1, .reusable = true}}, SHIFT(380),
@@ -59465,7 +59490,7 @@ static const TSParseActionEntry ts_parse_actions[] = {
   [1629] = {.entry = {.count = 1, .reusable = true}}, SHIFT(531),
   [1631] = {.entry = {.count = 1, .reusable = false}}, REDUCE(sym_copy, 2, 0, 1),
   [1633] = {.entry = {.count = 1, .reusable = false}}, SHIFT(689),
-  [1635] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_assignment, 3, 0, 0),
+  [1635] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_assignment, 3, 0, 2),
   [1637] = {.entry = {.count = 1, .reusable = true}}, SHIFT(426),
   [1639] = {.entry = {.count = 1, .reusable = true}}, SHIFT(432),
   [1641] = {.entry = {.count = 1, .reusable = true}}, SHIFT(528),
@@ -59543,9 +59568,9 @@ static const TSParseActionEntry ts_parse_actions[] = {
   [1786] = {.entry = {.count = 1, .reusable = true}}, SHIFT(631),
   [1788] = {.entry = {.count = 1, .reusable = false}}, REDUCE(sym_element, 2, 0, 0),
   [1790] = {.entry = {.count = 1, .reusable = true}}, SHIFT(122),
-  [1792] = {.entry = {.count = 1, .reusable = false}}, REDUCE(sym_assignment, 4, 0, 0),
+  [1792] = {.entry = {.count = 1, .reusable = false}}, REDUCE(sym_assignment, 4, 0, 3),
   [1794] = {.entry = {.count = 1, .reusable = true}}, SHIFT(148),
-  [1796] = {.entry = {.count = 1, .reusable = false}}, REDUCE(sym_assignment, 3, 0, 0),
+  [1796] = {.entry = {.count = 1, .reusable = false}}, REDUCE(sym_assignment, 3, 0, 2),
   [1798] = {.entry = {.count = 1, .reusable = false}}, REDUCE(sym_copy, 5, 0, 0),
   [1800] = {.entry = {.count = 1, .reusable = false}}, REDUCE(sym_balanced_text, 3, 0, 0),
   [1802] = {.entry = {.count = 1, .reusable = true}}, SHIFT(434),
@@ -59736,6 +59761,9 @@ TS_PUBLIC const TSLanguage *tree_sitter_pic(void) {
     .small_parse_table_map = ts_small_parse_table_map,
     .parse_actions = ts_parse_actions,
     .symbol_names = ts_symbol_names,
+    .field_names = ts_field_names,
+    .field_map_slices = ts_field_map_slices,
+    .field_map_entries = ts_field_map_entries,
     .symbol_metadata = ts_symbol_metadata,
     .public_symbol_map = ts_symbol_map,
     .alias_map = ts_non_terminal_alias_map,
