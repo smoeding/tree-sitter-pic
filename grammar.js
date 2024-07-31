@@ -212,13 +212,13 @@ module.exports = grammar({
 
     if: $ => seq(
       'if',
-      $.any_expr,
+      $._any_expr,
       'then',
       $.delimited,
       optional(seq('else', $.delimited)),
     ),
 
-    any_expr: $ => choice(
+    _any_expr: $ => choice(
       $.expr,
       $.text_expr,
     ),
@@ -362,7 +362,7 @@ module.exports = grammar({
 
     ordinal: $ => choice(
       prec(PREC.ORDINAL, /[1-9][0-9]*(th|st|nd|rd)/),
-      prec(PREC.GRAVEACCENT, seq('`', $.any_expr, '´th')),
+      prec(PREC.GRAVEACCENT, seq('`', $._any_expr, '´th')),
     ),
 
     nth_primitive: $ => prec.left(choice(
@@ -421,7 +421,7 @@ module.exports = grammar({
     ),
 
     assignment: $ => choice(
-      seq($.variable, optional(':'), '=', $.any_expr),
+      seq($.variable, optional(':'), '=', $._any_expr),
       seq('figname', '=', $.macroname),
     ),
 
@@ -478,7 +478,7 @@ module.exports = grammar({
       prec.left(PREC.MUL, seq($.expr, choice('*', '/', '%', $.expr))),
       prec.right(PREC.EXP, seq($.expr, '^', $.expr)),
       prec(PREC.UMINUS, seq('-', $.expr)),
-      seq('(', $.any_expr, ')'),
+      seq('(', $._any_expr, ')'),
       $.function_call,
       prec.left(PREC.LESS, seq($.expr, '<', $.expr)),
       prec.left(PREC.LESSEQUAL, seq($.expr, '<=', $.expr)),
@@ -502,9 +502,9 @@ module.exports = grammar({
     ),
 
     function_call: $ => choice(
-      seq(alias($.func0, $.func), '(', optional($.any_expr), ')',),
-      seq(alias($.func1, $.func), '(', $.any_expr, ')'),
-      seq(alias($.func2, $.func), '(', $.any_expr, ',', $.any_expr, ')'),
+      seq(alias($.func0, $.func), '(', optional($._any_expr), ')',),
+      seq(alias($.func1, $.func), '(', $._any_expr, ')'),
+      seq(alias($.func2, $.func), '(', $._any_expr, ',', $._any_expr, ')'),
     ),
 
     func0: $ => 'rand',

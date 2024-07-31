@@ -12,9 +12,8 @@ foo = 42
   (element
     (assignment
       (variable)
-      (any_expr
-        (expr
-          (number)))))
+      (expr
+        (number))))
   (element
     (command_line)))
 
@@ -32,9 +31,8 @@ foo = 42.1
   (element
     (assignment
       (variable)
-      (any_expr
-        (expr
-          (number)))))
+      (expr
+        (number))))
   (element
     (command_line)))
 
@@ -52,9 +50,8 @@ foo = 42.1i
   (element
     (assignment
       (variable)
-      (any_expr
-        (expr
-          (number)))))
+      (expr
+        (number))))
   (element
     (command_line)))
 
@@ -72,9 +69,8 @@ foo := 42
   (element
     (assignment
       (variable)
-      (any_expr
-        (expr
-          (number)))))
+      (expr
+        (number))))
   (element
     (command_line)))
 
@@ -92,9 +88,8 @@ scale = 42
   (element
     (assignment
       (variable)
-      (any_expr
-        (expr
-          (number)))))
+      (expr
+        (number))))
   (element
     (command_line)))
 
@@ -112,18 +107,16 @@ foo = (3 + 4) * 6
   (element
     (assignment
       (variable)
-      (any_expr
+      (expr
         (expr
           (expr
             (expr
-              (any_expr
-                (expr
-                  (expr
-                    (number))
-                (expr
-                  (number))))))
-          (expr
-            (number))))))
+              (expr
+                (number))
+            (expr
+              (number)))))
+        (expr
+          (number)))))
   (element
     (command_line)))
 
@@ -141,16 +134,13 @@ pi = atan2(0, -1)
   (element
     (assignment
       (variable)
-      (any_expr
-        (expr
-          (function_call
-            (func)
-            (any_expr
-              (expr
-                (number)))
-            (any_expr
-              (expr
-                (expr
-                  (number)))))))))
+      (expr
+        (function_call
+          (func)
+          (expr
+            (number))
+          (expr
+            (expr
+              (number)))))))
   (element
     (command_line)))
