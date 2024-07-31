@@ -86,7 +86,7 @@ arc radius 0.5
     (command_line)))
 
 ================================================================================
-box using at positions
+position using at modifier
 ================================================================================
 .PS
 box at (0,0)
@@ -136,5 +136,104 @@ box at last box.se + (1,0)
               (number))
             (expr
               (number)))))))))
+  (element
+    (command_line)))
+
+================================================================================
+position using to modifier
+================================================================================
+.PS
+box "from"
+move 0.75;
+ellipse "to"
+arc cw from 1/3 of the way \
+  between last box .n and last box .ne to last ellipse .n;
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (command_line))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (text))))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (expr
+          (number)))))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (text))))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute)
+      (attribute
+        (position
+          (position_not_place
+            (expr
+              (expr
+                (expr
+                  (number)))
+                (expr
+                  (number)))
+            (position
+              (place
+                (nth_primitive
+                  (object_type))
+              (corner)))
+            (position
+              (place
+                (nth_primitive
+                  (object_type))
+                (corner))))))
+      (attribute
+        (position
+          (place
+            (nth_primitive
+              (object_type))
+            (corner))))))
+  (element
+    (command_line)))
+
+================================================================================
+position using with modifier
+================================================================================
+.PS
+box ht 0.5; box ht 0.75 with .sw at last box .se
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (command_line))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (expr
+          (number)))))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (expr
+          (number)))
+      (attribute
+        (path
+          (relative_path
+            (corner))))
+      (attribute
+        (position
+          (place
+            (nth_primitive
+              (object_type))
+            (corner))))))
   (element
     (command_line)))

@@ -272,8 +272,8 @@ module.exports = grammar({
       seq('from', $.position),
       seq('to', $.position),
       seq('at', $.position),
-      //seq('with', $.path),
-      //seq('with', $.position),
+      seq('with', $.path),
+      seq('with', $.position),
       seq('by', $.expr_pair),
       'then',
       'solid',
@@ -355,11 +355,10 @@ module.exports = grammar({
       'Here',
     )),
 
-    _label: $ => choice(
+    _label: $ => prec.right(choice(
       seq($.label, optional($.composite_label)),
       $.nth_primitive,
-      //seq($._label, '.', $.label),
-    ),
+    )),
 
     ordinal: $ => choice(
       prec(PREC.ORDINAL, /[1-9][0-9]*(th|st|nd|rd)/),
@@ -383,7 +382,7 @@ module.exports = grammar({
       $._text,
     ),
 
-    label_path: $ => prec.left(repeat1($.composite_label)),
+    label_path: $ => repeat1(prec(PREC.LABEL, $.composite_label)),
 
     relative_path: $ => prec.left(choice(
       prec(PREC.CHOP, $.corner),

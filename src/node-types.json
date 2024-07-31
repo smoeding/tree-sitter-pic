@@ -62,6 +62,10 @@
           "named": true
         },
         {
+          "type": "path",
+          "named": true
+        },
+        {
           "type": "position",
           "named": true
         },
@@ -486,6 +490,33 @@
       "types": [
         {
           "type": "any_expr",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "path",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "label",
+          "named": true
+        },
+        {
+          "type": "object_type",
+          "named": true
+        },
+        {
+          "type": "ordinal",
+          "named": true
+        },
+        {
+          "type": "relative_path",
           "named": true
         }
       ]
@@ -1247,6 +1278,10 @@
   },
   {
     "type": "west",
+    "named": false
+  },
+  {
+    "type": "with",
     "named": false
   },
   {
