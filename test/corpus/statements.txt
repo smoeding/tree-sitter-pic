@@ -1,0 +1,426 @@
+================================================================================
+command
+================================================================================
+.PS
+x = 14
+command ".ds string x is " x "."
+.PE
+\*[string]
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (command_line))
+  (element
+    (assignment
+      (variable)
+      (expr
+        (number))))
+  (element
+    (command
+      (print_args
+        (print_arg
+          (text))
+        (print_arg
+          (expr
+            (variable)))
+        (print_arg
+          (text)))))
+  (element
+    (command_line))
+  (element
+    (command_line)))
+
+================================================================================
+print
+================================================================================
+.PS
+x = 14
+print "x is " x "."
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (command_line))
+  (element
+    (assignment
+      (variable)
+      (expr
+        (number))))
+  (element
+    (print
+      (print_args
+        (print_arg
+          (text))
+        (print_arg
+          (expr
+            (variable)))
+        (print_arg
+          (text)))))
+  (element
+    (command_line)))
+
+================================================================================
+sh
+================================================================================
+.PS
+sh { echo "foo" }
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (command_line))
+  (element
+    (sh
+      (balanced_text)))
+  (element
+    (command_line)))
+
+================================================================================
+copy "file"
+================================================================================
+.PS
+copy "file"
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (command_line))
+  (element
+    (copy
+      (filename
+        (text))))
+  (element
+    (command_line)))
+
+================================================================================
+copy thru macro-name
+:skip
+================================================================================
+.PS
+copy thru do_circle
+0 0 .05
+1 1 .1
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (command_line))
+  (element
+    (copy
+      (text)))
+  (element
+    (command_line)))
+
+================================================================================
+copy thru macro-text
+:skip
+================================================================================
+.PS
+copy thru { circle rad $3 at $1,$2 }
+0 0 .05
+1 1 .1
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (command_line))
+  (element
+    (copy
+      (text)))
+  (element
+    (command_line)))
+
+================================================================================
+for loop
+================================================================================
+.PS
+for i = 1 to 5 do {
+  print i
+}
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (command_line))
+  (element
+    (for
+      (variable)
+      (expr
+        (number))
+      (expr
+        (number))
+      (delimited
+        (element
+          (print
+            (print_args
+              (print_arg
+                (expr
+                  (variable)))))))))
+  (element
+    (command_line)))
+
+================================================================================
+for loop using additive steps
+================================================================================
+.PS
+for i = 1 to 5 by 2 do {
+  print i
+}
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (command_line))
+  (element
+    (for
+      (variable)
+      (expr
+        (number))
+      (expr
+        (number))
+      (expr
+        (number))
+      (delimited
+        (element
+          (print
+            (print_args
+              (print_arg
+                (expr
+                  (variable)))))))))
+  (element
+    (command_line)))
+
+================================================================================
+for loop using multiplicative steps
+================================================================================
+.PS
+for i = 1 to 5 by * 2 do {
+  print i
+}
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (command_line))
+  (element
+    (for
+      (variable)
+      (expr
+        (number))
+      (expr
+        (number))
+      (expr
+        (number))
+      (delimited
+        (element
+          (print
+            (print_args
+              (print_arg
+                (expr
+                  (variable)))))))))
+  (element
+    (command_line)))
+
+================================================================================
+for loop with delimited block in next line
+================================================================================
+.PS
+for i = 1 to 5 do
+{
+  print i
+}
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (command_line))
+  (element
+    (for
+      (variable)
+      (expr
+        (number))
+      (expr
+        (number))
+      (delimited
+        (element
+          (print
+            (print_args
+              (print_arg
+                (expr
+                  (variable)))))))))
+  (element
+    (command_line)))
+
+================================================================================
+if then
+================================================================================
+.PS
+if 1 == 1 then
+{
+  print "foo"
+}
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (command_line))
+  (element
+    (if
+      (expr
+        (expr
+          (number))
+        (expr
+          (number)))
+      (delimited
+        (element
+          (print
+            (print_args
+              (print_arg
+                (text))))))))
+  (element
+    (command_line)))
+
+================================================================================
+if then else
+================================================================================
+.PS
+if 1 == 1 then {
+  print "foo"
+} else {
+  print "bar"
+}
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (command_line))
+  (element
+    (if
+      (expr
+        (expr
+          (number))
+        (expr
+          (number)))
+      (delimited
+        (element
+          (print
+            (print_args
+              (print_arg
+                (text))))))
+      (delimited
+        (element
+          (print
+            (print_args
+              (print_arg
+                (text))))))))
+  (element
+    (command_line)))
+
+================================================================================
+if oneliner
+:skip
+================================================================================
+.PS
+if 1 == 1 then { print "foo" }
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (command_line))
+  (element
+    (if
+      (expr
+        (expr
+          (number))
+        (expr
+          (number)))
+      (delimited
+        (element
+          (print
+            (print_args
+              (print_arg
+                (text))))))))
+  (element
+    (command_line)))
+
+================================================================================
+reset all variables
+================================================================================
+.PS
+reset
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (command_line))
+  (element
+    (reset))
+  (element
+    (command_line)))
+
+================================================================================
+reset one variable
+================================================================================
+.PS
+reset scale
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (command_line))
+  (element
+    (reset
+      (variable)))
+  (element
+    (command_line)))
+
+================================================================================
+reset two variables
+================================================================================
+.PS
+reset boxwid boxht
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (command_line))
+  (element
+    (reset
+      (variable)
+      (variable)))
+  (element
+    (command_line)))
+
+================================================================================
+reset two variables with comma
+================================================================================
+.PS
+reset boxwid,boxht
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (command_line))
+  (element
+    (reset
+      (variable)
+      (variable)))
+  (element
+    (command_line)))
