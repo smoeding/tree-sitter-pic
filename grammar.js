@@ -541,17 +541,14 @@ module.exports = grammar({
     // FIXME:
     balanced_text: $ => seq('{', /[^}]*/, '}'),
 
-    // FIXME:
     delimited: $ => seq(
       '{',
-      repeat(seq(optional($.element), $._separator)),
+      $._element_list,
       '}',
     ),
 
     macroname: $ => choice($.variable, $.label),
 
     comment: _ => token(/#.*/),
-
-    _separator: $ => prec.left(repeat1(choice(";", "\n"))),
   },
 })
