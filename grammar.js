@@ -524,10 +524,18 @@ module.exports = grammar({
     number: $ => /([0-9]+\.?[0-9]*|\.[0-9]+)([eE][+-]?[0-9]+)?[iI]?/,
 
     // a string enclosed in double quotes
-    text: $ => seq(
-      '"',
-      /[^"]*/,
-      '"',
+    text: $ => seq('"', repeat($._string), '"'),
+
+    _string: $ => choice(/[^"\\]+/, $.escape_sequence),
+
+    // Escape sequences like font switching as used by troff
+    escape_sequence: $ => choice(
+      /\\\(../,
+      /\\f[0-9]/,
+      /\\[*fgn]./,
+      /\\[*fgn]\(../,
+      /\\s[+-]?[0-9]/,
+      /\\./,
     ),
 
     variable: $ => /[a-z][a-zA-Z0-9_]*/,

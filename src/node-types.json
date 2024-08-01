@@ -250,6 +250,11 @@
     }
   },
   {
+    "type": "escape_sequence",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "expr",
     "named": true,
     "fields": {},
@@ -743,7 +748,17 @@
   {
     "type": "text",
     "named": true,
-    "fields": {}
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "escape_sequence",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "text_expr",

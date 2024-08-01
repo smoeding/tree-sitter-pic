@@ -31,7 +31,10 @@ ellipse "PostScript"
         (expr
           (number)))
       (attribute
-        (text))))
+        (text
+          (escape_sequence)
+          (escape_sequence)
+          (escape_sequence)))))
   (element
     (primitive))
   (element
@@ -41,7 +44,13 @@ ellipse "PostScript"
         (expr
           (number)))
       (attribute
-        (text))
+        (text
+          (escape_sequence)
+          (escape_sequence)
+          (escape_sequence)
+          (escape_sequence)
+          (escape_sequence)
+          (escape_sequence)))
       (attribute
         (text))
       (attribute)))
@@ -54,7 +63,10 @@ ellipse "PostScript"
         (expr
           (number)))
       (attribute
-        (text))))
+        (text
+          (escape_sequence)
+          (escape_sequence)
+          (escape_sequence)))))
   (element
     (primitive))
   (element
