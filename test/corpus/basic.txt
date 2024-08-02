@@ -283,3 +283,78 @@ ellipse
     (primitive))
   (element
     (command_line)))
+
+================================================================================
+figure 10-3
+================================================================================
+.PS
+A: box "yin"; move;
+B: box "yang";
+arrow right at 1/4 <A.e,A.ne>;
+arrow left  at 1/4 <B.w,B.sw>;
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (command_line))
+  (element
+    (label)
+    (element
+      (primitive)
+      (attribute_list
+        (attribute
+          (text)))))
+  (element
+    (primitive))
+  (element
+    (label)
+    (element
+      (primitive)
+      (attribute_list
+        (attribute
+          (text)))))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute)
+      (attribute
+        (position
+          (position_not_place
+            (expr
+              (expr
+                (expr
+                  (number)))
+              (expr
+                (number)))
+            (position
+              (place
+                (label)
+                (corner)))
+            (position
+              (place
+                (label)
+                (corner))))))))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute)
+      (attribute
+        (position
+          (position_not_place
+            (expr
+              (expr
+                (expr
+                  (number)))
+              (expr
+                (number)))
+            (position
+              (place
+                (label)
+                (corner)))
+            (position
+              (place
+                (label)
+                (corner))))))))
+  (element
+    (command_line)))

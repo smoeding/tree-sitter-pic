@@ -317,9 +317,9 @@ module.exports = grammar({
       seq('(', $.place, ')'),
     ),
 
-    position_not_place: $ => prec.left(choice(
+    position_not_place: $ => choice(
       $.expr_pair,
-      seq($.position, choice('+', '-'), $.expr_pair),
+      prec(PREC.ADD, seq($.position, choice('+', '-'), $.expr_pair)),
       seq('(', $.position, choice('+', '-'), $.expr_pair, ')'),
       seq('(', $.position, ',', $.position, ')'),
       seq(
@@ -341,7 +341,7 @@ module.exports = grammar({
         ')',
       ),
       seq($.expr, '<', $.position, ',', $.position, '>'),
-    )),
+    ),
 
     expr_pair: $ => choice(
       seq($.expr, ',', $.expr),
