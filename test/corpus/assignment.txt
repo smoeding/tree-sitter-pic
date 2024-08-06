@@ -159,7 +159,6 @@ figname = foo
   (element
     (assignment
       (variable)
-      (macroname
-        (variable))))
+      (macroname)))
   (element
     (command_line)))

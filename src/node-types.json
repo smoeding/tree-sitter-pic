@@ -425,25 +425,6 @@
     }
   },
   {
-    "type": "macroname",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "label",
-          "named": true
-        },
-        {
-          "type": "variable",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "nth_primitive",
     "named": true,
     "fields": {},
@@ -1166,6 +1147,10 @@
   {
     "type": "lower",
     "named": false
+  },
+  {
+    "type": "macroname",
+    "named": true
   },
   {
     "type": "max",

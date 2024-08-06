@@ -430,7 +430,7 @@ module.exports = grammar({
       seq(
         field('lhs', alias('figname', $.variable)),
         '=',
-        field('rhs', $.macroname),
+        field('rhs', $._macroname),
       ),
     ),
 
@@ -459,7 +459,7 @@ module.exports = grammar({
           optional(alias($._text, $.filename)),
           'thru',
           choice(
-            $.macroname,
+            $._macroname,
             $.delimited,
           ),
           optional(seq('until', $.text)),
@@ -555,7 +555,7 @@ module.exports = grammar({
       '}',
     ),
 
-    macroname: $ => choice($.variable, $.label),
+    _macroname: $ => alias(choice($.variable, $.label), $.macroname),
 
     comment: _ => token(/#.*/),
   },

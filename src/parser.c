@@ -8,12 +8,12 @@
 #define STATE_COUNT 1056
 #define LARGE_STATE_COUNT 438
 #define SYMBOL_COUNT 217
-#define ALIAS_COUNT 1
+#define ALIAS_COUNT 2
 #define TOKEN_COUNT 160
 #define EXTERNAL_TOKEN_COUNT 2
 #define FIELD_COUNT 2
 #define MAX_ALIAS_SEQUENCE_LENGTH 11
-#define PRODUCTION_ID_COUNT 4
+#define PRODUCTION_ID_COUNT 5
 
 enum ts_symbol_identifiers {
   sym_variable = 1,
@@ -220,7 +220,7 @@ enum ts_symbol_identifiers {
   sym_escape_sequence = 202,
   sym_balanced_text = 203,
   sym_delimited = 204,
-  sym_macroname = 205,
+  sym__macroname = 205,
   aux_sym_picture_repeat1 = 206,
   aux_sym_picture_repeat2 = 207,
   aux_sym__element_list_repeat1 = 208,
@@ -233,6 +233,7 @@ enum ts_symbol_identifiers {
   aux_sym_label_path_repeat1 = 215,
   aux_sym_text_repeat1 = 216,
   alias_sym_filename = 217,
+  alias_sym_macroname = 218,
 };
 
 static const char * const ts_symbol_names[] = {
@@ -441,7 +442,7 @@ static const char * const ts_symbol_names[] = {
   [sym_escape_sequence] = "escape_sequence",
   [sym_balanced_text] = "balanced_text",
   [sym_delimited] = "delimited",
-  [sym_macroname] = "macroname",
+  [sym__macroname] = "_macroname",
   [aux_sym_picture_repeat1] = "picture_repeat1",
   [aux_sym_picture_repeat2] = "picture_repeat2",
   [aux_sym__element_list_repeat1] = "_element_list_repeat1",
@@ -454,6 +455,7 @@ static const char * const ts_symbol_names[] = {
   [aux_sym_label_path_repeat1] = "label_path_repeat1",
   [aux_sym_text_repeat1] = "text_repeat1",
   [alias_sym_filename] = "filename",
+  [alias_sym_macroname] = "macroname",
 };
 
 static const TSSymbol ts_symbol_map[] = {
@@ -662,7 +664,7 @@ static const TSSymbol ts_symbol_map[] = {
   [sym_escape_sequence] = sym_escape_sequence,
   [sym_balanced_text] = sym_balanced_text,
   [sym_delimited] = sym_delimited,
-  [sym_macroname] = sym_macroname,
+  [sym__macroname] = sym__macroname,
   [aux_sym_picture_repeat1] = aux_sym_picture_repeat1,
   [aux_sym_picture_repeat2] = aux_sym_picture_repeat2,
   [aux_sym__element_list_repeat1] = aux_sym__element_list_repeat1,
@@ -675,6 +677,7 @@ static const TSSymbol ts_symbol_map[] = {
   [aux_sym_label_path_repeat1] = aux_sym_label_path_repeat1,
   [aux_sym_text_repeat1] = aux_sym_text_repeat1,
   [alias_sym_filename] = alias_sym_filename,
+  [alias_sym_macroname] = alias_sym_macroname,
 };
 
 static const TSSymbolMetadata ts_symbol_metadata[] = {
@@ -1498,8 +1501,8 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
     .visible = true,
     .named = true,
   },
-  [sym_macroname] = {
-    .visible = true,
+  [sym__macroname] = {
+    .visible = false,
     .named = true,
   },
   [aux_sym_picture_repeat1] = {
@@ -1550,6 +1553,10 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
     .visible = true,
     .named = true,
   },
+  [alias_sym_macroname] = {
+    .visible = true,
+    .named = true,
+  },
 };
 
 enum ts_field_identifiers {
@@ -1564,8 +1571,8 @@ static const char * const ts_field_names[] = {
 };
 
 static const TSFieldMapSlice ts_field_map_slices[PRODUCTION_ID_COUNT] = {
-  [2] = {.index = 0, .length = 2},
-  [3] = {.index = 2, .length = 2},
+  [3] = {.index = 0, .length = 2},
+  [4] = {.index = 2, .length = 2},
 };
 
 static const TSFieldMapEntry ts_field_map_entries[] = {
@@ -1581,6 +1588,9 @@ static const TSSymbol ts_alias_sequences[PRODUCTION_ID_COUNT][MAX_ALIAS_SEQUENCE
   [0] = {0},
   [1] = {
     [1] = alias_sym_filename,
+  },
+  [2] = {
+    [0] = alias_sym_macroname,
   },
 };
 
@@ -56493,7 +56503,7 @@ static const uint16_t ts_small_parse_table[] = {
       sym_label,
     STATE(861), 2,
       sym_delimited,
-      sym_macroname,
+      sym__macroname,
   [15774] = 5,
     ACTIONS(3), 1,
       sym_comment,
@@ -56528,7 +56538,7 @@ static const uint16_t ts_small_parse_table[] = {
       sym_label,
     STATE(765), 2,
       sym_delimited,
-      sym_macroname,
+      sym__macroname,
   [15823] = 5,
     ACTIONS(3), 1,
       sym_comment,
@@ -56564,7 +56574,7 @@ static const uint16_t ts_small_parse_table[] = {
       sym_label,
     STATE(723), 2,
       sym_delimited,
-      sym_macroname,
+      sym__macroname,
   [15874] = 5,
     ACTIONS(3), 1,
       sym_comment,
@@ -56650,7 +56660,7 @@ static const uint16_t ts_small_parse_table[] = {
       sym_label,
     STATE(834), 2,
       sym_delimited,
-      sym_macroname,
+      sym__macroname,
   [15990] = 4,
     ACTIONS(43), 1,
       sym_comment,
@@ -57418,7 +57428,7 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(3), 1,
       sym_comment,
     STATE(927), 1,
-      sym_macroname,
+      sym__macroname,
     ACTIONS(1430), 2,
       sym_variable,
       sym_label,
@@ -57521,7 +57531,7 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(3), 1,
       sym_comment,
     STATE(785), 1,
-      sym_macroname,
+      sym__macroname,
     ACTIONS(1440), 2,
       sym_variable,
       sym_label,
@@ -60305,7 +60315,7 @@ static const TSParseActionEntry ts_parse_actions[] = {
   [1543] = {.entry = {.count = 1, .reusable = true}}, SHIFT(712),
   [1545] = {.entry = {.count = 1, .reusable = true}}, SHIFT(768),
   [1547] = {.entry = {.count = 1, .reusable = true}}, SHIFT(664),
-  [1549] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_macroname, 1, 0, 0),
+  [1549] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym__macroname, 1, 0, 2),
   [1551] = {.entry = {.count = 1, .reusable = true}}, SHIFT(460),
   [1553] = {.entry = {.count = 1, .reusable = true}}, SHIFT(87),
   [1555] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_balanced_text, 3, 0, 0),
@@ -60318,7 +60328,7 @@ static const TSParseActionEntry ts_parse_actions[] = {
   [1569] = {.entry = {.count = 1, .reusable = true}}, SHIFT(432),
   [1571] = {.entry = {.count = 1, .reusable = true}}, SHIFT(433),
   [1573] = {.entry = {.count = 1, .reusable = true}}, SHIFT(571),
-  [1575] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_assignment, 3, 0, 2),
+  [1575] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_assignment, 3, 0, 3),
   [1577] = {.entry = {.count = 1, .reusable = true}}, SHIFT(434),
   [1579] = {.entry = {.count = 1, .reusable = true}}, SHIFT(574),
   [1581] = {.entry = {.count = 1, .reusable = true}}, SHIFT(358),
@@ -60360,7 +60370,7 @@ static const TSParseActionEntry ts_parse_actions[] = {
   [1653] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_for, 8, 0, 0),
   [1655] = {.entry = {.count = 1, .reusable = false}}, SHIFT(704),
   [1657] = {.entry = {.count = 1, .reusable = false}}, REDUCE(sym_reset, 1, 0, 0),
-  [1659] = {.entry = {.count = 1, .reusable = false}}, REDUCE(sym_macroname, 1, 0, 0),
+  [1659] = {.entry = {.count = 1, .reusable = false}}, REDUCE(sym__macroname, 1, 0, 2),
   [1661] = {.entry = {.count = 1, .reusable = true}}, SHIFT(364),
   [1663] = {.entry = {.count = 1, .reusable = true}}, SHIFT(440),
   [1665] = {.entry = {.count = 1, .reusable = true}}, SHIFT(410),
@@ -60398,7 +60408,7 @@ static const TSParseActionEntry ts_parse_actions[] = {
   [1729] = {.entry = {.count = 1, .reusable = true}}, SHIFT(409),
   [1731] = {.entry = {.count = 1, .reusable = true}}, SHIFT(65),
   [1733] = {.entry = {.count = 1, .reusable = true}}, SHIFT(72),
-  [1735] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_assignment, 4, 0, 3),
+  [1735] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_assignment, 4, 0, 4),
   [1737] = {.entry = {.count = 2, .reusable = true}}, REDUCE(aux_sym__sprintf_repeat1, 2, 0, 0), SHIFT_REPEAT(460),
   [1740] = {.entry = {.count = 1, .reusable = true}}, SHIFT(426),
   [1742] = {.entry = {.count = 1, .reusable = false}}, REDUCE(sym_for, 11, 0, 0),
@@ -60411,7 +60421,7 @@ static const TSParseActionEntry ts_parse_actions[] = {
   [1756] = {.entry = {.count = 1, .reusable = true}}, SHIFT(327),
   [1758] = {.entry = {.count = 1, .reusable = true}}, SHIFT(576),
   [1760] = {.entry = {.count = 1, .reusable = true}}, SHIFT(705),
-  [1762] = {.entry = {.count = 1, .reusable = false}}, REDUCE(sym_assignment, 4, 0, 3),
+  [1762] = {.entry = {.count = 1, .reusable = false}}, REDUCE(sym_assignment, 4, 0, 4),
   [1764] = {.entry = {.count = 1, .reusable = true}}, SHIFT(133),
   [1766] = {.entry = {.count = 1, .reusable = false}}, REDUCE(sym_balanced_text, 3, 0, 0),
   [1768] = {.entry = {.count = 1, .reusable = true}}, SHIFT(351),
@@ -60431,7 +60441,7 @@ static const TSParseActionEntry ts_parse_actions[] = {
   [1796] = {.entry = {.count = 1, .reusable = true}}, SHIFT(451),
   [1798] = {.entry = {.count = 1, .reusable = false}}, REDUCE(sym_element, 2, 0, 0),
   [1800] = {.entry = {.count = 1, .reusable = true}}, SHIFT(633),
-  [1802] = {.entry = {.count = 1, .reusable = false}}, REDUCE(sym_assignment, 3, 0, 2),
+  [1802] = {.entry = {.count = 1, .reusable = false}}, REDUCE(sym_assignment, 3, 0, 3),
   [1804] = {.entry = {.count = 1, .reusable = false}}, SHIFT(937),
   [1806] = {.entry = {.count = 1, .reusable = true}}, SHIFT(394),
   [1808] = {.entry = {.count = 1, .reusable = true}}, SHIFT(718),

@@ -112,7 +112,7 @@ copy thru do_circle
     (command_line))
   (element
     (copy
-      (text)))
+      (macroname)))
   (element
     (command_line)))
 
