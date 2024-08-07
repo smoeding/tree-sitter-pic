@@ -25,6 +25,14 @@ ellipse "typesetter"
 .PE
 ```
 
+## Limitations
+
+The following limitations are known:
+
+- The parser doesn't know about the `define` and `undef` syntax to manage macros.
+- A block must use braces `{` and `}` as delimiters. The parser does not handle other characters as delimiters.
+- A `copy` statement using an inline data table is not parsed correctly.
+
 ## References
 
 1. Brian W. Kernighan, [PIC - A Graphics Language for Typesetting - User Manual](https://raw.githubusercontent.com/smoeding/tree-sitter-pic/main/doc/PIC_-_A_Graphics_Language_for_Typesetting_-_User_Manual.pdf)
