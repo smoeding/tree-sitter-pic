@@ -177,8 +177,18 @@ module.exports = grammar({
 
     block: $ => seq(
       '[',
-      $._element_list,
+      repeat("\n"),
+      repeat(seq($._element_list, repeat1("\n"))),
+      optional($._element_list),
       ']',
+    ),
+
+    delimited: $ => seq(
+      '{',
+      repeat("\n"),
+      repeat(seq($._element_list, repeat1("\n"))),
+      optional($._element_list),
+      '}',
     ),
 
     _placeless_element: $ => choice(
@@ -548,12 +558,6 @@ module.exports = grammar({
 
     // FIXME:
     balanced_text: $ => seq('{', /[^}]*/, '}'),
-
-    delimited: $ => seq(
-      '{',
-      $._element_list,
-      '}',
-    ),
 
     _macroname: $ => alias(choice($.variable, $.label), $.macroname),
 
