@@ -30,9 +30,11 @@
 
 
 #include <stdlib.h>
+#include <string.h>
 #include <ctype.h>
 
 #include "tree_sitter/parser.h"
+#include "tree_sitter/alloc.h"
 
 
 /**
@@ -43,31 +45,32 @@
 enum TokenType {
   SIDE,
   SIDE_CORNER,
+  DELIMITER,
 };
 
-// The words we need to match
+
+/**
+ * The state of the scanner to keep track of the heredoc tag that we are
+ * currently looking for.
+ */
+
+typedef struct ScannerState {
+  int32_t delimiter;  // the delimiter for a balanced text
+} ScannerState;
+
+
+/**
+ * The words we need to match with the scan_word function.
+ */
+
 static int32_t left[] = { U'l', U'e', U'f', U't', 0 };
 static int32_t right[] = { U'r', U'i', U'g', U'h', U't', 0 };
 static int32_t of[] = { U'o', U'f', 0 };
 
 
 /**
- * The public interface used by the tree-sitter parser
+ * Scan for a word.
  */
-
-void *tree_sitter_pic_external_scanner_create() {
-  return NULL;
-}
-
-void tree_sitter_pic_external_scanner_destroy(void *payload) {
-}
-
-unsigned tree_sitter_pic_external_scanner_serialize(void *payload, char *buffer) {
-  return 0;
-}
-
-void tree_sitter_pic_external_scanner_deserialize(void *payload, const char *buffer, unsigned length) {
-}
 
 static bool scan_word(TSLexer *lexer, int32_t word[], bool skip) {
   while ((lexer->lookahead == U' ') || (lexer->lookahead == U'\t')) {
@@ -91,7 +94,100 @@ static bool scan_word(TSLexer *lexer, int32_t word[], bool skip) {
   return false;
 }
 
+
+/**
+ * Scan for a delimiter. If the delimiter is currently unset, we are at the
+ * start and use the next non-whitespace character as the delimiter. The
+ * delimiter is saved in the scanner state to be able to detect the end
+ * later. Braces are handled as a special case.
+ */
+
+static bool scan_delimiter(TSLexer *lexer, ScannerState *state) {
+  for(;;) {
+    // We are done if the end of file is reached
+    if (lexer->eof(lexer)) return false;
+
+    if (isspace(lexer->lookahead) || (lexer->lookahead == U'\n')) {
+      // Skip whitespace
+      lexer->advance(lexer, true);
+    }
+    else if (state->delimiter == 0) {
+      // Remember new delimiter (use matching brace if that is used)
+      state->delimiter = (lexer->lookahead == U'{') ? U'}' : lexer->lookahead;
+      lexer->advance(lexer, false);
+      return true;
+    }
+    else if (lexer->lookahead == state->delimiter) {
+      // Look for end using saved delimiter
+      state->delimiter = 0;
+      lexer->advance(lexer, false);
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+}
+
+
+/**
+ * The public interface used by the tree-sitter parser
+ */
+
+void *tree_sitter_pic_external_scanner_create() {
+  ScannerState *state = ts_malloc(sizeof(ScannerState));
+
+  if (state) {
+    state->delimiter = 0;  // 0 means not inside a balanced text
+  }
+
+  return state;
+}
+
+void tree_sitter_pic_external_scanner_destroy(void *payload) {
+  ScannerState *state = (ScannerState*)payload;
+
+  if (state) {
+    ts_free(state);
+  }
+}
+
+unsigned tree_sitter_pic_external_scanner_serialize(void *payload, char *buffer) {
+  ScannerState *state = (ScannerState*)payload;
+  unsigned length = 0;  // total size of the serialized data in bytes
+  unsigned objsiz;      // size of the current object to serialize
+
+  // Serialize the scanner state. To prevent serialization of each struct
+  // item we also include the bogus pointer to the array contents. The
+  // pointer will be reset when the object is deserialized (see below).
+  objsiz = sizeof(ScannerState);
+  memcpy(buffer, state, objsiz);
+  buffer += objsiz;
+  length += objsiz;
+
+  return length;
+}
+
+void tree_sitter_pic_external_scanner_deserialize(void *payload, const char *buffer, unsigned length) {
+  ScannerState *state = (ScannerState*)payload;
+  unsigned objsiz;      // size of the current object to deserialize
+
+  // Initialize the structure since the deserialization function will
+  // sometimes also be called with length set to zero.
+  state->delimiter = 0;
+
+  // Deserialize the scanner state.
+  if (length >= sizeof(ScannerState)) {
+    objsiz = sizeof(ScannerState);
+    memcpy(payload, buffer, objsiz);
+    buffer += objsiz;
+    length -= objsiz;
+  }
+}
+
 bool tree_sitter_pic_external_scanner_scan(void *payload, TSLexer *lexer, const bool *valid_symbols) {
+  ScannerState *state = (ScannerState*)payload;
+
   if (valid_symbols[SIDE] || valid_symbols[SIDE_CORNER]) {
 
     // We try to parse the token 'left'. If that succeeds we check for the
@@ -120,7 +216,12 @@ bool tree_sitter_pic_external_scanner_scan(void *payload, TSLexer *lexer, const 
 
       return true;
     }
-
+  }
+  else if (valid_symbols[DELIMITER]) {
+    if (scan_delimiter(lexer, state)) {
+      lexer->result_symbol = DELIMITER;
+      return true;
+    }
   }
   return false;
 }
