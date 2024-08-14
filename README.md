@@ -29,7 +29,6 @@ ellipse "typesetter"
 
 The following limitations are known:
 
-- The parser doesn't know about the `define` and `undef` syntax to manage macros.
 - A `copy` statement using an inline data table is not parsed correctly.
 
 ## References

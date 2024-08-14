@@ -204,6 +204,19 @@ module.exports = grammar({
       $.for,
       $.if,
       $.reset,
+      $.define,
+      $.undef,
+    ),
+
+    define: $ => seq(
+      'define',
+      $._macroname,
+      $.delimited,
+    ),
+
+    undef: $ => seq(
+      'undef',
+      $._macroname,
     ),
 
     reset: $ => seq(
@@ -496,6 +509,7 @@ module.exports = grammar({
     expr: $ => choice(
       $.variable,
       $.number,
+      $.macroparameter,
       seq($.place, $.place_attribute),
       prec.left(PREC.ADD, seq($.expr, choice('+', '-'), $.expr)),
       prec.left(PREC.MUL, seq($.expr, choice('*', '/', '%', $.expr))),
@@ -561,6 +575,8 @@ module.exports = grammar({
     command_line: $ => /[.\\].*/,
 
     _macroname: $ => alias(choice($.variable, $.label), $.macroname),
+
+    macroparameter: $ => /\$[0-9]/,
 
     comment: _ => token(/#.*/),
   },

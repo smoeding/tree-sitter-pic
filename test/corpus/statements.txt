@@ -271,7 +271,22 @@ copy thru { circle rad $3 at $1,$2 }
     (command_line))
   (element
     (copy
-      (text)))
+      (delimited
+        (element
+          (primitive)
+          (attribute_list
+            (attribute
+              (expr
+                (macroparameter)))
+            (attribute
+              (position
+                (position_not_place
+                  (expr_pair
+                    (expr
+                      (macroparameter))
+                    (expr
+                      (macroparameter)))))))))
+      (data_table)))
   (element
     (command_line)))
 
@@ -581,5 +596,88 @@ reset boxwid,boxht
     (reset
       (variable)
       (variable)))
+  (element
+    (command_line)))
+
+================================================================================
+define simple macro
+================================================================================
+.PS
+define Circle { circle rad $3 at $1,$2 }
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (command_line))
+  (element
+    (define
+      (macroname)
+      (delimited
+        (element
+          (primitive)
+          (attribute_list
+            (attribute
+              (expr
+                (macroparameter)))
+            (attribute
+              (position
+                (position_not_place
+                  (expr_pair
+                    (expr
+                      (macroparameter))
+                    (expr
+                      (macroparameter)))))))))))
+  (element
+    (command_line)))
+
+================================================================================
+define multiline macro
+================================================================================
+.PS
+define Circle {
+  circle rad $3 at $1,$2
+}
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (command_line))
+  (element
+    (define
+      (macroname)
+      (delimited
+        (element
+          (primitive)
+          (attribute_list
+            (attribute
+              (expr
+                (macroparameter)))
+            (attribute
+              (position
+                (position_not_place
+                  (expr_pair
+                    (expr
+                      (macroparameter))
+                    (expr
+                      (macroparameter)))))))))))
+  (element
+    (command_line)))
+
+================================================================================
+undef macro
+================================================================================
+.PS
+undef Circle
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (command_line))
+  (element
+    (undef
+      (macroname)))
   (element
     (command_line)))

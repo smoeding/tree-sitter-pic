@@ -146,6 +146,25 @@
     "fields": {}
   },
   {
+    "type": "define",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "delimited",
+          "named": true
+        },
+        {
+          "type": "macroname",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "delimited",
     "named": true,
     "fields": {},
@@ -198,6 +217,10 @@
           "named": true
         },
         {
+          "type": "define",
+          "named": true
+        },
+        {
           "type": "direction",
           "named": true
         },
@@ -240,6 +263,10 @@
         {
           "type": "sh",
           "named": true
+        },
+        {
+          "type": "undef",
+          "named": true
         }
       ]
     }
@@ -263,6 +290,10 @@
         },
         {
           "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "macroparameter",
           "named": true
         },
         {
@@ -768,6 +799,21 @@
     }
   },
   {
+    "type": "undef",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "macroname",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "\n",
     "named": false
   },
@@ -1076,6 +1122,10 @@
     "named": false
   },
   {
+    "type": "define",
+    "named": false
+  },
+  {
     "type": "delimiter",
     "named": true
   },
@@ -1153,6 +1203,10 @@
   },
   {
     "type": "macroname",
+    "named": true
+  },
+  {
+    "type": "macroparameter",
     "named": true
   },
   {
@@ -1257,6 +1311,10 @@
   },
   {
     "type": "top",
+    "named": false
+  },
+  {
+    "type": "undef",
     "named": false
   },
   {
