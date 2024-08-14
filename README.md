@@ -30,7 +30,6 @@ ellipse "typesetter"
 The following limitations are known:
 
 - The parser doesn't know about the `define` and `undef` syntax to manage macros.
-- A block must use braces `{` and `}` as delimiters. The parser does not handle other characters as delimiters.
 - A `copy` statement using an inline data table is not parsed correctly.
 
 ## References

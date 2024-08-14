@@ -62,7 +62,25 @@ print "x is " x "."
     (command_line)))
 
 ================================================================================
-sh
+sh with braces and no command
+================================================================================
+.PS
+sh {}
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (command_line))
+  (element
+    (sh
+      (delimiter)
+      (delimiter)))
+  (element
+    (command_line)))
+
+================================================================================
+sh with braces and a single command
 ================================================================================
 .PS
 sh { echo "foo" }
@@ -74,7 +92,107 @@ sh { echo "foo" }
     (command_line))
   (element
     (sh
-      (balanced_text)))
+      (delimiter)
+      (shell_command)
+      (delimiter)))
+  (element
+    (command_line)))
+
+================================================================================
+sh with braces and multiple commands
+================================================================================
+.PS
+sh { echo "foo"; echo "bar" }
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (command_line))
+  (element
+    (sh
+      (delimiter)
+      (shell_command)
+      (delimiter)))
+  (element
+    (command_line)))
+
+================================================================================
+sh with braces and multiple command lines
+================================================================================
+.PS
+sh {
+echo "foo"
+echo "bar"
+}
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (command_line))
+  (element
+    (sh
+      (delimiter)
+      (shell_command)
+      (delimiter)))
+  (element
+    (command_line)))
+
+================================================================================
+sh with braces and a string containg a closing brace
+================================================================================
+.PS
+sh { echo "}" }
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (command_line))
+  (element
+    (sh
+      (delimiter)
+      (shell_command)
+      (delimiter)))
+  (element
+    (command_line)))
+
+================================================================================
+sh with braces and balanced braces inside
+================================================================================
+.PS
+sh { echo {} }
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (command_line))
+  (element
+    (sh
+      (delimiter)
+      (shell_command)
+      (delimiter)))
+  (element
+    (command_line)))
+
+================================================================================
+sh with another delimiter
+================================================================================
+.PS
+sh ! echo "foo" !
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (command_line))
+  (element
+    (sh
+      (delimiter)
+      (shell_command)
+      (delimiter)))
   (element
     (command_line)))
 

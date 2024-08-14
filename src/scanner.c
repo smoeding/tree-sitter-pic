@@ -46,6 +46,7 @@ enum TokenType {
   SIDE,
   SIDE_CORNER,
   DELIMITER,
+  SHELL_COMMAND,
 };
 
 
@@ -55,7 +56,7 @@ enum TokenType {
  */
 
 typedef struct ScannerState {
-  int32_t delimiter;  // the delimiter for a balanced text
+  int32_t delimiter;  // the delimiter for a shell command
 } ScannerState;
 
 
@@ -96,10 +97,49 @@ static bool scan_word(TSLexer *lexer, int32_t word[], bool skip) {
 
 
 /**
+ * Return the matching delimiter for a character. Braces are special while
+ * any other character (e.g. a double quote char) matches itself.
+ */
+
+static inline int32_t matching_delimiter(int32_t ch) {
+  return (ch == U'{') ? U'}' : ch;
+}
+
+
+/**
+ * Skip over balanced text. The lookahead character is used as a delimiter
+ * that starts and ends the balanced text.
+ */
+
+static bool skip_balanced(TSLexer *lexer) {
+  int32_t delimiter = 0;
+
+  for(;;) {
+    // We are done if the end of file is reached
+    if (lexer->eof(lexer)) return false;
+
+    if (delimiter == 0) {
+      delimiter = matching_delimiter(lexer->lookahead);
+    }
+    else if (lexer->lookahead == delimiter) {
+      lexer->advance(lexer, false);
+      return true;
+    }
+    else if (lexer->lookahead == U'\\') {
+      // Consume backslash and the following character
+      lexer->advance(lexer, false);
+    }
+
+    lexer->advance(lexer, false);
+  }
+}
+
+
+/**
  * Scan for a delimiter. If the delimiter is currently unset, we are at the
  * start and use the next non-whitespace character as the delimiter. The
  * delimiter is saved in the scanner state to be able to detect the end
- * later. Braces are handled as a special case.
+ * later.
  */
 
 static bool scan_delimiter(TSLexer *lexer, ScannerState *state) {
@@ -107,13 +147,13 @@ static bool scan_delimiter(TSLexer *lexer, ScannerState *state) {
     // We are done if the end of file is reached
     if (lexer->eof(lexer)) return false;
 
-    if (isspace(lexer->lookahead) || (lexer->lookahead == U'\n')) {
+    if (isspace(lexer->lookahead)) {
       // Skip whitespace
       lexer->advance(lexer, true);
     }
     else if (state->delimiter == 0) {
-      // Remember new delimiter (use matching brace if that is used)
-      state->delimiter = (lexer->lookahead == U'{') ? U'}' : lexer->lookahead;
+      // Remember new delimiter
+      state->delimiter = matching_delimiter(lexer->lookahead);
       lexer->advance(lexer, false);
       return true;
     }
@@ -131,6 +171,30 @@ static bool scan_delimiter(TSLexer *lexer, ScannerState *state) {
 
 
 /**
+ * Scan for a shell command between delimiters. Strings and balanced braces
+ * are allowed with so we skip over these as well until we find the matching
+ * delimiter from the start of the shell command.
+ */
+
+static bool scan_shell_command(TSLexer *lexer, ScannerState *state) {
+  for(bool has_content=false;; has_content=true) {
+    // We are done if the end of file is reached
+    if (lexer->eof(lexer)) return false;
+
+    if (lexer->lookahead == state->delimiter) {
+      return has_content;
+    }
+    else if ((lexer->lookahead == U'"') || (lexer->lookahead == U'{')) {
+      skip_balanced(lexer);
+    }
+    else {
+      lexer->advance(lexer, false);
+    }
+  }
+}
+
+
+/**
  * The public interface used by the tree-sitter parser
  */
 
@@ -138,7 +202,7 @@ void *tree_sitter_pic_external_scanner_create() {
   ScannerState *state = ts_malloc(sizeof(ScannerState));
 
   if (state) {
-    state->delimiter = 0;  // 0 means not inside a balanced text
+    state->delimiter = 0;  // 0 means not inside a shell command
   }
 
   return state;
@@ -217,11 +281,20 @@ bool tree_sitter_pic_external_scanner_scan(void *payload, TSLexer *lexer, const 
       return true;
     }
   }
-  else if (valid_symbols[DELIMITER]) {
+
+  if (valid_symbols[DELIMITER]) {
     if (scan_delimiter(lexer, state)) {
       lexer->result_symbol = DELIMITER;
       return true;
     }
   }
+
+  if (valid_symbols[SHELL_COMMAND]) {
+    if (scan_shell_command(lexer, state)) {
+      lexer->result_symbol = SHELL_COMMAND;
+      return true;
+    }
+  }
+
   return false;
 }

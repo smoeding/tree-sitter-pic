@@ -159,6 +159,8 @@ module.exports = grammar({
   externals: $ => [
     $._side,                    // "left" or "right"
     $._side_corner,             // "left of" or "right of"
+    $.delimiter,                // " or { or X or ...
+    $.shell_command,
   ],
 
   // keyword extraction optimization
@@ -458,7 +460,9 @@ module.exports = grammar({
 
     sh: $ => seq(
       'sh',
-      $.balanced_text,
+      $.delimiter,
+      optional($.shell_command),
+      $.delimiter,
     ),
 
     copy: $ => seq(
@@ -555,9 +559,6 @@ module.exports = grammar({
     composite_label: $ => /\.[A-Z][a-zA-Z0-9_]*/,
 
     command_line: $ => /[.\\].*/,
-
-    // FIXME:
-    balanced_text: $ => seq('{', /[^}]*/, '}'),
 
     _macroname: $ => alias(choice($.variable, $.label), $.macroname),
 
