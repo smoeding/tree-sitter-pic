@@ -122,6 +122,10 @@
       "required": true,
       "types": [
         {
+          "type": "data_table",
+          "named": true
+        },
+        {
           "type": "delimited",
           "named": true
         },
@@ -1120,6 +1124,10 @@
   {
     "type": "dashed",
     "named": false
+  },
+  {
+    "type": "data_table",
+    "named": true
   },
   {
     "type": "define",

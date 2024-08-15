@@ -161,6 +161,7 @@ module.exports = grammar({
     $._side_corner,             // "left of" or "right of"
     $.delimiter,                // " or { or X or ...
     $.shell_command,
+    $.data_table,
   ],
 
   // keyword extraction optimization
@@ -490,6 +491,7 @@ module.exports = grammar({
             $.delimited,
           ),
           optional(seq('until', $.text)),
+          optional($.data_table),
         ),
       ),
     ),

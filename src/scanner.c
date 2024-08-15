@@ -35,6 +35,7 @@
 
 #include "tree_sitter/parser.h"
 #include "tree_sitter/alloc.h"
+#include "tree_sitter/array.h"
 
 
 /**
@@ -47,7 +48,15 @@ enum TokenType {
   SIDE_CORNER,
   DELIMITER,
   SHELL_COMMAND,
+  DATA_TABLE,
 };
+
+
+/**
+ * Manage UTF32 strings using an array.
+ */
+
+typedef Array(int32_t) UTF32String;
 
 
 /**
@@ -56,6 +65,7 @@ enum TokenType {
  */
 
 typedef struct ScannerState {
+  UTF32String data_table_tag;
   int32_t delimiter;  // the delimiter for a shell command
 } ScannerState;
 
@@ -195,6 +205,60 @@ static bool scan_shell_command(TSLexer *lexer, ScannerState *state) {
 
 
 /**
+ * Scan for a data table.
+ */
+
+static bool scan_data_table(TSLexer *lexer, ScannerState *state) {
+  bool has_content = false;  // Anything but a tag has been found
+  bool tag_matched = true;   // Set to false if the line does not match the tag
+
+  unsigned int tag_length = state->data_table_tag.size > 0 ?
+                            state->data_table_tag.size : 3;
+
+  for(;;) {
+    // We are done if the end of file is reached
+    if (lexer->eof(lexer)) return false;
+
+    uint32_t col = lexer->get_column(lexer);
+
+    if ((state->data_table_tag.size == 0) && (col < tag_length)) {
+      // Tag is not set, so we use .PE or .PF as end tag
+      if ((col == 0) && (lexer->lookahead != U'.'))
+        tag_matched = false;
+      if ((col == 1) && (lexer->lookahead != U'P'))
+        tag_matched = false;
+      if ((col == 2) && (lexer->lookahead != U'E') && (lexer->lookahead != U'F'))
+        tag_matched = false;
+    }
+    else if ((col < tag_length) &&
+        (*array_get(&state->data_table_tag, col) != lexer->lookahead)) {
+      // Lookahead character does not match the tag we are looking for
+      tag_matched = false;
+    }
+    else if ((col == tag_length) && tag_matched && isspace(lexer->lookahead)) {
+      // Complete tag was matched
+      if (state->data_table_tag.size > 0) {
+        // Consume the end tag if a named tag has been used
+        lexer->mark_end(lexer);
+      }
+      return has_content;
+    }
+    else if (lexer->lookahead == U'\n') {
+      // Tag not found; continue in next line and try to match the tag
+      lexer->mark_end(lexer);
+      tag_matched = true;
+    }
+    else {
+      // Tag not matched but something else was found
+      has_content = true;
+    }
+
+    lexer->advance(lexer, false);
+  }
+}
+
+
+/**
  * The public interface used by the tree-sitter parser
  */
 
@@ -202,6 +266,7 @@ void *tree_sitter_pic_external_scanner_create() {
   ScannerState *state = ts_malloc(sizeof(ScannerState));
 
   if (state) {
+    array_init(&state->data_table_tag);
     state->delimiter = 0;  // 0 means not inside a shell command
   }
 
@@ -212,6 +277,7 @@ void tree_sitter_pic_external_scanner_destroy(void *payload) {
   ScannerState *state = (ScannerState*)payload;
 
   if (state) {
+    array_delete(&state->data_table_tag);
     ts_free(state);
   }
 }
@@ -229,6 +295,14 @@ unsigned tree_sitter_pic_external_scanner_serialize(void *payload, char *buffer)
   buffer += objsiz;
   length += objsiz;
 
+  // Serialize the array contents.
+  objsiz = state->data_table_tag.capacity * array_elem_size(&state->data_table_tag);
+  if (objsiz > 0) {
+    memcpy(buffer, state->data_table_tag.contents, objsiz);
+    buffer += objsiz;
+    length += objsiz;
+  }
+
   return length;
 }
 
@@ -238,6 +312,7 @@ void tree_sitter_pic_external_scanner_deserialize(void *payload, const char *buf
 
   // Initialize the structure since the deserialization function will
   // sometimes also be called with length set to zero.
+  array_init(&state->data_table_tag);
   state->delimiter = 0;
 
   // Deserialize the scanner state.
@@ -246,6 +321,16 @@ void tree_sitter_pic_external_scanner_deserialize(void *payload, const char *buf
     memcpy(payload, buffer, objsiz);
     buffer += objsiz;
     length -= objsiz;
+
+    // Check if the array content needs to be deserialized. In this case the
+    // contents pointer is invalid as is now contains the address of the
+    // contents when serialization has happened. So we need to allocate a new
+    // memory chunk and deserialize it there. The size and capacity elements
+    // are already defined correctly.
+    if (length > 0) {
+      state->data_table_tag.contents = ts_malloc(length);
+      memcpy(state->data_table_tag.contents, buffer, length);
+    }
   }
 }
 
@@ -296,5 +381,11 @@ bool tree_sitter_pic_external_scanner_scan(void *payload, TSLexer *lexer, const 
     }
   }
 
+  if (valid_symbols[DATA_TABLE]) {
+    if (scan_data_table(lexer, state)) {
+      lexer->result_symbol = DATA_TABLE;
+      return true;
+    }
+  }
   return false;
 }
