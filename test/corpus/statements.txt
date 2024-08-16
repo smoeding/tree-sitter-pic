@@ -253,7 +253,6 @@ copy thru do_circle
 
 ================================================================================
 copy thru macro-name until text
-:skip
 ================================================================================
 .PS
 copy thru do_circle until "END"
@@ -270,6 +269,7 @@ box
   (element
     (copy
       (macroname)
+      (data_table_tag)
       (data_table)))
   (element
     (primitive))
@@ -312,7 +312,6 @@ copy thru { circle rad $3 at $1,$2 }
 
 ================================================================================
 copy thru macro-text until text
-:skip
 ================================================================================
 .PS
 copy thru { circle rad $3 at $1,$2 } until "END"
@@ -327,7 +326,58 @@ END
     (command_line))
   (element
     (copy
-      (text)))
+      (delimited
+        (element
+          (primitive)
+          (attribute_list
+            (attribute
+              (expr
+                (macroparameter)))
+            (attribute
+              (position
+                (position_not_place
+                  (expr_pair
+                    (expr
+                      (macroparameter))
+                    (expr
+                      (macroparameter)))))))))
+      (data_table_tag)
+      (data_table)))
+  (element
+    (command_line)))
+
+
+================================================================================
+copy thru macro-text until text with empty data
+================================================================================
+.PS
+copy thru { circle rad $3 at $1,$2 } until "END"
+END
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (command_line))
+  (element
+    (copy
+      (delimited
+        (element
+          (primitive)
+          (attribute_list
+            (attribute
+              (expr
+                (macroparameter)))
+            (attribute
+              (position
+                (position_not_place
+                  (expr_pair
+                    (expr
+                      (macroparameter))
+                    (expr
+                      (macroparameter)))))))))
+      (data_table_tag)
+      (data_table)))
   (element
     (command_line)))
 

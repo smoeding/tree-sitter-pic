@@ -49,6 +49,7 @@ enum TokenType {
   DELIMITER,
   SHELL_COMMAND,
   DATA_TABLE,
+  DATA_TABLE_TAG,
 };
 
 
@@ -211,6 +212,7 @@ static bool scan_shell_command(TSLexer *lexer, ScannerState *state) {
 static bool scan_data_table(TSLexer *lexer, ScannerState *state) {
   bool has_content = false;  // Anything but a tag has been found
   bool tag_matched = true;   // Set to false if the line does not match the tag
+  bool scan_first  = true;   // True until we see the first non-space character
 
   unsigned int tag_length = state->data_table_tag.size > 0 ?
                             state->data_table_tag.size : 3;
@@ -220,6 +222,26 @@ static bool scan_data_table(TSLexer *lexer, ScannerState *state) {
     if (lexer->eof(lexer)) return false;
 
     uint32_t col = lexer->get_column(lexer);
+
+    if (scan_first) {
+      switch (lexer->lookahead) {
+      case U' ':
+      case U'\t':
+        // Skip over horizontal whitespace
+        lexer->advance(lexer, true);
+        continue;
+
+      case U'\n':
+        // End of line for the copy statement; the data table starts here
+        scan_first = false;
+        break;
+
+      default:
+        // Anything else means the copy statement probably has an until
+        // clause and therefore this is not the start of the data table
+        return false;
+      }
+    }
 
     if ((state->data_table_tag.size == 0) && (col < tag_length)) {
       // Tag is not set, so we use .PE or .PF as end tag
@@ -254,6 +276,55 @@ static bool scan_data_table(TSLexer *lexer, ScannerState *state) {
     }
 
     lexer->advance(lexer, false);
+  }
+}
+
+
+/**
+ * Scan for a data table tag.
+ */
+
+static bool scan_data_table_tag(TSLexer *lexer, ScannerState *state) {
+  bool skip = true;
+  int quote = 0;
+
+  array_clear(&state->data_table_tag);
+
+  for(;;) {
+    // We are done if the end of file is reached
+    if (lexer->eof(lexer)) return false;
+
+    switch (quote) {
+    case 0:
+      // before opening quote
+      if (lexer->lookahead == U'"') {
+        quote = 1;
+        skip = false;
+      }
+      else if (!isspace(lexer->lookahead)) {
+        return false;
+      }
+      break;
+
+    case 1:
+      // after opening quote
+      if (lexer->lookahead == U'"') {
+        quote = 2;
+      }
+      else if (lexer->lookahead == U'\n') {
+        return false;
+      }
+      else {
+        array_push(&state->data_table_tag, lexer->lookahead);
+      }
+      break;
+
+    case 2:
+      // closing quote
+      return true;
+      break;
+    }
+    lexer->advance(lexer, skip);
   }
 }
 
@@ -383,7 +454,15 @@ bool tree_sitter_pic_external_scanner_scan(void *payload, TSLexer *lexer, const 
 
   if (valid_symbols[DATA_TABLE]) {
     if (scan_data_table(lexer, state)) {
+      array_clear(&state->data_table_tag);
       lexer->result_symbol = DATA_TABLE;
+      return true;
+    }
+  }
+
+  if (valid_symbols[DATA_TABLE_TAG]) {
+    if (scan_data_table_tag(lexer, state)) {
+      lexer->result_symbol = DATA_TABLE_TAG;
       return true;
     }
   }

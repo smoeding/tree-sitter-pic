@@ -27,9 +27,7 @@ ellipse "typesetter"
 
 ## Limitations
 
-The following limitations are known:
-
-- A `copy` statement using an inline data table is not parsed correctly.
+The following limitations are known: none
 
 ## References
 

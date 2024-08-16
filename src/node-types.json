@@ -126,6 +126,10 @@
           "named": true
         },
         {
+          "type": "data_table_tag",
+          "named": true
+        },
+        {
           "type": "delimited",
           "named": true
         },
@@ -135,10 +139,6 @@
         },
         {
           "type": "macroname",
-          "named": true
-        },
-        {
-          "type": "text",
           "named": true
         }
       ]
@@ -1127,6 +1127,10 @@
   },
   {
     "type": "data_table",
+    "named": true
+  },
+  {
+    "type": "data_table_tag",
     "named": true
   },
   {

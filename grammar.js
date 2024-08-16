@@ -162,6 +162,7 @@ module.exports = grammar({
     $.delimiter,                // " or { or X or ...
     $.shell_command,
     $.data_table,
+    $.data_table_tag,
   ],
 
   // keyword extraction optimization
@@ -490,7 +491,7 @@ module.exports = grammar({
             $._macroname,
             $.delimited,
           ),
-          optional(seq('until', $.text)),
+          optional(seq('until', $.data_table_tag)),
           optional($.data_table),
         ),
       ),
