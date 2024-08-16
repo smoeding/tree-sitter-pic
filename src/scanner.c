@@ -206,7 +206,13 @@ static bool scan_shell_command(TSLexer *lexer, ScannerState *state) {
 
 
 /**
- * Scan for a data table.
+ * Scan for a data table. A data table starts at the end of line of the copy
+ * statement. A data table ends either with the tag given in the until clause
+ * of the copy statement or with the next .PE/.PF line. A data table may be
+ * empty if the next line after the copy statement contains the tag or the
+ * .PE/.PF requests. In this case the newline character of the line with the
+ * tag or the copy statement is not consumed and it will be read to complete
+ * the copy statement line.
  */
 
 static bool scan_data_table(TSLexer *lexer, ScannerState *state) {
