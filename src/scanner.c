@@ -218,10 +218,10 @@ static bool scan_shell_command(TSLexer *lexer, ScannerState *state) {
 static bool scan_data_table(TSLexer *lexer, ScannerState *state) {
   bool has_content = false;  // Anything but a tag has been found
   bool tag_matched = true;   // Set to false if the line does not match the tag
-  bool scan_first  = true;   // True until we see the first non-space character
+  bool start_table = false;  // False until we are sure that the table starts
 
-  unsigned int tag_length = state->data_table_tag.size > 0 ?
-                            state->data_table_tag.size : 3;
+  uint32_t tag_length = state->data_table_tag.size > 0 ?
+                        state->data_table_tag.size : 3;
 
   for(;;) {
     // We are done if the end of file is reached
@@ -229,7 +229,7 @@ static bool scan_data_table(TSLexer *lexer, ScannerState *state) {
 
     uint32_t col = lexer->get_column(lexer);
 
-    if (scan_first) {
+    if (!start_table) {
       switch (lexer->lookahead) {
       case U' ':
       case U'\t':
@@ -239,7 +239,7 @@ static bool scan_data_table(TSLexer *lexer, ScannerState *state) {
 
       case U'\n':
         // End of line for the copy statement; the data table starts here
-        scan_first = false;
+        start_table = true;
         break;
 
       default:
