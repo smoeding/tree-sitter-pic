@@ -268,7 +268,7 @@ module.exports = grammar({
       seq($.label, ':', optional(';'), $.element),
       seq($.label, ':', optional(';'), $.position_not_place),
       seq($.label, ':', optional(';'), $.place),
-      seq('{', $._element_list, '}', optional($.element)),
+      seq($.delimited, optional($.element)),
       $._placeless_element,
     ),
 
@@ -541,15 +541,14 @@ module.exports = grammar({
       '.rad',
     ),
 
-    function_call: $ => choice(
-      seq(alias($.func0, $.func), '(', optional($._any_expr), ')',),
-      seq(alias($.func1, $.func), '(', $._any_expr, ')'),
-      seq(alias($.func2, $.func), '(', $._any_expr, ',', $._any_expr, ')'),
-    ),
-
-    func0: $ => 'rand',
-    func1: $ => choice('sin', 'cos', 'log', 'exp', 'sqrt', 'int', 'srand'),
-    func2: $ => choice('atan2', 'max', 'min'),
+    // internal function calls (zero, one or two args) and also
+    // macros calls (up to 9 args)
+    function_call: $ => prec(PREC.FUN, seq(
+      alias(choice($.variable, $.label), $.func),
+      '(',
+      optional(seq($._any_expr, repeat(seq(',', $._any_expr)))),
+      ')',
+    )),
 
     // a floating point numeric constant with optional trailing 'i'
     number: $ => /([0-9]+\.?[0-9]*|\.[0-9]+)([eE][+-]?[0-9]+)?[iI]?/,

@@ -225,6 +225,10 @@
           "named": true
         },
         {
+          "type": "delimited",
+          "named": true
+        },
+        {
           "type": "direction",
           "named": true
         },
@@ -383,11 +387,6 @@
         }
       ]
     }
-  },
-  {
-    "type": "func",
-    "named": true,
-    "fields": {}
   },
   {
     "type": "function_call",
@@ -1062,10 +1061,6 @@
     "named": false
   },
   {
-    "type": "atan2",
-    "named": false
-  },
-  {
     "type": "below",
     "named": false
   },
@@ -1118,10 +1113,6 @@
     "named": false
   },
   {
-    "type": "cos",
-    "named": false
-  },
-  {
     "type": "dashed",
     "named": false
   },
@@ -1170,10 +1161,6 @@
     "named": false
   },
   {
-    "type": "exp",
-    "named": false
-  },
-  {
     "type": "for",
     "named": false
   },
@@ -1182,11 +1169,11 @@
     "named": false
   },
   {
-    "type": "if",
-    "named": false
+    "type": "func",
+    "named": true
   },
   {
-    "type": "int",
+    "type": "if",
     "named": false
   },
   {
@@ -1206,10 +1193,6 @@
     "named": false
   },
   {
-    "type": "log",
-    "named": false
-  },
-  {
     "type": "lower",
     "named": false
   },
@@ -1220,14 +1203,6 @@
   {
     "type": "macroparameter",
     "named": true
-  },
-  {
-    "type": "max",
-    "named": false
-  },
-  {
-    "type": "min",
-    "named": false
   },
   {
     "type": "move",
@@ -1278,10 +1253,6 @@
     "named": true
   },
   {
-    "type": "sin",
-    "named": false
-  },
-  {
     "type": "solid",
     "named": false
   },
@@ -1291,14 +1262,6 @@
   },
   {
     "type": "spline",
-    "named": false
-  },
-  {
-    "type": "sqrt",
-    "named": false
-  },
-  {
-    "type": "srand",
     "named": false
   },
   {
