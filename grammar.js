@@ -170,7 +170,7 @@ module.exports = grammar({
 
   rules: {
     picture: $ => seq(
-      repeat(seq($._element_list, repeat1("\n"))),
+      repeat(seq($._element_list, repeat1($._nl))),
     ),
 
     _element_list: $ => seq(
@@ -181,16 +181,16 @@ module.exports = grammar({
 
     block: $ => seq(
       '[',
-      repeat("\n"),
-      repeat(seq($._element_list, repeat1("\n"))),
+      repeat($._nl),
+      repeat(seq($._element_list, repeat1($._nl))),
       optional($._element_list),
       ']',
     ),
 
     delimited: $ => seq(
       '{',
-      repeat("\n"),
-      repeat(seq($._element_list, repeat1("\n"))),
+      repeat($._nl),
+      repeat(seq($._element_list, repeat1($._nl))),
       optional($._element_list),
       '}',
     ),
@@ -581,5 +581,7 @@ module.exports = grammar({
     macroparameter: $ => /\$[0-9]/,
 
     comment: _ => token(/#.*/),
+
+    _nl: _ => "\n",
   },
 })
