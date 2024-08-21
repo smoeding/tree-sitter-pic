@@ -85,7 +85,7 @@ static int32_t of[] = { U'o', U'f', 0 };
  */
 
 static bool scan_word(TSLexer *lexer, int32_t word[], bool skip) {
-  while ((lexer->lookahead == U' ') || (lexer->lookahead == U'\t')) {
+  while (isblank(lexer->lookahead)) {
     // FIXME: an escaped newline should also be skipped
     lexer->advance(lexer, skip);
   }
@@ -158,7 +158,7 @@ static bool scan_delimiter(TSLexer *lexer, ScannerState *state) {
     // We are done if the end of file is reached
     if (lexer->eof(lexer)) return false;
 
-    if (isspace(lexer->lookahead)) {
+    if (isblank(lexer->lookahead)) {
       // Skip whitespace
       lexer->advance(lexer, true);
     }
@@ -230,21 +230,19 @@ static bool scan_data_table(TSLexer *lexer, ScannerState *state) {
     uint32_t col = lexer->get_column(lexer);
 
     if (!start_table) {
-      switch (lexer->lookahead) {
-      case U' ':
-      case U'\t':
-        // Skip over horizontal whitespace
+      if (isblank(lexer->lookahead)) {
+        // Skip initial horizontal whitespace
         lexer->advance(lexer, true);
         continue;
-
-      case U'\n':
+      }
+      else if (lexer->lookahead == U'\n') {
         // End of line for the copy statement; the data table starts here
         start_table = true;
-        break;
-
-      default:
+      }
+      else {
         // Anything else means the copy statement probably has an until
-        // clause and therefore this is not the start of the data table
+        // clause that needs to be parsed before we can go on here. So this
+        // is not (yet) the start of the data table.
         return false;
       }
     }
@@ -307,7 +305,7 @@ static bool scan_data_table_tag(TSLexer *lexer, ScannerState *state) {
         quote = 1;
         skip = false;
       }
-      else if (!isspace(lexer->lookahead)) {
+      else if (!isblank(lexer->lookahead)) {
         return false;
       }
       break;
