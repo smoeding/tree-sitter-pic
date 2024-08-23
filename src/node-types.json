@@ -194,7 +194,7 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "assignment",
@@ -222,10 +222,6 @@
         },
         {
           "type": "define",
-          "named": true
-        },
-        {
-          "type": "delimited",
           "named": true
         },
         {

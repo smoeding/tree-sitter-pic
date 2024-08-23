@@ -268,7 +268,14 @@ module.exports = grammar({
       seq($.label, ':', optional(';'), $.element),
       seq($.label, ':', optional(';'), $.position_not_place),
       seq($.label, ':', optional(';'), $.place),
-      seq($.delimited, optional($.element)),
+      seq(
+        '{',
+        repeat($._nl),
+        repeat(seq($._element_list, repeat1($._nl))),
+        optional($._element_list),
+        '}',
+        optional($.element),
+      ),
       $._placeless_element,
     ),
 
