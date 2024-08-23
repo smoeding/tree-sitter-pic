@@ -482,9 +482,9 @@ module.exports = grammar({
 
     sh: $ => seq(
       'sh',
-      $.delimiter,
+      alias($.delimiter, '{'),  // return delimiter as '{'
       optional($.shell_command),
-      $.delimiter,
+      alias($.delimiter, '}'),  // return delimiter as '}'
     ),
 
     copy: $ => seq(

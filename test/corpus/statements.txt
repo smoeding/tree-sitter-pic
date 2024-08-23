@@ -73,9 +73,7 @@ sh {}
   (element
     (command_line))
   (element
-    (sh
-      (delimiter)
-      (delimiter)))
+    (sh))
   (element
     (command_line)))
 
@@ -92,9 +90,7 @@ sh { echo "foo" }
     (command_line))
   (element
     (sh
-      (delimiter)
-      (shell_command)
-      (delimiter)))
+      (shell_command)))
   (element
     (command_line)))
 
@@ -111,9 +107,7 @@ sh { echo "foo"; echo "bar" }
     (command_line))
   (element
     (sh
-      (delimiter)
-      (shell_command)
-      (delimiter)))
+      (shell_command)))
   (element
     (command_line)))
 
@@ -133,9 +127,7 @@ echo "bar"
     (command_line))
   (element
     (sh
-      (delimiter)
-      (shell_command)
-      (delimiter)))
+      (shell_command)))
   (element
     (command_line)))
 
@@ -152,9 +144,7 @@ sh { echo "}" }
     (command_line))
   (element
     (sh
-      (delimiter)
-      (shell_command)
-      (delimiter)))
+      (shell_command)))
   (element
     (command_line)))
 
@@ -171,9 +161,7 @@ sh { echo {} }
     (command_line))
   (element
     (sh
-      (delimiter)
-      (shell_command)
-      (delimiter)))
+      (shell_command)))
   (element
     (command_line)))
 
@@ -190,9 +178,7 @@ sh ! echo "foo" !
     (command_line))
   (element
     (sh
-      (delimiter)
-      (shell_command)
-      (delimiter)))
+      (shell_command)))
   (element
     (command_line)))
 

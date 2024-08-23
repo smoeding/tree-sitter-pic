@@ -741,13 +741,9 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": true,
-      "required": true,
+      "multiple": false,
+      "required": false,
       "types": [
-        {
-          "type": "delimiter",
-          "named": true
-        },
         {
           "type": "shell_command",
           "named": true
@@ -1119,10 +1115,6 @@
   {
     "type": "define",
     "named": false
-  },
-  {
-    "type": "delimiter",
-    "named": true
   },
   {
     "type": "do",
