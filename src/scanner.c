@@ -50,6 +50,7 @@ enum TokenType {
   SHELL_COMMAND,
   DATA_TABLE,
   DATA_TABLE_TAG,
+  MACRONAME,
 };
 
 
@@ -142,6 +143,47 @@ static bool skip_balanced(TSLexer *lexer) {
     }
 
     lexer->advance(lexer, false);
+  }
+}
+
+
+/**
+ * Scan for a macroname according to this regex [a-zA-Z][a-zA-Z0-9_]*
+ */
+
+static bool scan_macroname(TSLexer *lexer) {
+  for(int position=0;;) {
+    // We are done if the end of file is reached
+    if (lexer->eof(lexer)) return false;
+
+    switch (position) {
+    case 0:
+      if (isblank(lexer->lookahead)) {
+        // Skip whitespace
+        lexer->advance(lexer, true);
+        break;
+      }
+
+      position = 1;
+      break;
+
+    case 1:
+      // The first character must be an alphabet character.
+      if (!isalpha(lexer->lookahead)) return false;
+
+      lexer->advance(lexer, false);
+      position++;
+      break;
+
+    default:
+      // Skip all following characters until we find a character that does
+      // not belong to a macroname.
+      if (!isalnum(lexer->lookahead) && (lexer->lookahead != U'_')) return true;
+
+      lexer->advance(lexer, false);
+      position++;
+      break;
+    }
   }
 }
 
@@ -470,5 +512,13 @@ bool tree_sitter_pic_external_scanner_scan(void *payload, TSLexer *lexer, const 
       return true;
     }
   }
+
+  if (valid_symbols[MACRONAME]) {
+    if (scan_macroname(lexer)) {
+      lexer->result_symbol = MACRONAME;
+      return true;
+    }
+  }
+
   return false;
 }

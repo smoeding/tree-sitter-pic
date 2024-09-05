@@ -163,6 +163,7 @@ module.exports = grammar({
     $.shell_command,
     $.data_table,
     $.data_table_tag,
+    $.macroname,
   ],
 
   // keyword extraction optimization
@@ -212,13 +213,13 @@ module.exports = grammar({
 
     define: $ => seq(
       'define',
-      $._macroname,
+      $.macroname,
       $.delimited,
     ),
 
     undef: $ => seq(
       'undef',
-      $._macroname,
+      $.macroname,
     ),
 
     reset: $ => seq(
@@ -464,7 +465,7 @@ module.exports = grammar({
       seq(
         field('lhs', alias('figname', $.variable)),
         '=',
-        field('rhs', $._macroname),
+        field('rhs', $.macroname),
       ),
     ),
 
@@ -495,7 +496,7 @@ module.exports = grammar({
           optional(alias($._text, $.filename)),
           'thru',
           choice(
-            $._macroname,
+            $.macroname,
             $.delimited,
           ),
           optional(seq('until', $.data_table_tag)),
@@ -582,8 +583,6 @@ module.exports = grammar({
     composite_label: $ => /\.[A-Z][a-zA-Z0-9_]*/,
 
     command_line: $ => /[.\\].*/,
-
-    _macroname: $ => alias(choice($.variable, $.label), $.macroname),
 
     macroparameter: $ => /\$[0-9]/,
 
