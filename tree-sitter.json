@@ -1,0 +1,29 @@
+{
+  "grammars": [
+    {
+      "name": "pic",
+      "camelcase": "Pic",
+      "scope": "source.pic",
+      "path": ".",
+      "file-types": [
+        "pic"
+      ]
+    }
+  ],
+  "metadata": {
+    "version": "0.0.1",
+    "license": "BSD-2-Clause",
+    "description": "Pic grammar for tree-sitter",
+    "links": {
+      "repository": "https://github.com/smoeding/tree-sitter-pic"
+    }
+  },
+  "bindings": {
+    "c": true,
+    "go": true,
+    "node": true,
+    "python": true,
+    "rust": true,
+    "swift": true
+  }
+}
