@@ -183,6 +183,26 @@ sh ! echo "foo" !
     (command_line)))
 
 ================================================================================
+sh with another delimiter and multiple command lines
+================================================================================
+.PS
+sh !
+  echo "foo"
+  echo "bar"
+!
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (command_line))
+  (element
+    (sh
+      (shell_command)))
+  (element
+    (command_line)))
+
+================================================================================
 copy "file"
 ================================================================================
 .PS
@@ -205,6 +225,27 @@ copy thru macro-name
 ================================================================================
 .PS
 copy thru do_circle
+0 0 .05
+1 1 .1
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (command_line))
+  (element
+    (copy
+      (macroname)
+      (data_table)))
+  (element
+    (command_line)))
+
+
+================================================================================
+copy thru strange macro-name
+================================================================================
+.PS
+copy thru XfooX
 0 0 .05
 1 1 .1
 .PE
@@ -262,11 +303,72 @@ box
   (element
     (command_line)))
 
+
+================================================================================
+copy thru strange macro-name until text
+================================================================================
+.PS
+copy thru foof until "END"
+0 0 .05
+1 1 .1
+END
+box
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (command_line))
+  (element
+    (copy
+      (macroname)
+      (data_table_tag)
+      (data_table)))
+  (element
+    (primitive))
+  (element
+    (command_line)))
+
 ================================================================================
 copy thru macro-text
 ================================================================================
 .PS
 copy thru { circle rad $3 at $1,$2 }
+0 0 .05
+1 1 .1
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (command_line))
+  (element
+    (copy
+      (delimited
+        (element
+          (primitive)
+          (attribute_list
+            (attribute
+              (expr
+                (macroparameter)))
+            (attribute
+              (position
+                (position_not_place
+                  (expr_pair
+                    (expr
+                      (macroparameter))
+                    (expr
+                      (macroparameter)))))))))
+      (data_table)))
+  (element
+    (command_line)))
+
+
+================================================================================
+copy thru macro-text with another delimiter
+================================================================================
+.PS
+copy thru X circle rad $3 at $1,$2 X
 0 0 .05
 1 1 .1
 .PE
@@ -688,12 +790,79 @@ define Circle { circle rad $3 at $1,$2 }
     (command_line)))
 
 ================================================================================
+define simple macro without braces
+================================================================================
+.PS
+define Circle X circle rad $3 at $1,$2 X
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (command_line))
+  (element
+    (define
+      (macroname)
+      (delimited
+        (element
+          (primitive)
+          (attribute_list
+            (attribute
+              (expr
+                (macroparameter)))
+            (attribute
+              (position
+                (position_not_place
+                  (expr_pair
+                    (expr
+                      (macroparameter))
+                    (expr
+                      (macroparameter)))))))))))
+  (element
+    (command_line)))
+
+================================================================================
 define multiline macro
 ================================================================================
 .PS
 define Circle {
   circle rad $3 at $1,$2
 }
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (command_line))
+  (element
+    (define
+      (macroname)
+      (delimited
+        (element
+          (primitive)
+          (attribute_list
+            (attribute
+              (expr
+                (macroparameter)))
+            (attribute
+              (position
+                (position_not_place
+                  (expr_pair
+                    (expr
+                      (macroparameter))
+                    (expr
+                      (macroparameter)))))))))))
+  (element
+    (command_line)))
+
+
+================================================================================
+define multiline macro without braces
+================================================================================
+.PS
+define Circle %
+  circle rad $3 at $1,$2
+%
 .PE
 
 --------------------------------------------------------------------------------
