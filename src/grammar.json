@@ -1,4 +1,5 @@
 {
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/grammar.schema.json",
   "name": "pic",
   "word": "variable",
   "rules": {
@@ -116,7 +117,12 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "open_delimiter"
+          },
+          "named": false,
           "value": "{"
         },
         {
@@ -158,7 +164,12 @@
           ]
         },
         {
-          "type": "STRING",
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "close_delimiter"
+          },
+          "named": false,
           "value": "}"
         }
       ]
@@ -225,7 +236,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "_macroname"
+          "name": "macroname"
         },
         {
           "type": "SYMBOL",
@@ -242,7 +253,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "_macroname"
+          "name": "macroname"
         }
       ]
     },
@@ -713,8 +724,8 @@
           "type": "SEQ",
           "members": [
             {
-              "type": "SYMBOL",
-              "name": "delimiter"
+              "type": "STRING",
+              "value": "{"
             },
             {
               "type": "REPEAT",
@@ -755,8 +766,8 @@
               ]
             },
             {
-              "type": "SYMBOL",
-              "name": "delimiter"
+              "type": "STRING",
+              "value": "}"
             },
             {
               "type": "CHOICE",
@@ -2301,7 +2312,7 @@
               "name": "rhs",
               "content": {
                 "type": "SYMBOL",
-                "name": "_macroname"
+                "name": "macroname"
               }
             }
           ]
@@ -2363,8 +2374,13 @@
           "value": "sh"
         },
         {
-          "type": "SYMBOL",
-          "name": "delimiter"
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "open_delimiter"
+          },
+          "named": false,
+          "value": "{"
         },
         {
           "type": "CHOICE",
@@ -2379,8 +2395,13 @@
           ]
         },
         {
-          "type": "SYMBOL",
-          "name": "delimiter"
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "close_delimiter"
+          },
+          "named": false,
+          "value": "}"
         }
       ]
     },
@@ -2432,7 +2453,7 @@
                   "members": [
                     {
                       "type": "SYMBOL",
-                      "name": "_macroname"
+                      "name": "macroname"
                     },
                     {
                       "type": "SYMBOL",
@@ -3062,6 +3083,10 @@
       "type": "PATTERN",
       "value": "[A-Z][a-zA-Z0-9_]*"
     },
+    "macroname": {
+      "type": "PATTERN",
+      "value": "[a-zA-Z][a-zA-Z0-9_]*"
+    },
     "composite_label": {
       "type": "PATTERN",
       "value": "\\.[A-Z][a-zA-Z0-9_]*"
@@ -3069,24 +3094,6 @@
     "command_line": {
       "type": "PATTERN",
       "value": "[.\\\\].*"
-    },
-    "_macroname": {
-      "type": "ALIAS",
-      "content": {
-        "type": "CHOICE",
-        "members": [
-          {
-            "type": "SYMBOL",
-            "name": "variable"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "label"
-          }
-        ]
-      },
-      "named": true,
-      "value": "macroname"
     },
     "macroparameter": {
       "type": "PATTERN",
@@ -3131,10 +3138,6 @@
     },
     {
       "type": "SYMBOL",
-      "name": "delimiter"
-    },
-    {
-      "type": "SYMBOL",
       "name": "shell_command"
     },
     {
@@ -3144,6 +3147,14 @@
     {
       "type": "SYMBOL",
       "name": "data_table_tag"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "open_delimiter"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "close_delimiter"
     }
   ],
   "inline": [],

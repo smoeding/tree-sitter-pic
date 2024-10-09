@@ -159,11 +159,11 @@ module.exports = grammar({
   externals: $ => [
     $._side,                    // "left" or "right"
     $._side_corner,             // "left of" or "right of"
-    $.delimiter,                // " or { or X or ...
     $.shell_command,
     $.data_table,
     $.data_table_tag,
-    $.macroname,
+    $.open_delimiter,
+    $.close_delimiter,
   ],
 
   // keyword extraction optimization
@@ -189,11 +189,11 @@ module.exports = grammar({
     ),
 
     delimited: $ => seq(
-      '{',
+      alias($.open_delimiter, '{'),
       repeat($._nl),
       repeat(seq($._element_list, repeat1($._nl))),
       optional($._element_list),
-      '}',
+      alias($.close_delimiter, '}'),
     ),
 
     _placeless_element: $ => choice(
@@ -483,9 +483,9 @@ module.exports = grammar({
 
     sh: $ => seq(
       'sh',
-      alias($.delimiter, '{'),  // return delimiter as '{'
+      alias($.open_delimiter, '{'),  // return delimiter as '{'
       optional($.shell_command),
-      alias($.delimiter, '}'),  // return delimiter as '}'
+      alias($.close_delimiter, '}'),  // return delimiter as '}'
     ),
 
     copy: $ => seq(
@@ -579,6 +579,8 @@ module.exports = grammar({
     variable: $ => /[a-z][a-zA-Z0-9_]*/,
 
     label: $ => /[A-Z][a-zA-Z0-9_]*/,
+
+    macroname: $ => /[a-zA-Z][a-zA-Z0-9_]*/,
 
     composite_label: $ => /\.[A-Z][a-zA-Z0-9_]*/,
 
