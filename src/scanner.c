@@ -186,8 +186,8 @@ static bool open_delimiter(TSLexer *lexer, ScannerState *state) {
         return true;
       }
       else if (isalpha(lexer->lookahead)) {
-        // Either a delimiting character or a macroname; we store the
-        // delimiter and mark this as the end of the token.
+        // Either a delimiting character or a macroname; we remember the
+        // delimiter for later and mark this as the end of the token.
         first_delimiter = lexer->lookahead;
         lexer->advance(lexer, false);
         lexer->mark_end(lexer);

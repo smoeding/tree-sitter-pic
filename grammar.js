@@ -266,6 +266,7 @@ module.exports = grammar({
     element: $ => choice(
       seq($.primitive, optional($.attribute_list)),
       seq($.block, optional($.attribute_list)),
+      // FIXME: seq($.macroname, '(', ')'),
       seq($.label, ':', optional(';'), $.element),
       seq($.label, ':', optional(';'), $.position_not_place),
       seq($.label, ':', optional(';'), $.place),
