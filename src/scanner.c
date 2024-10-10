@@ -204,10 +204,17 @@ static bool open_delimiter(TSLexer *lexer, ScannerState *state) {
 
     case MACRONAME:
       if (isalnum(lexer->lookahead) || (lexer->lookahead == U'_')) {
+        // More alphanumeric characters could mean we see a macroname.
         last_delimiter = lexer->lookahead;
         lexer->advance(lexer, false);
       }
+      else if (!isalnum(lexer->lookahead)) {
+        // A single alphanumeric character starts a balanced block.
+        array_push(&state->delimiters, first_delimiter);
+        return true;
+      }
       else {
+        // FIXME:
         return (last_delimiter == first_delimiter);
       }
       break;
