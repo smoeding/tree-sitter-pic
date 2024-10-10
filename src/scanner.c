@@ -124,16 +124,14 @@ static inline int32_t matching_delimiter(int32_t ch) {
  */
 
 static bool skip_balanced(TSLexer *lexer) {
-  int32_t delimiter = 0;
+  for(int32_t delimiter = matching_delimiter(lexer->lookahead);;) {
+    lexer->advance(lexer, false);
 
-  for(;;) {
     // We are done if the end of file is reached
     if (lexer->eof(lexer)) return false;
 
-    if (delimiter == 0) {
-      delimiter = matching_delimiter(lexer->lookahead);
-    }
-    else if (lexer->lookahead == delimiter) {
+    if (lexer->lookahead == delimiter) {
+      // End of the balanced text is reached; skip delimiter and return.
       lexer->advance(lexer, false);
       return true;
     }
@@ -141,8 +139,6 @@ static bool skip_balanced(TSLexer *lexer) {
       // Consume backslash and the following character
       lexer->advance(lexer, false);
     }
-
-    lexer->advance(lexer, false);
   }
 }
 
@@ -224,15 +220,13 @@ static bool open_delimiter(TSLexer *lexer, ScannerState *state) {
 
 
 /**
- * Detect the end of a balanced body.
+ * Detect the end of a balanced body using the last stored delimiter.
  */
 
 static bool close_delimiter(TSLexer *lexer, ScannerState *state) {
   if (state->delimiters.size == 0) return false;
 
-  int32_t *delimiter = array_back(&state->delimiters);
-
-  for(;;) {
+  for(int32_t *delimiter = array_back(&state->delimiters);;) {
     // We are done if the end of file is reached
     if (lexer->eof(lexer)) return false;
 
@@ -241,11 +235,14 @@ static bool close_delimiter(TSLexer *lexer, ScannerState *state) {
       lexer->advance(lexer, true);
     }
     else if (lexer->lookahead == *delimiter) {
+      // The matching delimiter is found so we skip over it and remove it
+      // from the array of delimiters.
       lexer->advance(lexer, false);
       array_pop(&state->delimiters);
       return true;
     }
     else {
+      // Not our delimiter so let the parser try to match something else.
       return false;
     }
   }
@@ -261,6 +258,7 @@ static bool close_delimiter(TSLexer *lexer, ScannerState *state) {
 static bool shell_command(TSLexer *lexer, ScannerState *state) {
   if (state->delimiters.size == 0) return false;
 
+  // Use the last stored delimiter
   int32_t *delimiter = array_back(&state->delimiters);
 
   for(bool has_content=false;; has_content=true) {
@@ -572,5 +570,6 @@ bool tree_sitter_pic_external_scanner_scan(void *payload, TSLexer *lexer, const 
       return true;
     }
   }
+
   return false;
 }
