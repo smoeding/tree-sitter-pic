@@ -380,31 +380,32 @@ static bool data_table(TSLexer *lexer, ScannerState *state) {
  */
 
 static bool data_table_tag(TSLexer *lexer, ScannerState *state) {
-  bool skip = true;
-  int quote = 0;
+  typedef enum DataTableQuote {
+    BEFORE_OPEN_QUOTE,
+    AFTER_OPEN_QUOTE,
+  } DataTableQuote;
 
   array_clear(&state->data_table_tag);
 
-  for(;;) {
+  for(DataTableQuote quote=BEFORE_OPEN_QUOTE;;) {
     // We are done if the end of file is reached
     if (lexer->eof(lexer)) return false;
 
     switch (quote) {
-    case 0:
-      // before opening quote
+    case BEFORE_OPEN_QUOTE:
       if (lexer->lookahead == U'"') {
-        quote = 1;
-        skip = false;
+        quote = AFTER_OPEN_QUOTE;
       }
       else if (!isblank(lexer->lookahead)) {
         return false;
       }
       break;
 
-    case 1:
-      // after opening quote
+    case AFTER_OPEN_QUOTE:
       if (lexer->lookahead == U'"') {
-        quote = 2;
+        // Skip over closing quote
+        lexer->advance(lexer, false);
+        return true;
       }
       else if (lexer->lookahead == U'\n') {
         return false;
@@ -413,13 +414,9 @@ static bool data_table_tag(TSLexer *lexer, ScannerState *state) {
         array_push(&state->data_table_tag, lexer->lookahead);
       }
       break;
-
-    case 2:
-      // closing quote
-      return true;
-      break;
     }
-    lexer->advance(lexer, skip);
+
+    lexer->advance(lexer, (quote == BEFORE_OPEN_QUOTE));
   }
 }
 
