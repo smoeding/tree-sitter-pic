@@ -76,9 +76,10 @@ typedef struct ScannerState {
  * The words we need to match with the scan_word function.
  */
 
-static int32_t left[] = { U'l', U'e', U'f', U't', 0 };
+static int32_t left[]  = { U'l', U'e', U'f', U't', 0 };
 static int32_t right[] = { U'r', U'i', U'g', U'h', U't', 0 };
-static int32_t of[] = { U'o', U'f', 0 };
+static int32_t of[]    = { U'o', U'f', 0 };
+static int32_t until[] = { U'u', U'n', U't', U'i', U'l', 0 };
 
 
 /**
@@ -149,13 +150,13 @@ static bool skip_balanced(TSLexer *lexer) {
  */
 
 static bool open_delimiter(TSLexer *lexer, ScannerState *state) {
-  int32_t first_delimiter = 0;
-  int32_t last_delimiter = 0;
+  int32_t delimiter = 0;
 
   typedef enum ScanDelimiter {
     INITIAL_WHITESPACE,
     FIRST_CHAR,
     MACRONAME,
+    UNTIL,
   } ScanDelimiter;
 
   for(ScanDelimiter position=INITIAL_WHITESPACE;;) {
@@ -171,7 +172,8 @@ static bool open_delimiter(TSLexer *lexer, ScannerState *state) {
       }
 
       position = FIRST_CHAR;
-      break;
+
+      // Fall thru
 
     case FIRST_CHAR:
       if (lexer->lookahead == U'{') {
@@ -184,7 +186,7 @@ static bool open_delimiter(TSLexer *lexer, ScannerState *state) {
       else if (isalpha(lexer->lookahead)) {
         // Either a delimiting character or a macroname; we remember the
         // delimiter for later and mark this as the end of the token.
-        first_delimiter = lexer->lookahead;
+        delimiter = lexer->lookahead;
         lexer->advance(lexer, false);
         lexer->mark_end(lexer);
         position = MACRONAME;
@@ -196,24 +198,40 @@ static bool open_delimiter(TSLexer *lexer, ScannerState *state) {
         lexer->advance(lexer, false);
         return true;
       }
-      break;
+
+      // Fall thru
 
     case MACRONAME:
       if (isalnum(lexer->lookahead) || (lexer->lookahead == U'_')) {
         // More alphanumeric characters could mean we see a macroname.
-        last_delimiter = lexer->lookahead;
         lexer->advance(lexer, false);
+        break;
       }
-      else if (!isalnum(lexer->lookahead)) {
-        // A single alphanumeric character starts a balanced block.
-        array_push(&state->delimiters, first_delimiter);
-        return true;
+
+      position = UNTIL;
+
+      // Fall thru
+
+    case UNTIL:
+      if (isblank(lexer->lookahead)) {
+        // Skip whitespace
+        lexer->advance(lexer, false);
+        break;
       }
-      else {
-        // FIXME:
-        return (last_delimiter == first_delimiter);
+      else if ((lexer->lookahead == U'\n') || (lexer->lookahead == U'#')) {
+        // Parse it as macroname since we don't know any better.
+        return false;
       }
-      break;
+
+      // Now check the next token.
+      if (scan_word(lexer, until, false)) {
+        // The next token is 'until' so it really seems to be a macroname.
+        return false;
+      }
+
+      // We still need to store the delimiting char before we are done.
+      array_push(&state->delimiters, delimiter);
+      return true;
     }
   }
 }
