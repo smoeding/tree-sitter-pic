@@ -248,9 +248,6 @@ copy thru macro-name
 copy thru foo
 0
 10
-100
-1000
-10000
 .PE
 
 --------------------------------------------------------------------------------
@@ -306,9 +303,9 @@ copy thru do_circle
 copy thru macro-name until text
 ================================================================================
 .PS
-copy thru do_circle until "END"
-0 0 .05
-1 1 .1
+copy thru foo until "END"
+1
+10
 END
 box
 .PE
