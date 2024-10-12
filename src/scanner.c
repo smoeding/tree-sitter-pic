@@ -50,6 +50,7 @@ enum TokenType {
   DATA_TABLE,
   DATA_TABLE_TAG,
   OPEN_DELIMITER,
+  OPEN_DELIMITER_OR_MACRONAME,
   CLOSE_DELIMITER,
 };
 
@@ -145,11 +146,14 @@ static bool skip_balanced(TSLexer *lexer) {
 
 
 /**
- * Detect the start of a balanced body. The first non-whitespace character
- * is the delimiter. It can be an opening brace or any other character.
+ * Detect the start of a balanced body. If the parameter allow_macroname is
+ * set to true, then we need to handle the special case of the "copy thru"
+ * statement where either a balanced body or a macroname can follow. The
+ * first non-whitespace character is the delimiter. It can be an opening
+ * brace or any other character.
  */
 
-static bool open_delimiter(TSLexer *lexer, ScannerState *state) {
+static bool open_delimiter(TSLexer *lexer, ScannerState *state, bool allow_macroname) {
   int32_t delimiter = 0;
 
   typedef enum ScanDelimiter {
@@ -183,9 +187,10 @@ static bool open_delimiter(TSLexer *lexer, ScannerState *state) {
         lexer->advance(lexer, false);
         return true;
       }
-      else if (isalpha(lexer->lookahead)) {
-        // Either a delimiting character or a macroname; we remember the
-        // delimiter for later and mark this as the end of the token.
+      else if (isalpha(lexer->lookahead) && allow_macroname) {
+        // Either a delimiting character or the first char of a macroname
+        // if that is allowed; we remember the delimiter for later and mark
+        // this as the end of the token.
         delimiter = lexer->lookahead;
         lexer->advance(lexer, false);
         lexer->mark_end(lexer);
@@ -193,7 +198,10 @@ static bool open_delimiter(TSLexer *lexer, ScannerState *state) {
       }
       else {
         // Anything else is a delimiting character; we store the character
-        // as ending delimiter and stop scanning.
+        // as ending delimiter and stop scanning. The code is also used for
+        // a letter character if the parameter allow_macroname is false. In
+        // that case the first non-whitespace character is the delimiter
+        // and we return success here.
         array_push(&state->delimiters, lexer->lookahead);
         lexer->advance(lexer, false);
         return true;
@@ -579,8 +587,15 @@ bool tree_sitter_pic_external_scanner_scan(void *payload, TSLexer *lexer, const 
   }
 
   if (valid_symbols[OPEN_DELIMITER]) {
-    if (open_delimiter(lexer, state)) {
+    if (open_delimiter(lexer, state, false)) {
       lexer->result_symbol = OPEN_DELIMITER;
+      return true;
+    }
+  }
+
+  if (valid_symbols[OPEN_DELIMITER_OR_MACRONAME]) {
+    if (open_delimiter(lexer, state, true)) {
+      lexer->result_symbol = OPEN_DELIMITER_OR_MACRONAME;
       return true;
     }
   }

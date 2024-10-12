@@ -163,6 +163,7 @@ module.exports = grammar({
     $.data_table,
     $.data_table_tag,
     $.open_delimiter,
+    $.open_delimiter_or_macroname,
     $.close_delimiter,
   ],
 
@@ -190,6 +191,14 @@ module.exports = grammar({
 
     delimited: $ => seq(
       alias($.open_delimiter, '{'),
+      repeat($._nl),
+      repeat(seq($._element_list, repeat1($._nl))),
+      optional($._element_list),
+      alias($.close_delimiter, '}'),
+    ),
+
+    _delimited_or_macroname: $ => seq(
+      alias($.open_delimiter_or_macroname, '{'),
       repeat($._nl),
       repeat(seq($._element_list, repeat1($._nl))),
       optional($._element_list),
@@ -498,7 +507,7 @@ module.exports = grammar({
           'thru',
           choice(
             $.macroname,
-            $.delimited,
+            alias($._delimited_or_macroname, $.delimited),
           ),
           optional(seq('until', $.data_table_tag)),
           optional($.data_table),
