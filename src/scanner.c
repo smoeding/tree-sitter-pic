@@ -348,15 +348,20 @@ static bool data_table(TSLexer *lexer, ScannerState *state) {
 
     if ((state->data_table_tag.size == 0) && (col < tag_length)) {
       // Tag is not set, so we use .PE or .PF as end tag
-      if ((col == 0) && (lexer->lookahead != U'.')) {
+      if (lexer->lookahead == U'\n') {
+        // Tag not found; continue in next line and try to match the tag
+        lexer->mark_end(lexer);
+        tag_matched = true;
+      }
+      else if ((col == 0) && (lexer->lookahead != U'.')) {
         tag_matched = false;
         has_content = true;
       }
-      if ((col == 1) && (lexer->lookahead != U'P')) {
+      else if ((col == 1) && (lexer->lookahead != U'P')) {
         tag_matched = false;
         has_content = true;
       }
-      if ((col == 2) && (lexer->lookahead != U'E') && (lexer->lookahead != U'F')) {
+      else if ((col == 2) && (lexer->lookahead != U'E') && (lexer->lookahead != U'F')) {
         tag_matched = false;
         has_content = true;
       }
