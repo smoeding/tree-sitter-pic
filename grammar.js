@@ -220,41 +220,6 @@ module.exports = grammar({
       $.undef,
     ),
 
-    define: $ => seq(
-      'define',
-      $.macroname,
-      $.delimited,
-    ),
-
-    undef: $ => seq(
-      'undef',
-      $.macroname,
-    ),
-
-    reset: $ => seq(
-      'reset',
-      optional(prec.left(seq(
-        $.variable,
-        repeat(seq(optional(','), $.variable))
-      ))),
-    ),
-
-    print_args: $ => repeat1($.print_arg),
-
-    print_arg: $ => choice(
-      prec.left(PREC.COMMA, $.expr),     // prec ','
-      $._text,
-      prec.left(PREC.COMMA, $.position), // prec ','
-    ),
-
-    if: $ => seq(
-      'if',
-      $._any_expr,
-      'then',
-      $.delimited,
-      optional(seq('else', $.delimited)),
-    ),
-
     _any_expr: $ => choice(
       $.expr,
       $.text_expr,
@@ -518,6 +483,41 @@ module.exports = grammar({
       optional(seq('by', optional('*'), $.expr)),
       'do',
       $.delimited,
+    ),
+
+     if: $ => seq(
+      'if',
+      $._any_expr,
+      'then',
+      $.delimited,
+      optional(seq('else', $.delimited)),
+    ),
+
+    define: $ => seq(
+      'define',
+      $.macroname,
+      $.delimited,
+    ),
+
+    undef: $ => seq(
+      'undef',
+      $.macroname,
+    ),
+
+    reset: $ => seq(
+      'reset',
+      optional(prec.left(seq(
+        $.variable,
+        repeat(seq(optional(','), $.variable))
+      ))),
+    ),
+
+    print_args: $ => repeat1($.print_arg),
+
+    print_arg: $ => choice(
+      prec.left(PREC.COMMA, $.expr),     // prec ','
+      $._text,
+      prec.left(PREC.COMMA, $.position), // prec ','
     ),
 
     expr: $ => choice(
