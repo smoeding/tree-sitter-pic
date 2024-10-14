@@ -367,25 +367,18 @@ module.exports = grammar({
       prec(PREC.ADD, seq($.position, choice('+', '-'), $.expr_pair)),
       seq('(', $.position, choice('+', '-'), $.expr_pair, ')'),
       seq('(', $.position, ',', $.position, ')'),
-      seq(
-        $.expr,
-        optional(seq('of', 'the', 'way')),
-        'between',
-        $.position,
-        'and',
-        $.position,
-      ),
-      seq(
-        '(',
-        $.expr,
-        optional(seq('of', 'the', 'way')),
-        'between',
-        $.position,
-        'and',
-        $.position,
-        ')',
-      ),
+      seq('(', $._between_clause, ')', ),
+      seq($._between_clause),
       seq($.expr, '<', $.position, ',', $.position, '>'),
+    ),
+
+    _between_clause: $ => seq(
+      $.expr,
+      optional(seq('of', 'the', 'way')),
+      'between',
+      $.position,
+      'and',
+      $.position,
     ),
 
     expr_pair: $ => choice(

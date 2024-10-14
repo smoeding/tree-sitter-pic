@@ -1585,49 +1585,16 @@
           "type": "SEQ",
           "members": [
             {
-              "type": "SYMBOL",
-              "name": "expr"
+              "type": "STRING",
+              "value": "("
             },
             {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SEQ",
-                  "members": [
-                    {
-                      "type": "STRING",
-                      "value": "of"
-                    },
-                    {
-                      "type": "STRING",
-                      "value": "the"
-                    },
-                    {
-                      "type": "STRING",
-                      "value": "way"
-                    }
-                  ]
-                },
-                {
-                  "type": "BLANK"
-                }
-              ]
+              "type": "SYMBOL",
+              "name": "_between_clause"
             },
             {
               "type": "STRING",
-              "value": "between"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "position"
-            },
-            {
-              "type": "STRING",
-              "value": "and"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "position"
+              "value": ")"
             }
           ]
         },
@@ -1635,57 +1602,8 @@
           "type": "SEQ",
           "members": [
             {
-              "type": "STRING",
-              "value": "("
-            },
-            {
               "type": "SYMBOL",
-              "name": "expr"
-            },
-            {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SEQ",
-                  "members": [
-                    {
-                      "type": "STRING",
-                      "value": "of"
-                    },
-                    {
-                      "type": "STRING",
-                      "value": "the"
-                    },
-                    {
-                      "type": "STRING",
-                      "value": "way"
-                    }
-                  ]
-                },
-                {
-                  "type": "BLANK"
-                }
-              ]
-            },
-            {
-              "type": "STRING",
-              "value": "between"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "position"
-            },
-            {
-              "type": "STRING",
-              "value": "and"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "position"
-            },
-            {
-              "type": "STRING",
-              "value": ")"
+              "name": "_between_clause"
             }
           ]
         },
@@ -1717,6 +1635,56 @@
               "value": ">"
             }
           ]
+        }
+      ]
+    },
+    "_between_clause": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "expr"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "of"
+                },
+                {
+                  "type": "STRING",
+                  "value": "the"
+                },
+                {
+                  "type": "STRING",
+                  "value": "way"
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": "between"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "position"
+        },
+        {
+          "type": "STRING",
+          "value": "and"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "position"
         }
       ]
     },
