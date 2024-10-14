@@ -275,7 +275,6 @@ module.exports = grammar({
     element: $ => choice(
       seq($.primitive, optional($.attribute_list)),
       seq($.block, optional($.attribute_list)),
-      // FIXME: seq($.macroname, '(', ')'),
       seq($.label, ':', optional(';'), $.element),
       seq($.label, ':', optional(';'), $.position_not_place),
       seq($.label, ':', optional(';'), $.place),
@@ -288,6 +287,7 @@ module.exports = grammar({
         optional($.element),
       ),
       $._placeless_element,
+      $.macro_call,
     ),
 
     primitive: $ => choice(
@@ -559,14 +559,28 @@ module.exports = grammar({
       '.rad',
     ),
 
-    // internal function calls (zero, one or two args) and also
-    // macros calls (up to 9 args)
+    // internal function calls (zero, one or two args)
     function_call: $ => prec(PREC.FUN, seq(
-      alias(choice($.variable, $.label), $.func),
+      alias($.variable, $.name),
       '(',
-      optional(seq($._any_expr, repeat(seq(',', $._any_expr)))),
+      optional($._argument_list),
       ')',
     )),
+
+    // macros calls (up to 9 args)
+    macro_call: $ => prec(PREC.FUN, seq(
+      alias(choice($.variable, $.label), $.name),
+      optional(seq(
+        '(',
+        optional($._argument_list),
+        ')',
+      )),
+    )),
+
+    _argument_list: $ => seq(
+      choice($._any_expr, $.text),
+      repeat(seq(',', choice($._any_expr, $.text))),
+    ),
 
     // a floating point numeric constant with optional trailing 'i'
     number: $ => /([0-9]+\.?[0-9]*|\.[0-9]+)([eE][+-]?[0-9]+)?[iI]?/,

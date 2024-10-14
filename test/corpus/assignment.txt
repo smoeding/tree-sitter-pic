@@ -136,7 +136,7 @@ rnd = rand()
       (variable)
       (expr
         (function_call
-          (func)))))
+          (name)))))
   (element
     (command_line)))
 
@@ -156,7 +156,7 @@ root = sqrt(2)
       (variable)
       (expr
         (function_call
-          (func)
+          (name)
           (expr
             (number))))))
   (element
@@ -178,7 +178,7 @@ pi = atan2(0, -1)
       (variable)
       (expr
         (function_call
-          (func)
+          (name)
           (expr
             (number))
           (expr

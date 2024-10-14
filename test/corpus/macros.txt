@@ -1,0 +1,219 @@
+================================================================================
+define simple macro
+================================================================================
+.PS
+define Circle { circle rad $3 at $1,$2 }
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (command_line))
+  (element
+    (define
+      (macroname)
+      (delimited
+        (element
+          (primitive)
+          (attribute_list
+            (attribute
+              (expr
+                (macroparameter)))
+            (attribute
+              (position
+                (position_not_place
+                  (expr_pair
+                    (expr
+                      (macroparameter))
+                    (expr
+                      (macroparameter)))))))))))
+  (element
+    (command_line)))
+
+================================================================================
+define simple macro without braces
+================================================================================
+.PS
+define Circle X circle rad $3 at $1,$2 X
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (command_line))
+  (element
+    (define
+      (macroname)
+      (delimited
+        (element
+          (primitive)
+          (attribute_list
+            (attribute
+              (expr
+                (macroparameter)))
+            (attribute
+              (position
+                (position_not_place
+                  (expr_pair
+                    (expr
+                      (macroparameter))
+                    (expr
+                      (macroparameter)))))))))))
+  (element
+    (command_line)))
+
+================================================================================
+define multiline macro
+================================================================================
+.PS
+define Circle {
+  circle rad $3 at $1,$2
+}
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (command_line))
+  (element
+    (define
+      (macroname)
+      (delimited
+        (element
+          (primitive)
+          (attribute_list
+            (attribute
+              (expr
+                (macroparameter)))
+            (attribute
+              (position
+                (position_not_place
+                  (expr_pair
+                    (expr
+                      (macroparameter))
+                    (expr
+                      (macroparameter)))))))))))
+  (element
+    (command_line)))
+
+
+================================================================================
+define multiline macro without braces
+================================================================================
+.PS
+define Circle %
+  circle rad $3 at $1,$2
+%
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (command_line))
+  (element
+    (define
+      (macroname)
+      (delimited
+        (element
+          (primitive)
+          (attribute_list
+            (attribute
+              (expr
+                (macroparameter)))
+            (attribute
+              (position
+                (position_not_place
+                  (expr_pair
+                    (expr
+                      (macroparameter))
+                    (expr
+                      (macroparameter)))))))))))
+  (element
+    (command_line)))
+
+================================================================================
+undef macro
+================================================================================
+.PS
+undef Circle_Small
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (command_line))
+  (element
+    (undef
+      (macroname)))
+  (element
+    (command_line)))
+
+================================================================================
+undef single letter macro
+================================================================================
+.PS
+undef l
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (command_line))
+  (element
+    (undef
+      (macroname)))
+  (element
+    (command_line)))
+
+================================================================================
+macro calls
+================================================================================
+.PS
+foo
+Bar
+foo()
+Bar()
+foo("1")
+Bar("1")
+foo("1", 42)
+Bar("1", 42)
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (command_line))
+  (element
+    (macro_call
+      (name)))
+  (element
+    (macro_call
+      (name)))
+  (element
+    (macro_call
+      (name)))
+  (element
+    (macro_call
+      (name)))
+  (element
+    (macro_call
+      (name)
+      (text)))
+  (element
+    (macro_call
+      (name)
+      (text)))
+  (element
+    (macro_call
+      (name)
+      (text)
+      (expr
+        (number))))
+  (element
+    (macro_call
+      (name)
+      (text)
+      (expr
+        (number))))
+  (element
+    (command_line)))
