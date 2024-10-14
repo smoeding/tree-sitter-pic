@@ -29,7 +29,7 @@ ellipse "typesetter"
 
 The following limitations are known.
 
-### The copy thru statement may be parsed incorrectly
+#### The copy thru statement may be parsed incorrectly
 
 Consider the following piece of code:
 
@@ -40,9 +40,9 @@ X
 10
 ```
 
-When GNU pic parses this code, it checks if `X` has been defined as a macro. If `X` really is a macro, then the macro is called using the following three lines as data. If `X` is not defined as a macro, then it is parsed as a character delimiter and the block between the two `X` characters is used as an inline macro.
+When GNU pic parses this code, it checks if `X` has been defined as a macro. If it is a macro, then it is called using the following three lines as data. If `X` is not defined as a macro, then it is parsed as a character delimiter and the block between the two `X` characters is used as an inline macro.
 
-This tree-sitter implementation doesn't have access to the defined macros and may therefore parse this specific piece of code differently. You can use longer macro names and non-alphabetic letters as inline macro delimiters to avoid this ambiguity.
+The tree-sitter implementation doesn't record the defined macros and may therefore parse this specific piece of code differently. You can use longer macro names and non-alphabetic letters as inline macro delimiters to avoid this ambiguity.
 
 ## References
 
