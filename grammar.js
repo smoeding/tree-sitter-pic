@@ -25,6 +25,7 @@
 //
 
 const PREC = {
+  LOW: 1,
   DOT: 10,                      // '.'
 
   PLOT: 11,
@@ -220,23 +221,6 @@ module.exports = grammar({
       $.undef,
     ),
 
-    _any_expr: $ => choice(
-      $.expr,
-      $.text_expr,
-    ),
-
-    text_expr: $ => choice(
-      prec.left(PREC.EQUALEQUAL, seq($._text, '==', $._text)),
-      prec.left(PREC.NOTEQUAL, seq($._text, '!=', $._text)),
-      prec.left(PREC.ANDAND, seq($.text_expr, '&&', $.text_expr)),
-      prec.left(PREC.ANDAND, seq($.text_expr, '&&', $.expr)),
-      prec.left(PREC.ANDAND, seq($.expr, '&&', $.text_expr)),
-      prec.left(PREC.OROR, seq($.text_expr, '||', $.text_expr)),
-      prec.left(PREC.OROR, seq($.text_expr, '||', $.expr)),
-      prec.left(PREC.OROR, seq($.expr, '||', $.text_expr)),
-      prec.right(PREC.NOT, seq('!', $.text_expr)),
-    ),
-
     element: $ => choice(
       seq($.primitive, optional($.attribute_list)),
       seq($.block, optional($.attribute_list)),
@@ -321,11 +305,11 @@ module.exports = grammar({
       ')',
     ),
 
-    position: $ => choice(
+    position: $ => prec(PREC.LOW, choice(
       $.position_not_place,
       $.place,
       seq('(', $.place, ')'),
-    ),
+    )),
 
     position_not_place: $ => choice(
       $.expr_pair,
@@ -515,16 +499,33 @@ module.exports = grammar({
     print_args: $ => repeat1($.print_arg),
 
     print_arg: $ => choice(
-      prec.left(PREC.COMMA, $.expr),     // prec ','
+      $.expr,
       $._text,
-      prec.left(PREC.COMMA, $.position), // prec ','
+      $.position,
+    ),
+
+    _any_expr: $ => choice(
+      $.expr,
+      $.text_expr,
+    ),
+
+    text_expr: $ => choice(
+      prec.left(PREC.EQUALEQUAL, seq($._text, '==', $._text)),
+      prec.left(PREC.NOTEQUAL, seq($._text, '!=', $._text)),
+      prec.left(PREC.ANDAND, seq($.text_expr, '&&', $.text_expr)),
+      prec.left(PREC.ANDAND, seq($.text_expr, '&&', $.expr)),
+      prec.left(PREC.ANDAND, seq($.expr, '&&', $.text_expr)),
+      prec.left(PREC.OROR, seq($.text_expr, '||', $.text_expr)),
+      prec.left(PREC.OROR, seq($.text_expr, '||', $.expr)),
+      prec.left(PREC.OROR, seq($.expr, '||', $.text_expr)),
+      prec.right(PREC.NOT, seq('!', $.text_expr)),
     ),
 
     expr: $ => choice(
       $.variable,
       $.number,
       $.macroparameter,
-      seq($.place, $.place_attribute),
+      seq($.place, optional($.place_attribute)),
       prec.left(PREC.ADD, seq($.expr, choice('+', '-'), $.expr)),
       prec.left(PREC.MUL, seq($.expr, choice('*', '/', '%', $.expr))),
       prec.right(PREC.EXP, seq($.expr, '^', $.expr)),
@@ -556,7 +557,7 @@ module.exports = grammar({
     function_call: $ => prec(PREC.FUN, seq(
       alias($.variable, $.name),
       '(',
-      optional($._argument_list),
+      optional(alias($.function_parameter_list, $.parameter_list)),
       ')',
     )),
 
@@ -565,15 +566,32 @@ module.exports = grammar({
       alias(choice($.variable, $.label), $.name),
       optional(seq(
         '(',
-        optional($._argument_list),
+        optional(alias($.macro_parameter_list, $.parameter_list)),
         ')',
       )),
     )),
 
-    _argument_list: $ => seq(
-      choice($._any_expr, $.text),
-      repeat(seq(',', choice($._any_expr, $.text))),
+    function_parameter_list: $ => seq(
+      alias($.function_parameter, $.parameter),
+      repeat(seq(',', alias($.function_parameter, $.parameter))),
     ),
+
+    function_parameter: $ => choice(
+      $._any_expr,
+      $.text
+    ),
+
+    macro_parameter_list: $ => prec(PREC.LOW, seq(
+      alias($.macro_parameter, $.parameter),
+      repeat(seq(',', alias($.macro_parameter, $.parameter))),
+    )),
+
+    macro_parameter: $ => prec(PREC.LOW, choice(
+      '->', '<->', '<-',
+      $.text,
+      $.expr,
+      $.position,
+    )),
 
     // a floating point numeric constant with optional trailing 'i'
     number: $ => /([0-9]+\.?[0-9]*|\.[0-9]+)([eE][+-]?[0-9]+)?[iI]?/,
@@ -596,14 +614,12 @@ module.exports = grammar({
     variable: $ => /[a-z][a-zA-Z0-9_]*/,
 
     label: $ => /[A-Z][a-zA-Z0-9_]*/,
-
-    macroname: $ => /[a-zA-Z][a-zA-Z0-9_]*/,
-
     composite_label: $ => /\.[A-Z][a-zA-Z0-9_]*/,
 
-    command_line: $ => /[.\\].*/,
-
+    macroname: $ => /[a-zA-Z][a-zA-Z0-9_]*/,
     macroparameter: $ => /\$[0-9]/,
+
+    command_line: $ => /[.\\].*/,
 
     comment: _ => token(/#.*/),
 

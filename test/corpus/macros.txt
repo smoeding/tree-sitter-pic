@@ -198,22 +198,32 @@ Bar("1", 42)
   (element
     (macro_call
       (name)
-      (text)))
+      (parameter_list
+        (parameter
+          (text)))))
   (element
     (macro_call
       (name)
-      (text)))
+      (parameter_list
+        (parameter
+          (text)))))
   (element
     (macro_call
       (name)
-      (text)
-      (expr
-        (number))))
+      (parameter_list
+        (parameter
+          (text))
+        (parameter
+          (expr
+            (number))))))
   (element
     (macro_call
       (name)
-      (text)
-      (expr
-        (number))))
+      (parameter_list
+        (parameter
+          (text))
+        (parameter
+          (expr
+            (number))))))
   (element
     (command_line)))

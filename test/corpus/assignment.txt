@@ -157,8 +157,10 @@ root = sqrt(2)
       (expr
         (function_call
           (name)
-          (expr
-            (number))))))
+          (parameter_list
+            (parameter
+              (expr
+                (number))))))))
   (element
     (command_line)))
 
@@ -179,11 +181,14 @@ pi = atan2(0, -1)
       (expr
         (function_call
           (name)
-          (expr
-            (number))
-          (expr
-            (expr
-              (number)))))))
+          (parameter_list
+            (parameter
+              (expr
+                (number)))
+            (parameter
+              (expr
+                (expr
+                  (number)))))))))
   (element
     (command_line)))
 
