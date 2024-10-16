@@ -1,0 +1,2830 @@
+================================================================================
+01-fundamental-objects
+================================================================================
+.PS
+box "box"
+move
+line "line" above
+move
+arrow "arrow" above
+move
+circle "circle"
+move
+ellipse "ellipse"
+move
+arc "arc"
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (command_line))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (text))))
+  (element
+    (primitive))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (text))
+      (attribute)))
+  (element
+    (primitive))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (text))
+      (attribute)))
+  (element
+    (primitive))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (text))))
+  (element
+    (primitive))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (text))))
+  (element
+    (primitive))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (text))))
+  (element
+    (command_line)))
+================================================================================
+02-size
+================================================================================
+.PS
+box width 3 height 0.1; circle radius 0.1
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (command_line))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (expr
+          (number)))
+      (attribute
+        (expr
+          (number)))))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (expr
+          (number)))))
+  (element
+    (command_line)))
+================================================================================
+03-motion
+================================================================================
+.PS
+line up 1 right 2
+arrow left 2
+move left 0.1
+line <-> down 1 "height " rjust
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (command_line))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (expr
+          (number)))
+      (attribute
+        (expr
+          (number)))))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (expr
+          (number)))))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (expr
+          (number)))))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute)
+      (attribute
+        (expr
+          (number)))
+      (attribute
+        (text))
+      (attribute)))
+  (element
+    (command_line)))
+================================================================================
+04-dashed-lines
+================================================================================
+.PS
+line right 5 dashed; move left 5 down .25; right
+line right 5 dashed 0.25; move left 5 down .25; right
+line right 5 dashed 0.5; move left 5 down .25; right
+line right 5 dashed 1
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (command_line))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (expr
+          (number)))
+      (attribute)))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (expr
+          (number)))
+      (attribute
+        (expr
+          (number)))))
+  (element
+    (direction))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (expr
+          (number)))
+      (attribute
+        (expr
+          (number)))))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (expr
+          (number)))
+      (attribute
+        (expr
+          (number)))))
+  (element
+    (direction))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (expr
+          (number)))
+      (attribute
+        (expr
+          (number)))))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (expr
+          (number)))
+      (attribute
+        (expr
+          (number)))))
+  (element
+    (direction))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (expr
+          (number)))
+      (attribute
+        (expr
+          (number)))))
+  (element
+    (command_line)))
+================================================================================
+05-invisible-objects
+================================================================================
+.PS
+box invis "input"; arrow; box invis "output"
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (command_line))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute)
+      (attribute
+        (text))))
+  (element
+    (primitive))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute)
+      (attribute
+        (text))))
+  (element
+    (command_line)))
+================================================================================
+06-text-on-lines
+================================================================================
+.PS
+arrow "on top of"; move
+arrow "above" "below"; move
+arrow "above" above; move
+arrow "below" below; move
+arrow "above" "on top of" "below"
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (command_line))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (text))))
+  (element
+    (primitive))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (text))
+      (attribute
+        (text))))
+  (element
+    (primitive))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (text))
+      (attribute)))
+  (element
+    (primitive))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (text))
+      (attribute)))
+  (element
+    (primitive))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (text))
+      (attribute
+        (text))
+      (attribute
+        (text))))
+  (element
+    (command_line)))
+================================================================================
+07-default-sizes
+================================================================================
+.PS
+boxwid = 0.1; boxht = 1
+movewid = 0.2
+box; move; box; move; box
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (command_line))
+  (element
+    (assignment
+      lhs: (variable)
+      rhs: (expr
+        (number))))
+  (element
+    (assignment
+      lhs: (variable)
+      rhs: (expr
+        (number))))
+  (element
+    (assignment
+      lhs: (variable)
+      rhs: (expr
+        (number))))
+  (element
+    (primitive))
+  (element
+    (primitive))
+  (element
+    (primitive))
+  (element
+    (primitive))
+  (element
+    (primitive))
+  (element
+    (command_line)))
+================================================================================
+08-positions
+================================================================================
+.PS
+box ht 0.2 wid 0.2 at 0,0 "1"
+move right 0.5                  # or "move to 0.5,0"
+box ht 0.2 wid 0.2 "2"
+move right 0.5                  # or "move 0.5" or "move same"
+box ht 0.2 wid 0.2 "3"
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (command_line))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (expr
+          (number)))
+      (attribute
+        (expr
+          (number)))
+      (attribute
+        (position
+          (position_not_place
+            (expr_pair
+              (expr
+                (number))
+              (expr
+                (number))))))
+      (attribute
+        (text))))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (expr
+          (number)))))
+  (comment)
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (expr
+          (number)))
+      (attribute
+        (expr
+          (number)))
+      (attribute
+        (text))))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (expr
+          (number)))))
+  (comment)
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (expr
+          (number)))
+      (attribute
+        (expr
+          (number)))
+      (attribute
+        (text))))
+  (element
+    (command_line)))
+================================================================================
+09-endpoints
+================================================================================
+.PS
+"+" at 0,0
+arc -> from 0.5,0 to 0,0.5
+arc -> cw from 0,0 to 1,0.5
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (command_line))
+  (element
+    (primitive
+      (text))
+    (attribute_list
+      (attribute
+        (position
+          (position_not_place
+            (expr_pair
+              (expr
+                (number))
+              (expr
+                (number))))))))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute)
+      (attribute
+        (position
+          (position_not_place
+            (expr_pair
+              (expr
+                (number))
+              (expr
+                (number))))))
+      (attribute
+        (position
+          (position_not_place
+            (expr_pair
+              (expr
+                (number))
+              (expr
+                (number))))))))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute)
+      (attribute)
+      (attribute
+        (position
+          (position_not_place
+            (expr_pair
+              (expr
+                (number))
+              (expr
+                (number))))))
+      (attribute
+        (position
+          (position_not_place
+            (expr_pair
+              (expr
+                (number))
+              (expr
+                (number))))))))
+  (element
+    (command_line)))
+================================================================================
+10-flat-arc
+================================================================================
+.PS
+arc -> cw from 0,0 to 2,0 rad 15
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (command_line))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute)
+      (attribute)
+      (attribute
+        (position
+          (position_not_place
+            (expr_pair
+              (expr
+                (number))
+              (expr
+                (number))))))
+      (attribute
+        (position
+          (position_not_place
+            (expr_pair
+              (expr
+                (number))
+              (expr
+                (number))))))
+      (attribute
+        (expr
+          (number)))))
+  (element
+    (command_line)))
+================================================================================
+11-reference-label
+================================================================================
+.PS
+Box1: box
+Box2: box
+move to Box1
+line from Box1 to Box2
+move to Box1 up 0.1 right 0.2
+move to Box1 + 0.2,0.1 # same as previous
+line to Box1 - 0.5,0
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (command_line))
+  (element
+    (label)
+    (element
+      (primitive)))
+  (element
+    (label)
+    (element
+      (primitive)))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (position
+          (place
+            (label))))))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (position
+          (place
+            (label))))
+      (attribute
+        (position
+          (place
+            (label))))))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (position
+          (place
+            (label))))
+      (attribute
+        (expr
+          (number)))
+      (attribute
+        (expr
+          (number)))))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (position
+          (position_not_place
+            (position
+              (place
+                (label)))
+            (expr_pair
+              (expr
+                (number))
+              (expr
+                (number))))))))
+  (comment)
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (position
+          (position_not_place
+            (position
+              (place
+                (label)))
+            (expr_pair
+              (expr
+                (number))
+              (expr
+                (number))))))))
+  (element
+    (command_line)))
+================================================================================
+12-reset-label
+================================================================================
+.PS
+Box1: Box1 + 1,1
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (command_line))
+  (element
+    (label)
+    (position_not_place
+      (position
+        (place
+          (label)))
+      (expr_pair
+        (expr
+          (number))
+        (expr
+          (number)))))
+  (element
+    (command_line)))
+================================================================================
+13-corners
+================================================================================
+.PS
+B: box "B.c" ht 1 wid 1.5
+   " B.e" at B.e ljust
+   " B.ne" at B.ne ljust
+   " B.se" at B.se ljust
+   "B.s" at B.s below
+   "B.n" at B.n above
+   "B.sw " at B.sw rjust
+   "B.w " at B.w rjust
+   "B.nw " at B.nw rjust
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (command_line))
+  (element
+    (label)
+    (element
+      (primitive)
+      (attribute_list
+        (attribute
+          (text))
+        (attribute
+          (expr
+            (number)))
+        (attribute
+          (expr
+            (number))))))
+  (element
+    (primitive
+      (text))
+    (attribute_list
+      (attribute
+        (position
+          (place
+            (label)
+            (corner))))
+      (attribute)))
+  (element
+    (primitive
+      (text))
+    (attribute_list
+      (attribute
+        (position
+          (place
+            (label)
+            (corner))))
+      (attribute)))
+  (element
+    (primitive
+      (text))
+    (attribute_list
+      (attribute
+        (position
+          (place
+            (label)
+            (corner))))
+      (attribute)))
+  (element
+    (primitive
+      (text))
+    (attribute_list
+      (attribute
+        (position
+          (place
+            (label)
+            (corner))))
+      (attribute)))
+  (element
+    (primitive
+      (text))
+    (attribute_list
+      (attribute
+        (position
+          (place
+            (label)
+            (corner))))
+      (attribute)))
+  (element
+    (primitive
+      (text))
+    (attribute_list
+      (attribute
+        (position
+          (place
+            (label)
+            (corner))))
+      (attribute)))
+  (element
+    (primitive
+      (text))
+    (attribute_list
+      (attribute
+        (position
+          (place
+            (label)
+            (corner))))
+      (attribute)))
+  (element
+    (primitive
+      (text))
+    (attribute_list
+      (attribute
+        (position
+          (place
+            (label)
+            (corner))))
+      (attribute)))
+  (element
+    (command_line)))
+================================================================================
+14-position-at
+================================================================================
+.PS
+ellipse
+ellipse ht .2 wid .3 with .se at 1st ellipse.nw
+ellipse ht .2 wid .3 with .sw at 1st ellipse.ne
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (command_line))
+  (element
+    (primitive))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (expr
+          (number)))
+      (attribute
+        (expr
+          (number)))
+      (attribute
+        (path
+          (relative_path
+            (corner))))
+      (attribute
+        (position
+          (place
+            (nth_primitive
+              (ordinal)
+              (object_type))
+            (corner))))))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (expr
+          (number)))
+      (attribute
+        (expr
+          (number)))
+      (attribute
+        (path
+          (relative_path
+            (corner))))
+      (attribute
+        (position
+          (place
+            (nth_primitive
+              (ordinal)
+              (object_type))
+            (corner))))))
+  (element
+    (command_line)))
+================================================================================
+15-chop
+================================================================================
+.PS
+circlerad = 0.15; arrowhead = 7
+circle "a"
+circle "b" at 1st circle - (0.4, 0.6)
+circle "c" at 1st circle + (0.4, -0.6)
+arrow from 1st circle to 2nd circle chop
+arrow from 1st circle to 3rd circle chop
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (command_line))
+  (element
+    (assignment
+      lhs: (variable)
+      rhs: (expr
+        (number))))
+  (element
+    (assignment
+      lhs: (variable)
+      rhs: (expr
+        (number))))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (text))))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (text))
+      (attribute
+        (position
+          (position_not_place
+            (position
+              (place
+                (nth_primitive
+                  (ordinal)
+                  (object_type))))
+            (expr_pair
+              (expr_pair
+                (expr
+                  (number))
+                (expr
+                  (number)))))))))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (text))
+      (attribute
+        (position
+          (position_not_place
+            (position
+              (place
+                (nth_primitive
+                  (ordinal)
+                  (object_type))))
+            (expr_pair
+              (expr_pair
+                (expr
+                  (number))
+                (expr
+                  (expr
+                    (number))))))))))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (position
+          (place
+            (nth_primitive
+              (ordinal)
+              (object_type)))))
+      (attribute
+        (position
+          (place
+            (nth_primitive
+              (ordinal)
+              (object_type)))))
+      (attribute)))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (position
+          (place
+            (nth_primitive
+              (ordinal)
+              (object_type)))))
+      (attribute
+        (position
+          (place
+            (nth_primitive
+              (ordinal)
+              (object_type)))))
+      (attribute)))
+  (element
+    (command_line)))
+================================================================================
+16-between
+================================================================================
+.PS
+box
+arrow right from 1/3 of the way between last box.ne and last box.se
+arrow right from 2/3 <last box.ne, last box.se>
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (command_line))
+  (element
+    (primitive))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute)
+      (attribute
+        (position
+          (position_not_place
+            (expr
+              (expr
+                (expr
+                  (number)))
+              (expr
+                (number)))
+            (position
+              (place
+                (nth_primitive
+                  (object_type))
+                (corner)))
+            (position
+              (place
+                (nth_primitive
+                  (object_type))
+                (corner))))))))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute)
+      (attribute
+        (position
+          (position_not_place
+            (expr
+              (expr
+                (expr
+                  (number)))
+              (expr
+                (number)))
+            (position
+              (place
+                (nth_primitive
+                  (object_type))
+                (corner)))
+            (position
+              (place
+                (nth_primitive
+                  (object_type))
+                (corner))))))))
+  (element
+    (command_line)))
+================================================================================
+17-between
+================================================================================
+.PS
+A: ellipse
+   ellipse ht .2 wid .3 with .se at 1st ellipse.nw
+   ellipse ht .2 wid .3 with .sw at 1st ellipse.ne
+   circle rad .05 at 0.5 <A.nw,A.c>
+   circle rad .05 at 0.5 <A.ne,A.c>
+   arc from 0.25 <A.w,A.e> to 0.75 <A.w,A.e>
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (command_line))
+  (element
+    (label)
+    (element
+      (primitive)))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (expr
+          (number)))
+      (attribute
+        (expr
+          (number)))
+      (attribute
+        (path
+          (relative_path
+            (corner))))
+      (attribute
+        (position
+          (place
+            (nth_primitive
+              (ordinal)
+              (object_type))
+            (corner))))))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (expr
+          (number)))
+      (attribute
+        (expr
+          (number)))
+      (attribute
+        (path
+          (relative_path
+            (corner))))
+      (attribute
+        (position
+          (place
+            (nth_primitive
+              (ordinal)
+              (object_type))
+            (corner))))))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (expr
+          (number)))
+      (attribute
+        (position
+          (position_not_place
+            (expr
+              (number))
+            (position
+              (place
+                (label)
+                (corner)))
+            (position
+              (place
+                (label)
+                (corner))))))))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (expr
+          (number)))
+      (attribute
+        (position
+          (position_not_place
+            (expr
+              (number))
+            (position
+              (place
+                (label)
+                (corner)))
+            (position
+              (place
+                (label)
+                (corner))))))))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (position
+          (position_not_place
+            (expr
+              (number))
+            (position
+              (place
+                (label)
+                (corner)))
+            (position
+              (place
+                (label)
+                (corner))))))
+      (attribute
+        (position
+          (position_not_place
+            (expr
+              (number))
+            (position
+              (place
+                (label)
+                (corner)))
+            (position
+              (place
+                (label)
+                (corner))))))))
+  (element
+    (command_line)))
+================================================================================
+18-expression
+================================================================================
+.PS
+a = 0.5; b = 1
+box wid a ht b
+ellipse wid a/2 ht 1.5*b
+Box2: Box1 - (a/2, b/2)
+foo = Box1.x               # the x coordinate of the center of Box1
+bar = Box1.ne.y            # the y coordinate of the northeast corner of Box1
+baz = Box1.wid             # the width of Box1
+rad = 2nd last circle.rad  # the radius of the 2nd last circle
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (command_line))
+  (element
+    (assignment
+      lhs: (variable)
+      rhs: (expr
+        (number))))
+  (element
+    (assignment
+      lhs: (variable)
+      rhs: (expr
+        (number))))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (expr
+          (variable)))
+      (attribute
+        (expr
+          (variable)))))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (expr
+          (expr
+            (expr
+              (variable)))
+          (expr
+            (number))))
+      (attribute
+        (expr
+          (expr
+            (expr
+              (number)))
+          (expr
+            (variable))))))
+  (element
+    (label)
+    (position_not_place
+      (position
+        (place
+          (label)))
+      (expr_pair
+        (expr_pair
+          (expr
+            (expr
+              (expr
+                (variable)))
+            (expr
+              (number)))
+          (expr
+            (expr
+              (expr
+                (variable)))
+            (expr
+              (number)))))))
+  (element
+    (assignment
+      lhs: (variable)
+      rhs: (expr
+        (place
+          (label))
+        (place_attribute))))
+  (comment)
+  (element
+    (assignment
+      lhs: (variable)
+      rhs: (expr
+        (place
+          (label)
+          (corner))
+        (place_attribute))))
+  (comment)
+  (element
+    (assignment
+      lhs: (variable)
+      rhs: (expr
+        (place
+          (label))
+        (place_attribute))))
+  (comment)
+  (element
+    (assignment
+      lhs: (variable)
+      rhs: (expr
+        (place
+          (nth_primitive
+            (ordinal)
+            (object_type)))
+        (place_attribute))))
+  (comment)
+  (element
+    (command_line)))
+================================================================================
+19-text
+================================================================================
+.PS
+"origin" "(0,0)" at 0,0
+"this is" "(1,1)" at 1,1
+box ht 1 wid 1 dotted with .sw at 0,0
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (command_line))
+  (element
+    (primitive
+      (text))
+    (attribute_list
+      (attribute
+        (text))
+      (attribute
+        (position
+          (position_not_place
+            (expr_pair
+              (expr
+                (number))
+              (expr
+                (number))))))))
+  (element
+    (primitive
+      (text))
+    (attribute_list
+      (attribute
+        (text))
+      (attribute
+        (position
+          (position_not_place
+            (expr_pair
+              (expr
+                (number))
+              (expr
+                (number))))))))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (expr
+          (number)))
+      (attribute
+        (expr
+          (number)))
+      (attribute)
+      (attribute
+        (path
+          (relative_path
+            (corner))))
+      (attribute
+        (position
+          (position_not_place
+            (expr_pair
+              (expr
+                (number))
+              (expr
+                (number))))))))
+  (element
+    (command_line)))
+================================================================================
+20-spline
+================================================================================
+.PS
+line dashed right 1 then down .5 left 1 then right 1
+spline from start of last line \
+       right 1 then down .5 left 1 then right 1
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (command_line))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute)
+      (attribute
+        (expr
+          (number)))
+      (attribute)
+      (attribute
+        (expr
+          (number)))
+      (attribute
+        (expr
+          (number)))
+      (attribute)
+      (attribute
+        (expr
+          (number)))))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (position
+          (place
+            (corner)
+            (nth_primitive
+              (object_type)))))
+      (attribute
+        (expr
+          (expr
+            (variable))
+          (expr
+            (number))))
+      (attribute)
+      (attribute
+        (expr
+          (number)))
+      (attribute
+        (expr
+          (number)))
+      (attribute)
+      (attribute
+        (expr
+          (number)))))
+  (element
+    (command_line)))
+================================================================================
+21-blocks
+================================================================================
+.PS
+box "1"
+[ box "2"; arrow "3" above; box "4" ] with .n at last box.s - (0,0.1)
+"Thing 2: " rjust at last [].w
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (command_line))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (text))))
+  (element
+    (block
+      (element
+        (primitive)
+        (attribute_list
+          (attribute
+            (text))))
+      (element
+        (primitive)
+        (attribute_list
+          (attribute
+            (text))
+          (attribute)))
+      (element
+        (primitive)
+        (attribute_list
+          (attribute
+            (text)))))
+    (attribute_list
+      (attribute
+        (path
+          (relative_path
+            (corner))))
+      (attribute
+        (position
+          (position_not_place
+            (position
+              (place
+                (nth_primitive
+                  (object_type))
+                (corner)))
+            (expr_pair
+              (expr_pair
+                (expr
+                  (number))
+                (expr
+                  (number)))))))))
+  (element
+    (primitive
+      (text))
+    (attribute_list
+      (attribute)
+      (attribute
+        (position
+          (place
+            (nth_primitive
+              (object_type))
+            (corner))))))
+  (element
+    (command_line)))
+================================================================================
+22-complex-blocks
+================================================================================
+.PS
+h = .5; dh = .02; dw = .1
+[
+  Ptr: [
+    boxht = h; boxwid = dw
+    A: box
+    B: box
+    C: box
+    box wid 2*boxwid "..."
+    D: box
+]
+Block: [
+  boxht = 2*dw; boxwid = 2*dw
+  movewid = 2*dh
+  A: box; move
+  B: box; move
+  C: box; move
+  box invis "..." wid 2*boxwid; move
+  D: box
+] with .t at Ptr.s - (0,h/2)
+  arrow from Ptr.A to Block.A.nw + (dh,0)
+  arrow from Ptr.B to Block.B.nw + (dh,0)
+  arrow from Ptr.C to Block.C.nw + (dh,0)
+  arrow from Ptr.D to Block.D.nw + (dh,0)
+]
+box dashed ht last [].ht+dw wid last [].wid+dw at last []
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (command_line))
+  (element
+    (assignment
+      lhs: (variable)
+      rhs: (expr
+        (number))))
+  (element
+    (assignment
+      lhs: (variable)
+      rhs: (expr
+        (number))))
+  (element
+    (assignment
+      lhs: (variable)
+      rhs: (expr
+        (number))))
+  (element
+    (block
+      (element
+        (label)
+        (element
+          (block
+            (element
+              (assignment
+                lhs: (variable)
+                rhs: (expr
+                  (variable))))
+            (element
+              (assignment
+                lhs: (variable)
+                rhs: (expr
+                  (variable))))
+            (element
+              (label)
+              (element
+                (primitive)))
+            (element
+              (label)
+              (element
+                (primitive)))
+            (element
+              (label)
+              (element
+                (primitive)))
+            (element
+              (primitive)
+              (attribute_list
+                (attribute
+                  (expr
+                    (expr
+                      (expr
+                        (number)))
+                    (expr
+                      (variable))))
+                (attribute
+                  (text))))
+            (element
+              (label)
+              (element
+                (primitive))))))
+      (element
+        (label)
+        (element
+          (block
+            (element
+              (assignment
+                lhs: (variable)
+                rhs: (expr
+                  (expr
+                    (expr
+                      (number)))
+                  (expr
+                    (variable)))))
+            (element
+              (assignment
+                lhs: (variable)
+                rhs: (expr
+                  (expr
+                    (expr
+                      (number)))
+                  (expr
+                    (variable)))))
+            (element
+              (assignment
+                lhs: (variable)
+                rhs: (expr
+                  (expr
+                    (expr
+                      (number)))
+                  (expr
+                    (variable)))))
+            (element
+              (label)
+              (element
+                (primitive)))
+            (element
+              (primitive))
+            (element
+              (label)
+              (element
+                (primitive)))
+            (element
+              (primitive))
+            (element
+              (label)
+              (element
+                (primitive)))
+            (element
+              (primitive))
+            (element
+              (primitive)
+              (attribute_list
+                (attribute)
+                (attribute
+                  (text))
+                (attribute
+                  (expr
+                    (expr
+                      (expr
+                        (number)))
+                    (expr
+                      (variable))))))
+            (element
+              (primitive))
+            (element
+              (label)
+              (element
+                (primitive))))
+          (attribute_list
+            (attribute
+              (path
+                (relative_path
+                  (corner))))
+            (attribute
+              (position
+                (position_not_place
+                  (position
+                    (place
+                      (label)
+                      (corner)))
+                  (expr_pair
+                    (expr_pair
+                      (expr
+                        (number))
+                      (expr
+                        (expr
+                          (expr
+                            (variable)))
+                        (expr
+                          (number)))))))))))
+      (element
+        (primitive)
+        (attribute_list
+          (attribute
+            (position
+              (place
+                (label)
+                (composite_label))))
+          (attribute
+            (position
+              (position_not_place
+                (position
+                  (place
+                    (label)
+                    (composite_label)
+                    (corner)))
+                (expr_pair
+                  (expr_pair
+                    (expr
+                      (variable))
+                    (expr
+                      (number)))))))))
+      (element
+        (primitive)
+        (attribute_list
+          (attribute
+            (position
+              (place
+                (label)
+                (composite_label))))
+          (attribute
+            (position
+              (position_not_place
+                (position
+                  (place
+                    (label)
+                    (composite_label)
+                    (corner)))
+                (expr_pair
+                  (expr_pair
+                    (expr
+                      (variable))
+                    (expr
+                      (number)))))))))
+      (element
+        (primitive)
+        (attribute_list
+          (attribute
+            (position
+              (place
+                (label)
+                (composite_label))))
+          (attribute
+            (position
+              (position_not_place
+                (position
+                  (place
+                    (label)
+                    (composite_label)
+                    (corner)))
+                (expr_pair
+                  (expr_pair
+                    (expr
+                      (variable))
+                    (expr
+                      (number)))))))))
+      (element
+        (primitive)
+        (attribute_list
+          (attribute
+            (position
+              (place
+                (label)
+                (composite_label))))
+          (attribute
+            (position
+              (position_not_place
+                (position
+                  (place
+                    (label)
+                    (composite_label)
+                    (corner)))
+                (expr_pair
+                  (expr_pair
+                    (expr
+                      (variable))
+                    (expr
+                      (number)))))))))))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute)
+      (attribute
+        (expr
+          (expr
+            (place
+              (nth_primitive
+                (object_type)))
+            (place_attribute))
+          (expr
+            (variable))))
+      (attribute
+        (expr
+          (expr
+            (place
+              (nth_primitive
+                (object_type)))
+            (place_attribute))
+          (expr
+            (variable))))
+      (attribute
+        (position
+          (place
+            (nth_primitive
+              (object_type)))))))
+  (element
+    (command_line)))
+================================================================================
+23-macros
+================================================================================
+.PS
+define square { box ht $1 wid $1 $2 }
+square(1, "one" "inch")
+square(0.5)
+square(0.25, "\s-4tiny\s+4" dashed)
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (command_line))
+  (element
+    (define
+      (macroname)
+      (delimited
+        (element
+          (primitive)
+          (attribute_list
+            (attribute
+              (expr
+                (macroparameter)))
+            (attribute
+              (expr
+                (expr
+                  (macroparameter))
+                (expr
+                  (macroparameter)))))))))
+  (element
+    (macro_call
+      (name)
+      (parameter_list
+        (parameter
+          (expr
+            (number)))
+        (parameter
+          (text))
+        (parameter
+          (text)))))
+  (element
+    (macro_call
+      (name)
+      (parameter_list
+        (parameter
+          (expr
+            (number))))))
+  (element
+    (macro_call
+      (name)
+      (parameter_list
+        (parameter
+          (expr
+            (number)))
+        (parameter
+          (text
+            (escape_sequence)
+            (escape_sequence)))
+        (parameter
+          (expr
+            (variable))))))
+  (element
+    (command_line)))
+================================================================================
+24-loop
+================================================================================
+.PS
+pi = atan2(0,-1)
+for i = 0 to 2 * pi by 0.1 do {
+  "–" at i/2, 0
+  "s" at i/2, sin(i)/2
+  "c" at i/2, cos(i)/2
+}
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (command_line))
+  (element
+    (assignment
+      lhs: (variable)
+      rhs: (expr
+        (function_call
+          (name)
+          (parameter_list
+            (parameter
+              (expr
+                (number)))
+            (parameter
+              (expr
+                (expr
+                  (number)))))))))
+  (element
+    (for
+      (variable)
+      (expr
+        (number))
+      (expr
+        (expr
+          (expr
+            (number)))
+        (expr
+          (variable)))
+      (expr
+        (number))
+      (delimited
+        (element
+          (primitive
+            (text))
+          (attribute_list
+            (attribute
+              (position
+                (position_not_place
+                  (expr_pair
+                    (expr
+                      (expr
+                        (expr
+                          (variable)))
+                      (expr
+                        (number)))
+                    (expr
+                      (number))))))))
+        (element
+          (primitive
+            (text))
+          (attribute_list
+            (attribute
+              (position
+                (position_not_place
+                  (expr_pair
+                    (expr
+                      (expr
+                        (expr
+                          (variable)))
+                      (expr
+                        (number)))
+                    (expr
+                      (expr
+                        (expr
+                          (function_call
+                            (name)
+                            (parameter_list
+                              (parameter
+                                (expr
+                                  (variable)))))))
+                      (expr
+                        (number)))))))))
+        (element
+          (primitive
+            (text))
+          (attribute_list
+            (attribute
+              (position
+                (position_not_place
+                  (expr_pair
+                    (expr
+                      (expr
+                        (expr
+                          (variable)))
+                      (expr
+                        (number)))
+                    (expr
+                      (expr
+                        (expr
+                          (function_call
+                            (name)
+                            (parameter_list
+                              (parameter
+                                (expr
+                                  (variable)))))))
+                      (expr
+                        (number))))))))))))
+  (element
+    (command_line)))
+================================================================================
+25-condition
+================================================================================
+.PS
+pi = atan2(0,-1)
+for i = 0 to pi by 0.1 do {
+if (s = sin(i)) > 0.8 then { s = 0.8 }
+                            "x" at i/2, s/2
+}
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (command_line))
+  (element
+    (assignment
+      (variable)
+      (expr
+        (function_call
+          (name)
+          (parameter_list
+            (parameter
+              (expr
+                (number)))
+            (parameter
+              (expr
+                (expr
+                  (number)))))))))
+  (element
+    (for
+      (variable)
+      (expr
+        (number))
+      (expr
+        (variable))
+      (expr
+        (number))
+      (delimited
+        (element
+          (if
+            (expr
+              (expr
+                (assignment
+                  (variable)
+                  (expr
+                    (function_call
+                      (name)
+                      (parameter_list
+                        (parameter
+                          (expr
+                            (variable))))))))
+              (expr
+                (number)))
+            (delimited
+              (element
+                (assignment
+                  (variable)
+                  (expr
+                    (number)))))))
+        (element
+          (primitive
+            (text))
+          (attribute_list
+            (attribute
+              (position
+                (position_not_place
+                  (expr_pair
+                    (expr
+                      (expr
+                        (expr
+                          (variable)))
+                      (expr
+                        (number)))
+                    (expr
+                      (expr
+                        (expr
+                          (variable)))
+                      (expr
+                        (number))))))))))))
+  (element
+    (command_line)))
+================================================================================
+26-troff-commands
+================================================================================
+.PS
+.ps 24
+circle radius .4 at 0,0
+.ps 12
+circle radius .2 at 0,0
+.ps 8
+circle radius .1 at 0,0
+.ps 6
+circle radius .05 at 0,0
+.ps 10 \" don’t forget to restore size
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (command_line))
+  (element
+    (command_line))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (expr
+          (number)))
+      (attribute
+        (position
+          (position_not_place
+            (expr_pair
+              (expr
+                (number))
+              (expr
+                (number))))))))
+  (element
+    (command_line))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (expr
+          (number)))
+      (attribute
+        (position
+          (position_not_place
+            (expr_pair
+              (expr
+                (number))
+              (expr
+                (number))))))))
+  (element
+    (command_line))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (expr
+          (number)))
+      (attribute
+        (position
+          (position_not_place
+            (expr_pair
+              (expr
+                (number))
+              (expr
+                (number))))))))
+  (element
+    (command_line))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (expr
+          (number)))
+      (attribute
+        (position
+          (position_not_place
+            (expr_pair
+              (expr
+                (number))
+              (expr
+                (number))))))))
+  (element
+    (command_line))
+  (element
+    (command_line)))
+================================================================================
+27-large-example
+================================================================================
+.PS
+define ndblock {
+box wid boxwid/2 ht boxht/2
+down; box same with .t at bottom of last box; box same
+}
+boxht = .2; boxwid = .3; circlerad = .3; dx = 0.05
+down; box; box; box; box ht 3*boxht "." "." "."
+L: box; box; box invis wid 2*boxwid "hashtab:" with .e at 1st box .w
+right
+Start: box wid .5 with .sw at 1st box.ne + (.4,.2) "..."
+N1: box wid .2 "n1"; D1: box wid .3 "d1"
+N3: box wid .4 "n3"; D3: box wid .3 "d3"
+box wid .4 "..."
+N2: box wid .5 "n2"; D2: box wid .2 "d2"
+arrow right from 2nd box
+ndblock
+spline -> right .2 from 3rd last box then to N1.sw + (dx,0)
+spline -> right .3 from 2nd last box then to D1.sw + (dx,0)
+arrow right from last box
+ndblock
+spline -> right .2 from 3rd last box to N2.sw-(dx,.2) to N2.sw+(dx,0)
+spline -> right .3 from 2nd last box to D2.sw-(dx,.2) to D2.sw+(dx,0)
+arrow right 2*linewid from L
+ndblock
+spline -> right .2 from 3rd last box to N3.sw + (dx,0)
+spline -> right .3 from 2nd last box to D3.sw + (dx,0)
+circlerad = .3
+circle invis "ndblock" at last box.e + (1.2,.2)
+arrow dashed from last circle.w to last box chop 0 chop .3
+box invis wid 2*boxwid "ndtable:" with .e at Start.w
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (command_line))
+  (element
+    (define
+      (macroname)
+      (delimited
+        (element
+          (primitive)
+          (attribute_list
+            (attribute
+              (expr
+                (expr
+                  (expr
+                    (variable)))
+                (expr
+                  (number))))
+            (attribute
+              (expr
+                (expr
+                  (expr
+                    (variable)))
+                (expr
+                  (number))))))
+        (element
+          (direction))
+        (element
+          (primitive)
+          (attribute_list
+            (attribute)
+            (attribute
+              (path
+                (relative_path
+                  (corner))))
+            (attribute
+              (position
+                (place
+                  (corner)
+                  (nth_primitive
+                    (object_type)))))))
+        (element
+          (primitive)
+          (attribute_list
+            (attribute))))))
+  (element
+    (assignment
+      lhs: (variable)
+      rhs: (expr
+        (number))))
+  (element
+    (assignment
+      lhs: (variable)
+      rhs: (expr
+        (number))))
+  (element
+    (assignment
+      lhs: (variable)
+      rhs: (expr
+        (number))))
+  (element
+    (assignment
+      lhs: (variable)
+      rhs: (expr
+        (number))))
+  (element
+    (direction))
+  (element
+    (primitive))
+  (element
+    (primitive))
+  (element
+    (primitive))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (expr
+          (expr
+            (expr
+              (number)))
+          (expr
+            (variable))))
+      (attribute
+        (text))
+      (attribute
+        (text))
+      (attribute
+        (text))))
+  (element
+    (label)
+    (element
+      (primitive)))
+  (element
+    (primitive))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute)
+      (attribute
+        (expr
+          (expr
+            (expr
+              (number)))
+          (expr
+            (variable))))
+      (attribute
+        (text))
+      (attribute
+        (path
+          (relative_path
+            (corner))))
+      (attribute
+        (position
+          (place
+            (nth_primitive
+              (ordinal)
+              (object_type))
+            (corner))))))
+  (element
+    (direction))
+  (element
+    (label)
+    (element
+      (primitive)
+      (attribute_list
+        (attribute
+          (expr
+            (number)))
+        (attribute
+          (path
+            (relative_path
+              (corner))))
+        (attribute
+          (position
+            (position_not_place
+              (position
+                (place
+                  (nth_primitive
+                    (ordinal)
+                    (object_type))
+                  (corner)))
+              (expr_pair
+                (expr_pair
+                  (expr
+                    (number))
+                  (expr
+                    (number)))))))
+        (attribute
+          (text)))))
+  (element
+    (label)
+    (element
+      (primitive)
+      (attribute_list
+        (attribute
+          (expr
+            (number)))
+        (attribute
+          (text)))))
+  (element
+    (label)
+    (element
+      (primitive)
+      (attribute_list
+        (attribute
+          (expr
+            (number)))
+        (attribute
+          (text)))))
+  (element
+    (label)
+    (element
+      (primitive)
+      (attribute_list
+        (attribute
+          (expr
+            (number)))
+        (attribute
+          (text)))))
+  (element
+    (label)
+    (element
+      (primitive)
+      (attribute_list
+        (attribute
+          (expr
+            (number)))
+        (attribute
+          (text)))))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (expr
+          (number)))
+      (attribute
+        (text))))
+  (element
+    (label)
+    (element
+      (primitive)
+      (attribute_list
+        (attribute
+          (expr
+            (number)))
+        (attribute
+          (text)))))
+  (element
+    (label)
+    (element
+      (primitive)
+      (attribute_list
+        (attribute
+          (expr
+            (number)))
+        (attribute
+          (text)))))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute)
+      (attribute
+        (position
+          (place
+            (nth_primitive
+              (ordinal)
+              (object_type)))))))
+  (element
+    (macro_call
+      (name)))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute)
+      (attribute
+        (expr
+          (number)))
+      (attribute
+        (position
+          (place
+            (nth_primitive
+              (ordinal)
+              (object_type)))))
+      (attribute)
+      (attribute
+        (position
+          (position_not_place
+            (position
+              (place
+                (label)
+                (corner)))
+            (expr_pair
+              (expr_pair
+                (expr
+                  (variable))
+                (expr
+                  (number)))))))))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute)
+      (attribute
+        (expr
+          (number)))
+      (attribute
+        (position
+          (place
+            (nth_primitive
+              (ordinal)
+              (object_type)))))
+      (attribute)
+      (attribute
+        (position
+          (position_not_place
+            (position
+              (place
+                (label)
+                (corner)))
+            (expr_pair
+              (expr_pair
+                (expr
+                  (variable))
+                (expr
+                  (number)))))))))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute)
+      (attribute
+        (position
+          (place
+            (nth_primitive
+              (object_type)))))))
+  (element
+    (macro_call
+      (name)))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute)
+      (attribute
+        (expr
+          (number)))
+      (attribute
+        (position
+          (place
+            (nth_primitive
+              (ordinal)
+              (object_type)))))
+      (attribute
+        (position
+          (position_not_place
+            (position
+              (place
+                (label)
+                (corner)))
+            (expr_pair
+              (expr_pair
+                (expr
+                  (variable))
+                (expr
+                  (number)))))))
+      (attribute
+        (position
+          (position_not_place
+            (position
+              (place
+                (label)
+                (corner)))
+            (expr_pair
+              (expr_pair
+                (expr
+                  (variable))
+                (expr
+                  (number)))))))))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute)
+      (attribute
+        (expr
+          (number)))
+      (attribute
+        (position
+          (place
+            (nth_primitive
+              (ordinal)
+              (object_type)))))
+      (attribute
+        (position
+          (position_not_place
+            (position
+              (place
+                (label)
+                (corner)))
+            (expr_pair
+              (expr_pair
+                (expr
+                  (variable))
+                (expr
+                  (number)))))))
+      (attribute
+        (position
+          (position_not_place
+            (position
+              (place
+                (label)
+                (corner)))
+            (expr_pair
+              (expr_pair
+                (expr
+                  (variable))
+                (expr
+                  (number)))))))))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (expr
+          (expr
+            (expr
+              (number)))
+          (expr
+            (variable))))
+      (attribute
+        (position
+          (place
+            (label))))))
+  (element
+    (macro_call
+      (name)))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute)
+      (attribute
+        (expr
+          (number)))
+      (attribute
+        (position
+          (place
+            (nth_primitive
+              (ordinal)
+              (object_type)))))
+      (attribute
+        (position
+          (position_not_place
+            (position
+              (place
+                (label)
+                (corner)))
+            (expr_pair
+              (expr_pair
+                (expr
+                  (variable))
+                (expr
+                  (number)))))))))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute)
+      (attribute
+        (expr
+          (number)))
+      (attribute
+        (position
+          (place
+            (nth_primitive
+              (ordinal)
+              (object_type)))))
+      (attribute
+        (position
+          (position_not_place
+            (position
+              (place
+                (label)
+                (corner)))
+            (expr_pair
+              (expr_pair
+                (expr
+                  (variable))
+                (expr
+                  (number)))))))))
+  (element
+    (assignment
+      lhs: (variable)
+      rhs: (expr
+        (number))))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute)
+      (attribute
+        (text))
+      (attribute
+        (position
+          (position_not_place
+            (position
+              (place
+                (nth_primitive
+                  (object_type))
+                (corner)))
+            (expr_pair
+              (expr_pair
+                (expr
+                  (number))
+                (expr
+                  (number)))))))))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute)
+      (attribute
+        (position
+          (place
+            (nth_primitive
+              (object_type))
+            (corner))))
+      (attribute
+        (position
+          (place
+            (nth_primitive
+              (object_type)))))
+      (attribute
+        (expr
+          (number)))
+      (attribute
+        (expr
+          (number)))))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute)
+      (attribute
+        (expr
+          (expr
+            (expr
+              (number)))
+          (expr
+            (variable))))
+      (attribute
+        (text))
+      (attribute
+        (path
+          (relative_path
+            (corner))))
+      (attribute
+        (position
+          (place
+            (label)
+            (corner))))))
+  (element
+    (command_line)))
+================================================================================
+28-typesetter
+================================================================================
+.PS
+.PS
+.ps -2
+circle "DISK"
+arrow "character" "defns"
+CPU: box "CPU" "(16-bit mini)"
+{ arrow <- from top of CPU up "input " rjust }
+arrow
+CRT: " CRT" ljust
+line from CRT - 0,0.075 up 0.15 \
+then right 0.5 \
+then right 0.5 up 0.25 \
+then down 0.5+0.15 \
+then left 0.5 up 0.25 \
+then left 0.5
+Paper: CRT + 1.05,0.75
+arrow <- from Paper down 1.5
+" ... paper" ljust at end of last arrow + 0, 0.25
+circle rad 0.05 at Paper + (-0.055, -0.25)
+circle rad 0.05 at Paper + (0.055, -0.25)
+" rollers" ljust at Paper + (0.1, -0.25)
+.ps +2
+.PE
+.PE
+
+--------------------------------------------------------------------------------
+(picture
+  (element
+    (command_line))
+  (element
+    (command_line))
+  (element
+    (command_line))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (text))))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (text))
+      (attribute
+        (text))))
+  (element
+    (label)
+    (element
+      (primitive)
+      (attribute_list
+        (attribute
+          (text))
+        (attribute
+          (text)))))
+  (element
+    (element
+      (primitive)
+      (attribute_list
+        (attribute)
+        (attribute
+          (position
+            (place
+              (corner)
+              (label))))
+        (attribute)
+        (attribute
+          (text))
+        (attribute))))
+  (element
+    (primitive))
+  (element
+    (label)
+    (element
+      (primitive
+        (text))
+      (attribute_list
+        (attribute))))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (position
+          (position_not_place
+            (position
+              (place
+                (label)))
+            (expr_pair
+              (expr
+                (number))
+              (expr
+                (number))))))
+      (attribute
+        (expr
+          (number)))
+      (attribute)
+      (attribute
+        (expr
+          (number)))
+      (attribute)
+      (attribute
+        (expr
+          (number)))
+      (attribute
+        (expr
+          (number)))
+      (attribute)
+      (attribute
+        (expr
+          (expr
+            (number))
+          (expr
+            (number))))
+      (attribute)
+      (attribute
+        (expr
+          (number)))
+      (attribute
+        (expr
+          (number)))
+      (attribute)
+      (attribute
+        (expr
+          (number)))))
+  (element
+    (label)
+    (position_not_place
+      (position
+        (place
+          (label)))
+      (expr_pair
+        (expr
+          (number))
+        (expr
+          (number)))))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute)
+      (attribute
+        (position
+          (place
+            (label))))
+      (attribute
+        (expr
+          (number)))))
+  (element
+    (primitive
+      (text))
+    (attribute_list
+      (attribute)
+      (attribute
+        (position
+          (position_not_place
+            (position
+              (place
+                (corner)
+                (nth_primitive
+                  (object_type))))
+            (expr_pair
+              (expr
+                (number))
+              (expr
+                (number))))))))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (expr
+          (number)))
+      (attribute
+        (position
+          (position_not_place
+            (position
+              (place
+                (label)))
+            (expr_pair
+              (expr_pair
+                (expr
+                  (expr
+                    (number)))
+                (expr
+                  (expr
+                    (number))))))))))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (expr
+          (number)))
+      (attribute
+        (position
+          (position_not_place
+            (position
+              (place
+                (label)))
+            (expr_pair
+              (expr_pair
+                (expr
+                  (number))
+                (expr
+                  (expr
+                    (number))))))))))
+  (element
+    (primitive
+      (text))
+    (attribute_list
+      (attribute)
+      (attribute
+        (position
+          (position_not_place
+            (position
+              (place
+                (label)))
+            (expr_pair
+              (expr_pair
+                (expr
+                  (number))
+                (expr
+                  (expr
+                    (number))))))))))
+  (element
+    (command_line))
+  (element
+    (command_line))
+  (element
+    (command_line)))

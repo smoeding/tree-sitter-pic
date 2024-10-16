@@ -3150,13 +3150,16 @@
         "type": "SEQ",
         "members": [
           {
-            "type": "ALIAS",
+            "type": "REPEAT1",
             "content": {
-              "type": "SYMBOL",
-              "name": "macro_parameter"
-            },
-            "named": true,
-            "value": "parameter"
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "macro_parameter"
+              },
+              "named": true,
+              "value": "parameter"
+            }
           },
           {
             "type": "REPEAT",
@@ -3168,13 +3171,16 @@
                   "value": ","
                 },
                 {
-                  "type": "ALIAS",
+                  "type": "REPEAT1",
                   "content": {
-                    "type": "SYMBOL",
-                    "name": "macro_parameter"
-                  },
-                  "named": true,
-                  "value": "parameter"
+                    "type": "ALIAS",
+                    "content": {
+                      "type": "SYMBOL",
+                      "name": "macro_parameter"
+                    },
+                    "named": true,
+                    "value": "parameter"
+                  }
                 }
               ]
             }

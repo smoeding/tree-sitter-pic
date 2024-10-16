@@ -583,8 +583,8 @@ module.exports = grammar({
     ),
 
     macro_parameter_list: $ => prec(PREC.LOW, seq(
-      alias($.macro_parameter, $.parameter),
-      repeat(seq(',', alias($.macro_parameter, $.parameter))),
+      repeat1(alias($.macro_parameter, $.parameter)),
+      repeat(seq(',', repeat1(alias($.macro_parameter, $.parameter)))),
     )),
 
     macro_parameter: $ => prec(PREC.LOW, choice(
