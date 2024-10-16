@@ -2411,6 +2411,10 @@
         {
           "type": "SYMBOL",
           "name": "text_expr"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "assignment"
         }
       ]
     },

@@ -507,6 +507,7 @@ module.exports = grammar({
     _any_expr: $ => choice(
       $.expr,
       $.text_expr,
+      $.assignment,
     ),
 
     text_expr: $ => choice(

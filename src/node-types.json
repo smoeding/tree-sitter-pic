@@ -18,6 +18,10 @@
         "required": true,
         "types": [
           {
+            "type": "assignment",
+            "named": true
+          },
+          {
             "type": "expr",
             "named": true
           },
@@ -293,6 +297,10 @@
       "required": true,
       "types": [
         {
+          "type": "assignment",
+          "named": true
+        },
+        {
           "type": "expr",
           "named": true
         },
@@ -428,6 +436,10 @@
       "required": true,
       "types": [
         {
+          "type": "assignment",
+          "named": true
+        },
+        {
           "type": "delimited",
           "named": true
         },
@@ -523,6 +535,10 @@
       "required": false,
       "types": [
         {
+          "type": "assignment",
+          "named": true
+        },
+        {
           "type": "expr",
           "named": true
         },
@@ -541,6 +557,10 @@
       "multiple": false,
       "required": false,
       "types": [
+        {
+          "type": "assignment",
+          "named": true
+        },
         {
           "type": "expr",
           "named": true
