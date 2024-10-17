@@ -29,6 +29,18 @@ ellipse "typesetter"
 
 The following limitations are known.
 
+#### Macros definitions and macro parameters may be parsed incorrectly
+
+Macros are not part of the Pic language. When the scanner finds a macro call, it does a simple text replacement using the macro parameters. Neither the macro definition nor the macro call needs to be a correct Pic statement or expression. This makes is impossible to parse all macros correctly.
+
+See the following example which is perfectly legal code for `pic`:
+
+``` pic
+define foo { circle at $1 $2 }
+foo((2,2), diam 1)
+foo((3,5), rad 1)
+```
+
 #### The copy thru statement may be parsed incorrectly
 
 Consider the following piece of code:
