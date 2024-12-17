@@ -187,37 +187,46 @@
           "value": "{"
         },
         {
-          "type": "REPEAT",
-          "content": {
-            "type": "SYMBOL",
-            "name": "_nl"
-          }
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "delimited_block"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         },
         {
-          "type": "REPEAT",
+          "type": "ALIAS",
           "content": {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "_element_list"
-              },
-              {
-                "type": "REPEAT1",
-                "content": {
-                  "type": "SYMBOL",
-                  "name": "_nl"
-                }
-              }
-            ]
-          }
+            "type": "SYMBOL",
+            "name": "close_delimiter"
+          },
+          "named": false,
+          "value": "}"
+        }
+      ]
+    },
+    "macro_definition": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "open_delimiter"
+          },
+          "named": false,
+          "value": "{"
         },
         {
           "type": "CHOICE",
           "members": [
             {
               "type": "SYMBOL",
-              "name": "_element_list"
+              "name": "delimited_block"
             },
             {
               "type": "BLANK"
@@ -2062,8 +2071,13 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "SYMBOL",
-              "name": "shell_command"
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "delimited_block"
+              },
+              "named": true,
+              "value": "shell_command"
             },
             {
               "type": "BLANK"
@@ -2138,7 +2152,7 @@
                         "name": "_delimited_or_macroname"
                       },
                       "named": true,
-                      "value": "delimited"
+                      "value": "macro_definition"
                     }
                   ]
                 },
@@ -2306,7 +2320,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "delimited"
+          "name": "macro_definition"
         }
       ]
     },
@@ -3350,7 +3364,7 @@
     },
     {
       "type": "SYMBOL",
-      "name": "shell_command"
+      "name": "delimited_block"
     },
     {
       "type": "SYMBOL",

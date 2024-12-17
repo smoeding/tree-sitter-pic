@@ -202,7 +202,6 @@ sh !
   (element
     (command_line)))
 
-
 ================================================================================
 sh with letter as delimiter and multiple command lines
 ================================================================================
@@ -260,7 +259,6 @@ copy thru foo
       (data_table)))
   (element
     (command_line)))
-
 
 ================================================================================
 copy thru strange macro-name
@@ -324,7 +322,6 @@ box
   (element
     (command_line)))
 
-
 ================================================================================
 copy thru strange macro-name until text
 ================================================================================
@@ -365,25 +362,11 @@ copy thru { circle rad $3 at $1,$2 }
     (command_line))
   (element
     (copy
-      (delimited
-        (element
-          (primitive)
-          (attribute_list
-            (attribute
-              (expr
-                (macroparameter)))
-            (attribute
-              (position
-                (position_not_place
-                  (expr_pair
-                    (expr
-                      (macroparameter))
-                    (expr
-                      (macroparameter)))))))))
+      (macro_definition
+        (delimited_block))
       (data_table)))
   (element
     (command_line)))
-
 
 ================================================================================
 copy thru macro-text with another delimiter
@@ -400,21 +383,8 @@ copy thru X circle rad $3 at $1,$2 X
     (command_line))
   (element
     (copy
-      (delimited
-        (element
-          (primitive)
-          (attribute_list
-            (attribute
-              (expr
-                (macroparameter)))
-            (attribute
-              (position
-                (position_not_place
-                  (expr_pair
-                    (expr
-                      (macroparameter))
-                    (expr
-                      (macroparameter)))))))))
+      (macro_definition
+        (delimited_block))
       (data_table)))
   (element
     (command_line)))
@@ -435,26 +405,12 @@ END
     (command_line))
   (element
     (copy
-      (delimited
-        (element
-          (primitive)
-          (attribute_list
-            (attribute
-              (expr
-                (macroparameter)))
-            (attribute
-              (position
-                (position_not_place
-                  (expr_pair
-                    (expr
-                      (macroparameter))
-                    (expr
-                      (macroparameter)))))))))
+      (macro_definition
+        (delimited_block))
       (data_table_tag)
       (data_table)))
   (element
     (command_line)))
-
 
 ================================================================================
 copy thru macro-text until text with empty data
@@ -470,21 +426,8 @@ END
     (command_line))
   (element
     (copy
-      (delimited
-        (element
-          (primitive)
-          (attribute_list
-            (attribute
-              (expr
-                (macroparameter)))
-            (attribute
-              (position
-                (position_not_place
-                  (expr_pair
-                    (expr
-                      (macroparameter))
-                    (expr
-                      (macroparameter)))))))))
+      (macro_definition
+        (delimited_block))
       (data_table_tag)
       (data_table)))
   (element

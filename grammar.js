@@ -160,7 +160,7 @@ module.exports = grammar({
   externals: $ => [
     $._side,                    // "left" or "right"
     $._side_corner,             // "left of" or "right of"
-    $.shell_command,
+    $.delimited_block,
     $.data_table,
     $.data_table_tag,
     $.open_delimiter,
@@ -200,9 +200,13 @@ module.exports = grammar({
 
     _delimited_or_macroname: $ => seq(
       alias($.open_delimiter_or_macroname, '{'),
-      repeat($._nl),
-      repeat(seq($._element_list, repeat1($._nl))),
-      optional($._element_list),
+      optional($.delimited_block),
+      alias($.close_delimiter, '}'),
+    ),
+
+    macro_definition: $ => seq(
+      alias($.open_delimiter, '{'),
+      optional($.delimited_block),
       alias($.close_delimiter, '}'),
     ),
 
@@ -435,8 +439,8 @@ module.exports = grammar({
 
     sh: $ => seq(
       'sh',
-      alias($.open_delimiter, '{'),  // return delimiter as '{'
-      optional($.shell_command),
+      alias($.open_delimiter, '{'),   // return delimiter as '{'
+      optional(alias($.delimited_block, $.shell_command)),
       alias($.close_delimiter, '}'),  // return delimiter as '}'
     ),
 
@@ -449,7 +453,7 @@ module.exports = grammar({
           'thru',
           choice(
             $.macroname,
-            alias($._delimited_or_macroname, $.delimited),
+            alias($._delimited_or_macroname, $.macro_definition),
           ),
           optional(seq('until', $.data_table_tag)),
           optional($.data_table),
@@ -480,7 +484,7 @@ module.exports = grammar({
     define: $ => seq(
       'define',
       $.macroname,
-      $.delimited,
+      $.macro_definition,
     ),
 
     undef: $ => seq(

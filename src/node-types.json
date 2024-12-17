@@ -134,11 +134,11 @@
           "named": true
         },
         {
-          "type": "delimited",
+          "type": "filename",
           "named": true
         },
         {
-          "type": "filename",
+          "type": "macro_definition",
           "named": true
         },
         {
@@ -162,7 +162,7 @@
       "required": true,
       "types": [
         {
-          "type": "delimited",
+          "type": "macro_definition",
           "named": true
         },
         {
@@ -483,6 +483,21 @@
         },
         {
           "type": "parameter_list",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "macro_definition",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "delimited_block",
           "named": true
         }
       ]
@@ -1209,6 +1224,10 @@
   {
     "type": "define",
     "named": false
+  },
+  {
+    "type": "delimited_block",
+    "named": true
   },
   {
     "type": "do",

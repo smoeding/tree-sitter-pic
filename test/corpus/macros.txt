@@ -12,21 +12,8 @@ define Circle { circle rad $3 at $1,$2 }
   (element
     (define
       (macroname)
-      (delimited
-        (element
-          (primitive)
-          (attribute_list
-            (attribute
-              (expr
-                (macroparameter)))
-            (attribute
-              (position
-                (position_not_place
-                  (expr_pair
-                    (expr
-                      (macroparameter))
-                    (expr
-                      (macroparameter)))))))))))
+      (macro_definition
+        (delimited_block))))
   (element
     (command_line)))
 
@@ -44,21 +31,8 @@ define Circle X circle rad $3 at $1,$2 X
   (element
     (define
       (macroname)
-      (delimited
-        (element
-          (primitive)
-          (attribute_list
-            (attribute
-              (expr
-                (macroparameter)))
-            (attribute
-              (position
-                (position_not_place
-                  (expr_pair
-                    (expr
-                      (macroparameter))
-                    (expr
-                      (macroparameter)))))))))))
+      (macro_definition
+        (delimited_block))))
   (element
     (command_line)))
 
@@ -78,24 +52,10 @@ define Circle {
   (element
     (define
       (macroname)
-      (delimited
-        (element
-          (primitive)
-          (attribute_list
-            (attribute
-              (expr
-                (macroparameter)))
-            (attribute
-              (position
-                (position_not_place
-                  (expr_pair
-                    (expr
-                      (macroparameter))
-                    (expr
-                      (macroparameter)))))))))))
+      (macro_definition
+        (delimited_block))))
   (element
     (command_line)))
-
 
 ================================================================================
 define multiline macro without braces
@@ -113,21 +73,8 @@ define Circle %
   (element
     (define
       (macroname)
-      (delimited
-        (element
-          (primitive)
-          (attribute_list
-            (attribute
-              (expr
-                (macroparameter)))
-            (attribute
-              (position
-                (position_not_place
-                  (expr_pair
-                    (expr
-                      (macroparameter))
-                    (expr
-                      (macroparameter)))))))))))
+      (macro_definition
+        (delimited_block))))
   (element
     (command_line)))
 
