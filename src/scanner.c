@@ -46,12 +46,12 @@
 enum TokenType {
   SIDE,
   SIDE_CORNER,
-  DELIMITED_BLOCK,
   DATA_TABLE,
   DATA_TABLE_TAG,
   OPEN_DELIMITER,
   OPEN_DELIMITER_OR_MACRONAME,
   CLOSE_DELIMITER,
+  BALANCED_TEXT,
 };
 
 
@@ -281,7 +281,7 @@ static bool close_delimiter(TSLexer *lexer, ScannerState *state) {
  * delimiter from the start of the block.
  */
 
-static bool delimited_block(TSLexer *lexer, ScannerState *state) {
+static bool balanced_text(TSLexer *lexer, ScannerState *state) {
   if (state->delimiters.size == 0) return false;
 
   // Use the last stored delimiter
@@ -608,9 +608,9 @@ bool tree_sitter_pic_external_scanner_scan(void *payload, TSLexer *lexer, const 
     }
   }
 
-  if (valid_symbols[DELIMITED_BLOCK]) {
-    if (delimited_block(lexer, state)) {
-      lexer->result_symbol = DELIMITED_BLOCK;
+  if (valid_symbols[BALANCED_TEXT]) {
+    if (balanced_text(lexer, state)) {
+      lexer->result_symbol = BALANCED_TEXT;
       return true;
     }
   }

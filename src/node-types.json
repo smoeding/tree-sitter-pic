@@ -123,8 +123,12 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
+        {
+          "type": "balanced_text",
+          "named": true
+        },
         {
           "type": "data_table",
           "named": true
@@ -135,10 +139,6 @@
         },
         {
           "type": "filename",
-          "named": true
-        },
-        {
-          "type": "macro_definition",
           "named": true
         },
         {
@@ -162,7 +162,7 @@
       "required": true,
       "types": [
         {
-          "type": "macro_definition",
+          "type": "balanced_text",
           "named": true
         },
         {
@@ -479,21 +479,6 @@
         },
         {
           "type": "parameter_list",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "macro_definition",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "delimited_block",
           "named": true
         }
       ]
@@ -846,7 +831,7 @@
       "required": false,
       "types": [
         {
-          "type": "shell_command",
+          "type": "balanced_text",
           "named": true
         }
       ]
@@ -1154,6 +1139,10 @@
     "named": false
   },
   {
+    "type": "balanced_text",
+    "named": true
+  },
+  {
     "type": "below",
     "named": false
   },
@@ -1220,10 +1209,6 @@
   {
     "type": "define",
     "named": false
-  },
-  {
-    "type": "delimited_block",
-    "named": true
   },
   {
     "type": "do",
@@ -1340,10 +1325,6 @@
   {
     "type": "shaded",
     "named": false
-  },
-  {
-    "type": "shell_command",
-    "named": true
   },
   {
     "type": "solid",

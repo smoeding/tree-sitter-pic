@@ -1722,8 +1722,7 @@ square(0.25, "\s-4tiny\s+4" dashed)
   (element
     (define
       (macroname)
-      (macro_definition
-          (delimited_block))))
+      (balanced_text)))
   (element
     (macro_call
       (name)
@@ -2081,8 +2080,7 @@ box invis wid 2*boxwid "ndtable:" with .e at Start.w
   (element
     (define
       (macroname)
-      (macro_definition
-        (delimited_block))))
+      (balanced_text)))
   (element
     (assignment
       lhs: (variable)

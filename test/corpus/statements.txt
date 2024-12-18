@@ -90,7 +90,7 @@ sh { echo "foo" }
     (command_line))
   (element
     (sh
-      (shell_command)))
+      (balanced_text)))
   (element
     (command_line)))
 
@@ -107,7 +107,7 @@ sh { echo "foo"; echo "bar" }
     (command_line))
   (element
     (sh
-      (shell_command)))
+      (balanced_text)))
   (element
     (command_line)))
 
@@ -127,7 +127,7 @@ echo "bar"
     (command_line))
   (element
     (sh
-      (shell_command)))
+      (balanced_text)))
   (element
     (command_line)))
 
@@ -144,7 +144,7 @@ sh { echo "}" }
     (command_line))
   (element
     (sh
-      (shell_command)))
+      (balanced_text)))
   (element
     (command_line)))
 
@@ -161,7 +161,7 @@ sh { echo {} }
     (command_line))
   (element
     (sh
-      (shell_command)))
+      (balanced_text)))
   (element
     (command_line)))
 
@@ -178,7 +178,7 @@ sh ! echo "foo" !
     (command_line))
   (element
     (sh
-      (shell_command)))
+      (balanced_text)))
   (element
     (command_line)))
 
@@ -198,7 +198,7 @@ sh !
     (command_line))
   (element
     (sh
-      (shell_command)))
+      (balanced_text)))
   (element
     (command_line)))
 
@@ -218,7 +218,7 @@ X
     (command_line))
   (element
     (sh
-      (shell_command)))
+      (balanced_text)))
   (element
     (command_line)))
 
@@ -362,8 +362,7 @@ copy thru { circle rad $3 at $1,$2 }
     (command_line))
   (element
     (copy
-      (macro_definition
-        (delimited_block))
+      (balanced_text)
       (data_table)))
   (element
     (command_line)))
@@ -383,8 +382,7 @@ copy thru X circle rad $3 at $1,$2 X
     (command_line))
   (element
     (copy
-      (macro_definition
-        (delimited_block))
+      (balanced_text)
       (data_table)))
   (element
     (command_line)))
@@ -405,8 +403,7 @@ END
     (command_line))
   (element
     (copy
-      (macro_definition
-        (delimited_block))
+      (balanced_text)
       (data_table_tag)
       (data_table)))
   (element
@@ -426,8 +423,7 @@ END
     (command_line))
   (element
     (copy
-      (macro_definition
-        (delimited_block))
+      (balanced_text)
       (data_table_tag)
       (data_table)))
   (element

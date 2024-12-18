@@ -191,7 +191,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "delimited_block"
+              "name": "balanced_text"
             },
             {
               "type": "BLANK"
@@ -209,7 +209,7 @@
         }
       ]
     },
-    "macro_definition": {
+    "_macro_definition": {
       "type": "SEQ",
       "members": [
         {
@@ -226,7 +226,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "delimited_block"
+              "name": "balanced_text"
             },
             {
               "type": "BLANK"
@@ -2071,13 +2071,8 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "ALIAS",
-              "content": {
-                "type": "SYMBOL",
-                "name": "delimited_block"
-              },
-              "named": true,
-              "value": "shell_command"
+              "type": "SYMBOL",
+              "name": "balanced_text"
             },
             {
               "type": "BLANK"
@@ -2146,13 +2141,8 @@
                       "name": "macroname"
                     },
                     {
-                      "type": "ALIAS",
-                      "content": {
-                        "type": "SYMBOL",
-                        "name": "_delimited_or_macroname"
-                      },
-                      "named": true,
-                      "value": "macro_definition"
+                      "type": "SYMBOL",
+                      "name": "_delimited_or_macroname"
                     }
                   ]
                 },
@@ -2320,7 +2310,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "macro_definition"
+          "name": "_macro_definition"
         }
       ]
     },
@@ -3356,10 +3346,6 @@
     },
     {
       "type": "SYMBOL",
-      "name": "delimited_block"
-    },
-    {
-      "type": "SYMBOL",
       "name": "data_table"
     },
     {
@@ -3377,6 +3363,10 @@
     {
       "type": "SYMBOL",
       "name": "close_delimiter"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "balanced_text"
     }
   ],
   "inline": [],

@@ -12,8 +12,7 @@ define Circle { circle rad $3 at $1,$2 }
   (element
     (define
       (macroname)
-      (macro_definition
-        (delimited_block))))
+      (balanced_text)))
   (element
     (command_line)))
 
@@ -31,8 +30,7 @@ define Circle X circle rad $3 at $1,$2 X
   (element
     (define
       (macroname)
-      (macro_definition
-        (delimited_block))))
+      (balanced_text)))
   (element
     (command_line)))
 
@@ -52,8 +50,7 @@ define Circle {
   (element
     (define
       (macroname)
-      (macro_definition
-        (delimited_block))))
+      (balanced_text)))
   (element
     (command_line)))
 
@@ -73,8 +70,7 @@ define Circle %
   (element
     (define
       (macroname)
-      (macro_definition
-        (delimited_block))))
+      (balanced_text)))
   (element
     (command_line)))
 
