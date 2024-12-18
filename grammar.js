@@ -529,7 +529,6 @@ module.exports = grammar({
     expr: $ => choice(
       $.variable,
       $.number,
-      $.macroparameter,
       seq($.place, optional($.place_attribute)),
       prec.left(PREC.ADD, seq($.expr, choice('+', '-'), $.expr)),
       prec.left(PREC.MUL, seq($.expr, choice('*', '/', '%', $.expr))),
@@ -622,7 +621,6 @@ module.exports = grammar({
     composite_label: $ => /\.[A-Z][a-zA-Z0-9_]*/,
 
     macroname: $ => /[a-zA-Z][a-zA-Z0-9_]*/,
-    macroparameter: $ => /\$[0-9]/,
 
     command_line: $ => /[.\\].*/,
 

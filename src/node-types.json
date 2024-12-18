@@ -309,10 +309,6 @@
           "named": true
         },
         {
-          "type": "macroparameter",
-          "named": true
-        },
-        {
           "type": "number",
           "named": true
         },
@@ -1295,10 +1291,6 @@
   },
   {
     "type": "macroname",
-    "named": true
-  },
-  {
-    "type": "macroparameter",
     "named": true
   },
   {

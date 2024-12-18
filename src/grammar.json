@@ -2634,10 +2634,6 @@
           "name": "number"
         },
         {
-          "type": "SYMBOL",
-          "name": "macroparameter"
-        },
-        {
           "type": "SEQ",
           "members": [
             {
@@ -3316,10 +3312,6 @@
     "macroname": {
       "type": "PATTERN",
       "value": "[a-zA-Z][a-zA-Z0-9_]*"
-    },
-    "macroparameter": {
-      "type": "PATTERN",
-      "value": "\\$[0-9]"
     },
     "command_line": {
       "type": "PATTERN",
