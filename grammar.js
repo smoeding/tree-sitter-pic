@@ -190,7 +190,7 @@ module.exports = grammar({
       ']',
     ),
 
-    delimited: $ => seq(
+    balanced_body: $ => seq(
       alias($.open_delimiter, '{'),
       repeat($._nl),
       repeat(seq($._element_list, repeat1($._nl))),
@@ -198,7 +198,7 @@ module.exports = grammar({
       alias($.close_delimiter, '}'),
     ),
 
-    _delimited_or_macroname: $ => seq(
+    _balanced_body_or_macroname: $ => seq(
       alias($.open_delimiter_or_macroname, '{'),
       optional($.balanced_text),
       alias($.close_delimiter, '}'),
@@ -453,7 +453,7 @@ module.exports = grammar({
           'thru',
           choice(
             $.macroname,
-            $._delimited_or_macroname,
+            $._balanced_body_or_macroname,
           ),
           optional(seq('until', $.data_table_tag)),
           optional($.data_table),
@@ -470,15 +470,15 @@ module.exports = grammar({
       $.expr,
       optional(seq('by', optional('*'), $.expr)),
       'do',
-      $.delimited,
+      $.balanced_body,
     ),
 
      if: $ => seq(
       'if',
       $._any_expr,
       'then',
-      $.delimited,
-      optional(seq('else', $.delimited)),
+      $.balanced_body,
+      optional(seq('else', $.balanced_body)),
     ),
 
     define: $ => seq(

@@ -113,7 +113,7 @@
         }
       ]
     },
-    "delimited": {
+    "balanced_body": {
       "type": "SEQ",
       "members": [
         {
@@ -174,7 +174,7 @@
         }
       ]
     },
-    "_delimited_or_macroname": {
+    "_balanced_body_or_macroname": {
       "type": "SEQ",
       "members": [
         {
@@ -2142,7 +2142,7 @@
                     },
                     {
                       "type": "SYMBOL",
-                      "name": "_delimited_or_macroname"
+                      "name": "_balanced_body_or_macroname"
                     }
                   ]
                 },
@@ -2251,7 +2251,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "delimited"
+          "name": "balanced_body"
         }
       ]
     },
@@ -2272,7 +2272,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "delimited"
+          "name": "balanced_body"
         },
         {
           "type": "CHOICE",
@@ -2286,7 +2286,7 @@
                 },
                 {
                   "type": "SYMBOL",
-                  "name": "delimited"
+                  "name": "balanced_body"
                 }
               ]
             },

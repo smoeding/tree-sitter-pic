@@ -88,6 +88,21 @@
     }
   },
   {
+    "type": "balanced_body",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "element",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "block",
     "named": true,
     "fields": {},
@@ -167,21 +182,6 @@
         },
         {
           "type": "macroname",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "delimited",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "element",
           "named": true
         }
       ]
@@ -378,7 +378,7 @@
       "required": true,
       "types": [
         {
-          "type": "delimited",
+          "type": "balanced_body",
           "named": true
         },
         {
@@ -436,7 +436,7 @@
           "named": true
         },
         {
-          "type": "delimited",
+          "type": "balanced_body",
           "named": true
         },
         {

@@ -468,7 +468,7 @@ for i = 1 to 5 do {
         (number))
       (expr
         (number))
-      (delimited
+      (balanced_body
         (element
           (print
             (print_args
@@ -500,7 +500,7 @@ for i = 1 to 5 by 2 do {
         (number))
       (expr
         (number))
-      (delimited
+      (balanced_body
         (element
           (print
             (print_args
@@ -532,7 +532,7 @@ for i = 1 to 5 by * 2 do {
         (number))
       (expr
         (number))
-      (delimited
+      (balanced_body
         (element
           (print
             (print_args
@@ -563,7 +563,7 @@ for i = 1 to 5 do
         (number))
       (expr
         (number))
-      (delimited
+      (balanced_body
         (element
           (print
             (print_args
@@ -594,7 +594,7 @@ if 1 == 1 then
           (number))
         (expr
           (number)))
-      (delimited
+      (balanced_body
         (element
           (print
             (print_args
@@ -625,13 +625,13 @@ if 1 == 1 then {
           (number))
         (expr
           (number)))
-      (delimited
+      (balanced_body
         (element
           (print
             (print_args
               (print_arg
                 (text))))))
-      (delimited
+      (balanced_body
         (element
           (print
             (print_args
@@ -658,7 +658,7 @@ if 1 == 1 then { print "foo" }
           (number))
         (expr
           (number)))
-      (delimited
+      (balanced_body
         (element
           (print
             (print_args

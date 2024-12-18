@@ -1800,7 +1800,7 @@ for i = 0 to 2 * pi by 0.1 do {
           (variable)))
       (expr
         (number))
-      (delimited
+      (balanced_body
         (element
           (primitive
             (text))
@@ -1907,7 +1907,7 @@ if (s = sin(i)) > 0.8 then { s = 0.8 }
         (variable))
       (expr
         (number))
-      (delimited
+      (balanced_body
         (element
           (if
             (expr
@@ -1923,7 +1923,7 @@ if (s = sin(i)) > 0.8 then { s = 0.8 }
                             (variable))))))))
               (expr
                 (number)))
-            (delimited
+            (balanced_body
               (element
                 (assignment
                   (variable)
