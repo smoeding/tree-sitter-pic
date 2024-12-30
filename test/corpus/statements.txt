@@ -73,7 +73,8 @@ sh {}
   (element
     (command_line))
   (element
-    (sh))
+    (sh
+      (balanced_text)))
   (element
     (command_line)))
 

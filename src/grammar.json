@@ -174,7 +174,7 @@
         }
       ]
     },
-    "_balanced_body_or_macroname": {
+    "_balanced_text_or_macroname": {
       "type": "SEQ",
       "members": [
         {
@@ -191,7 +191,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "balanced_text"
+              "name": "_balanced_text"
             },
             {
               "type": "BLANK"
@@ -209,7 +209,7 @@
         }
       ]
     },
-    "_macro_definition": {
+    "balanced_text": {
       "type": "SEQ",
       "members": [
         {
@@ -226,7 +226,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "balanced_text"
+              "name": "_balanced_text"
             },
             {
               "type": "BLANK"
@@ -2059,34 +2059,8 @@
           "value": "sh"
         },
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "open_delimiter"
-          },
-          "named": false,
-          "value": "{"
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "balanced_text"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "close_delimiter"
-          },
-          "named": false,
-          "value": "}"
+          "type": "SYMBOL",
+          "name": "balanced_text"
         }
       ]
     },
@@ -2141,8 +2115,13 @@
                       "name": "macroname"
                     },
                     {
-                      "type": "SYMBOL",
-                      "name": "_balanced_body_or_macroname"
+                      "type": "ALIAS",
+                      "content": {
+                        "type": "SYMBOL",
+                        "name": "_balanced_text_or_macroname"
+                      },
+                      "named": true,
+                      "value": "balanced_text"
                     }
                   ]
                 },
@@ -2310,7 +2289,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "_macro_definition"
+          "name": "balanced_text"
         }
       ]
     },
@@ -3366,7 +3345,7 @@
     },
     {
       "type": "SYMBOL",
-      "name": "balanced_text"
+      "name": "_balanced_text"
     }
   ],
   "inline": [],

@@ -165,7 +165,7 @@ module.exports = grammar({
     $.open_delimiter,
     $.open_delimiter_or_macroname,
     $.close_delimiter,
-    $.balanced_text,
+    $._balanced_text,
   ],
 
   // keyword extraction optimization
@@ -198,15 +198,15 @@ module.exports = grammar({
       alias($.close_delimiter, '}'),
     ),
 
-    _balanced_body_or_macroname: $ => seq(
+    _balanced_text_or_macroname: $ => seq(
       alias($.open_delimiter_or_macroname, '{'),
-      optional($.balanced_text),
+      optional($._balanced_text),
       alias($.close_delimiter, '}'),
     ),
 
-    _macro_definition: $ => seq(
+    balanced_text: $ => seq(
       alias($.open_delimiter, '{'),
-      optional($.balanced_text),
+      optional($._balanced_text),
       alias($.close_delimiter, '}'),
     ),
 
@@ -439,9 +439,7 @@ module.exports = grammar({
 
     sh: $ => seq(
       'sh',
-      alias($.open_delimiter, '{'),   // return delimiter as '{'
-      optional($.balanced_text),
-      alias($.close_delimiter, '}'),  // return delimiter as '}'
+      $.balanced_text,
     ),
 
     copy: $ => seq(
@@ -453,7 +451,7 @@ module.exports = grammar({
           'thru',
           choice(
             $.macroname,
-            $._balanced_body_or_macroname,
+            alias($._balanced_text_or_macroname, $.balanced_text),
           ),
           optional(seq('until', $.data_table_tag)),
           optional($.data_table),
@@ -484,7 +482,7 @@ module.exports = grammar({
     define: $ => seq(
       'define',
       $.macroname,
-      $._macro_definition,
+      $.balanced_text,
     ),
 
     undef: $ => seq(
