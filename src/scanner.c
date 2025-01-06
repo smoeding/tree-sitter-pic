@@ -1,6 +1,6 @@
 /**************************************************************************
  *
- * Copyright (c) 2024 Stefan Möding
+ * Copyright (c) 2024, 2025 Stefan Möding
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -478,23 +478,35 @@ unsigned tree_sitter_pic_external_scanner_serialize(void *payload, char *buffer)
   // array contents. The pointer will be reset when the object is
   // deserialized (see below).
   objsiz = sizeof(ScannerState);
+  length += objsiz;
+
+  // Fail if the scanner state is too large
+  if (length > TREE_SITTER_SERIALIZATION_BUFFER_SIZE) return 0;
+
   memcpy(buffer, state, objsiz);
   buffer += objsiz;
-  length += objsiz;
 
   // Serialize the array contents.
   objsiz = state->data_table_tag.capacity * array_elem_size(&state->data_table_tag);
   if (objsiz > 0) {
+    length += objsiz;
+
+    // Fail if the scanner state is too large
+    if (length > TREE_SITTER_SERIALIZATION_BUFFER_SIZE) return 0;
+
     memcpy(buffer, state->data_table_tag.contents, objsiz);
     buffer += objsiz;
-    length += objsiz;
   }
 
   objsiz = state->delimiters.capacity * array_elem_size(&state->delimiters);
   if (objsiz > 0) {
+    length += objsiz;
+
+    // Fail if the scanner state is too large
+    if (length > TREE_SITTER_SERIALIZATION_BUFFER_SIZE) return 0;
+
     memcpy(buffer, state->delimiters.contents, objsiz);
     buffer += objsiz;
-    length += objsiz;
   }
 
   return length;
@@ -522,19 +534,25 @@ void tree_sitter_pic_external_scanner_deserialize(void *payload, const char *buf
     // a new memory chunk and deserialize it there. The size and capacity
     // elements are already defined correctly.
     objsiz = state->data_table_tag.capacity * array_elem_size(&state->data_table_tag);
-    if (objsiz > 0) {
+    if ((length > 0) && (objsiz > 0)) {
       state->data_table_tag.contents = ts_malloc(objsiz);
       memcpy(state->data_table_tag.contents, buffer, objsiz);
       buffer += objsiz;
       length -= objsiz;
     }
+    else {
+      array_init(&state->data_table_tag);
+    }
 
     objsiz = state->delimiters.capacity * array_elem_size(&state->delimiters);
-    if (objsiz > 0) {
+    if ((length > 0) && (objsiz > 0)) {
       state->delimiters.contents = ts_malloc(objsiz);
       memcpy(state->delimiters.contents, buffer, objsiz);
       buffer += objsiz;
       length -= objsiz;
+    }
+    else {
+      array_init(&state->delimiters);
     }
   }
 }
