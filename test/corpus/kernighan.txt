@@ -31,7 +31,8 @@ arc "arc"
     (attribute_list
       (attribute
         (text))
-      (attribute)))
+      (attribute
+        (name))))
   (element
     (primitive))
   (element
@@ -39,7 +40,8 @@ arc "arc"
     (attribute_list
       (attribute
         (text))
-      (attribute)))
+      (attribute
+        (name))))
   (element
     (primitive))
   (element
@@ -78,15 +80,18 @@ box width 3 height 0.1; circle radius 0.1
     (primitive)
     (attribute_list
       (attribute
+        (name)
         (expr
           (number)))
       (attribute
+        (name)
         (expr
           (number)))))
   (element
     (primitive)
     (attribute_list
       (attribute
+        (name)
         (expr
           (number)))))
   (element
@@ -109,33 +114,40 @@ line <-> down 1 "height " rjust
     (primitive)
     (attribute_list
       (attribute
+        (name)
         (expr
           (number)))
       (attribute
+        (name)
         (expr
           (number)))))
   (element
     (primitive)
     (attribute_list
       (attribute
+        (name)
         (expr
           (number)))))
   (element
     (primitive)
     (attribute_list
       (attribute
+        (name)
         (expr
           (number)))))
   (element
     (primitive)
     (attribute_list
-      (attribute)
       (attribute
+        (name))
+      (attribute
+        (name)
         (expr
           (number)))
       (attribute
         (text))
-      (attribute)))
+      (attribute
+        (name))))
   (element
     (command_line)))
 ================================================================================
@@ -156,16 +168,20 @@ line right 5 dashed 1
     (primitive)
     (attribute_list
       (attribute
+        (name)
         (expr
           (number)))
-      (attribute)))
+      (attribute
+        (name))))
   (element
     (primitive)
     (attribute_list
       (attribute
+        (name)
         (expr
           (number)))
       (attribute
+        (name)
         (expr
           (number)))))
   (element
@@ -174,38 +190,22 @@ line right 5 dashed 1
     (primitive)
     (attribute_list
       (attribute
+        (name)
         (expr
           (number)))
       (attribute
+        (name)
         (expr
           (number)))))
   (element
     (primitive)
     (attribute_list
       (attribute
+        (name)
         (expr
           (number)))
       (attribute
-        (expr
-          (number)))))
-  (element
-    (direction))
-  (element
-    (primitive)
-    (attribute_list
-      (attribute
-        (expr
-          (number)))
-      (attribute
-        (expr
-          (number)))))
-  (element
-    (primitive)
-    (attribute_list
-      (attribute
-        (expr
-          (number)))
-      (attribute
+        (name)
         (expr
           (number)))))
   (element
@@ -214,9 +214,35 @@ line right 5 dashed 1
     (primitive)
     (attribute_list
       (attribute
+        (name)
         (expr
           (number)))
       (attribute
+        (name)
+        (expr
+          (number)))))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (name)
+        (expr
+          (number)))
+      (attribute
+        (name)
+        (expr
+          (number)))))
+  (element
+    (direction))
+  (element
+    (primitive)
+    (attribute_list
+      (attribute
+        (name)
+        (expr
+          (number)))
+      (attribute
+        (name)
         (expr
           (number)))))
   (element
@@ -235,7 +261,8 @@ box invis "input"; arrow; box invis "output"
   (element
     (primitive)
     (attribute_list
-      (attribute)
+      (attribute
+        (name))
       (attribute
         (text))))
   (element
@@ -243,7 +270,8 @@ box invis "input"; arrow; box invis "output"
   (element
     (primitive)
     (attribute_list
-      (attribute)
+      (attribute
+        (name))
       (attribute
         (text))))
   (element
@@ -284,7 +312,8 @@ arrow "above" "on top of" "below"
     (attribute_list
       (attribute
         (text))
-      (attribute)))
+      (attribute
+        (name))))
   (element
     (primitive))
   (element
@@ -292,7 +321,8 @@ arrow "above" "on top of" "below"
     (attribute_list
       (attribute
         (text))
-      (attribute)))
+      (attribute
+        (name))))
   (element
     (primitive))
   (element
@@ -365,12 +395,15 @@ box ht 0.2 wid 0.2 "3"
     (primitive)
     (attribute_list
       (attribute
+        (name)
         (expr
           (number)))
       (attribute
+        (name)
         (expr
           (number)))
       (attribute
+        (name)
         (position
           (position_not_place
             (expr_pair
@@ -384,6 +417,7 @@ box ht 0.2 wid 0.2 "3"
     (primitive)
     (attribute_list
       (attribute
+        (name)
         (expr
           (number)))))
   (comment)
@@ -391,9 +425,11 @@ box ht 0.2 wid 0.2 "3"
     (primitive)
     (attribute_list
       (attribute
+        (name)
         (expr
           (number)))
       (attribute
+        (name)
         (expr
           (number)))
       (attribute
@@ -402,6 +438,7 @@ box ht 0.2 wid 0.2 "3"
     (primitive)
     (attribute_list
       (attribute
+        (name)
         (expr
           (number)))))
   (comment)
@@ -409,9 +446,11 @@ box ht 0.2 wid 0.2 "3"
     (primitive)
     (attribute_list
       (attribute
+        (name)
         (expr
           (number)))
       (attribute
+        (name)
         (expr
           (number)))
       (attribute
@@ -436,6 +475,7 @@ arc -> cw from 0,0 to 1,0.5
       (text))
     (attribute_list
       (attribute
+        (name)
         (position
           (position_not_place
             (expr_pair
@@ -446,8 +486,10 @@ arc -> cw from 0,0 to 1,0.5
   (element
     (primitive)
     (attribute_list
-      (attribute)
       (attribute
+        (name))
+      (attribute
+        (name)
         (position
           (position_not_place
             (expr_pair
@@ -456,6 +498,7 @@ arc -> cw from 0,0 to 1,0.5
               (expr
                 (number))))))
       (attribute
+        (name)
         (position
           (position_not_place
             (expr_pair
@@ -466,9 +509,12 @@ arc -> cw from 0,0 to 1,0.5
   (element
     (primitive)
     (attribute_list
-      (attribute)
-      (attribute)
       (attribute
+        (name))
+      (attribute
+        (name))
+      (attribute
+        (name)
         (position
           (position_not_place
             (expr_pair
@@ -477,6 +523,7 @@ arc -> cw from 0,0 to 1,0.5
               (expr
                 (number))))))
       (attribute
+        (name)
         (position
           (position_not_place
             (expr_pair
@@ -500,9 +547,12 @@ arc -> cw from 0,0 to 2,0 rad 15
   (element
     (primitive)
     (attribute_list
-      (attribute)
-      (attribute)
       (attribute
+        (name))
+      (attribute
+        (name))
+      (attribute
+        (name)
         (position
           (position_not_place
             (expr_pair
@@ -511,6 +561,7 @@ arc -> cw from 0,0 to 2,0 rad 15
               (expr
                 (number))))))
       (attribute
+        (name)
         (position
           (position_not_place
             (expr_pair
@@ -519,6 +570,7 @@ arc -> cw from 0,0 to 2,0 rad 15
               (expr
                 (number))))))
       (attribute
+        (name)
         (expr
           (number)))))
   (element
@@ -552,6 +604,7 @@ line to Box1 - 0.5,0
     (primitive)
     (attribute_list
       (attribute
+        (name)
         (position
           (place
             (label))))))
@@ -559,10 +612,12 @@ line to Box1 - 0.5,0
     (primitive)
     (attribute_list
       (attribute
+        (name)
         (position
           (place
             (label))))
       (attribute
+        (name)
         (position
           (place
             (label))))))
@@ -570,19 +625,23 @@ line to Box1 - 0.5,0
     (primitive)
     (attribute_list
       (attribute
+        (name)
         (position
           (place
             (label))))
       (attribute
+        (name)
         (expr
           (number)))
       (attribute
+        (name)
         (expr
           (number)))))
   (element
     (primitive)
     (attribute_list
       (attribute
+        (name)
         (position
           (position_not_place
             (position
@@ -598,6 +657,7 @@ line to Box1 - 0.5,0
     (primitive)
     (attribute_list
       (attribute
+        (name)
         (position
           (position_not_place
             (position
@@ -661,9 +721,11 @@ B: box "B.c" ht 1 wid 1.5
         (attribute
           (text))
         (attribute
+          (name)
           (expr
             (number)))
         (attribute
+          (name)
           (expr
             (number))))))
   (element
@@ -671,81 +733,97 @@ B: box "B.c" ht 1 wid 1.5
       (text))
     (attribute_list
       (attribute
+        (name)
         (position
           (place
             (label)
             (corner))))
-      (attribute)))
+      (attribute
+        (name))))
   (element
     (primitive
       (text))
     (attribute_list
       (attribute
+        (name)
         (position
           (place
             (label)
             (corner))))
-      (attribute)))
+      (attribute
+        (name))))
   (element
     (primitive
       (text))
     (attribute_list
       (attribute
+        (name)
         (position
           (place
             (label)
             (corner))))
-      (attribute)))
+      (attribute
+        (name))))
   (element
     (primitive
       (text))
     (attribute_list
       (attribute
+        (name)
         (position
           (place
             (label)
             (corner))))
-      (attribute)))
+      (attribute
+        (name))))
   (element
     (primitive
       (text))
     (attribute_list
       (attribute
+        (name)
         (position
           (place
             (label)
             (corner))))
-      (attribute)))
+      (attribute
+        (name))))
   (element
     (primitive
       (text))
     (attribute_list
       (attribute
+        (name)
         (position
           (place
             (label)
             (corner))))
-      (attribute)))
+      (attribute
+        (name))))
   (element
     (primitive
       (text))
     (attribute_list
       (attribute
+        (name)
         (position
           (place
             (label)
             (corner))))
-      (attribute)))
+      (attribute
+        (name))))
   (element
     (primitive
       (text))
     (attribute_list
       (attribute
+        (name)
         (position
           (place
             (label)
             (corner))))
-      (attribute)))
+      (attribute
+        (name))))
   (element
     (command_line)))
 ================================================================================
@@ -767,16 +845,20 @@ ellipse ht .2 wid .3 with .sw at 1st ellipse.ne
     (primitive)
     (attribute_list
       (attribute
+        (name)
         (expr
           (number)))
       (attribute
+        (name)
         (expr
           (number)))
       (attribute
+        (name)
         (path
           (relative_path
             (corner))))
       (attribute
+        (name)
         (position
           (place
             (nth_primitive
@@ -787,16 +869,20 @@ ellipse ht .2 wid .3 with .sw at 1st ellipse.ne
     (primitive)
     (attribute_list
       (attribute
+        (name)
         (expr
           (number)))
       (attribute
+        (name)
         (expr
           (number)))
       (attribute
+        (name)
         (path
           (relative_path
             (corner))))
       (attribute
+        (name)
         (position
           (place
             (nth_primitive
@@ -842,6 +928,7 @@ arrow from 1st circle to 3rd circle chop
       (attribute
         (text))
       (attribute
+        (name)
         (position
           (position_not_place
             (position
@@ -861,6 +948,7 @@ arrow from 1st circle to 3rd circle chop
       (attribute
         (text))
       (attribute
+        (name)
         (position
           (position_not_place
             (position
@@ -879,34 +967,40 @@ arrow from 1st circle to 3rd circle chop
     (primitive)
     (attribute_list
       (attribute
+        (name)
         (position
           (place
             (nth_primitive
               (ordinal)
               (object_type)))))
       (attribute
+        (name)
         (position
           (place
             (nth_primitive
               (ordinal)
               (object_type)))))
-      (attribute)))
+      (attribute
+        (name))))
   (element
     (primitive)
     (attribute_list
       (attribute
+        (name)
         (position
           (place
             (nth_primitive
               (ordinal)
               (object_type)))))
       (attribute
+        (name)
         (position
           (place
             (nth_primitive
               (ordinal)
               (object_type)))))
-      (attribute)))
+      (attribute
+        (name))))
   (element
     (command_line)))
 ================================================================================
@@ -927,8 +1021,10 @@ arrow right from 2/3 <last box.ne, last box.se>
   (element
     (primitive)
     (attribute_list
-      (attribute)
       (attribute
+        (name))
+      (attribute
+        (name)
         (position
           (position_not_place
             (expr
@@ -950,8 +1046,10 @@ arrow right from 2/3 <last box.ne, last box.se>
   (element
     (primitive)
     (attribute_list
-      (attribute)
       (attribute
+        (name))
+      (attribute
+        (name)
         (position
           (position_not_place
             (expr
@@ -996,16 +1094,20 @@ A: ellipse
     (primitive)
     (attribute_list
       (attribute
+        (name)
         (expr
           (number)))
       (attribute
+        (name)
         (expr
           (number)))
       (attribute
+        (name)
         (path
           (relative_path
             (corner))))
       (attribute
+        (name)
         (position
           (place
             (nth_primitive
@@ -1016,16 +1118,20 @@ A: ellipse
     (primitive)
     (attribute_list
       (attribute
+        (name)
         (expr
           (number)))
       (attribute
+        (name)
         (expr
           (number)))
       (attribute
+        (name)
         (path
           (relative_path
             (corner))))
       (attribute
+        (name)
         (position
           (place
             (nth_primitive
@@ -1036,9 +1142,11 @@ A: ellipse
     (primitive)
     (attribute_list
       (attribute
+        (name)
         (expr
           (number)))
       (attribute
+        (name)
         (position
           (position_not_place
             (expr
@@ -1055,9 +1163,11 @@ A: ellipse
     (primitive)
     (attribute_list
       (attribute
+        (name)
         (expr
           (number)))
       (attribute
+        (name)
         (position
           (position_not_place
             (expr
@@ -1074,6 +1184,7 @@ A: ellipse
     (primitive)
     (attribute_list
       (attribute
+        (name)
         (position
           (position_not_place
             (expr
@@ -1087,6 +1198,7 @@ A: ellipse
                 (label)
                 (corner))))))
       (attribute
+        (name)
         (position
           (position_not_place
             (expr
@@ -1102,7 +1214,7 @@ A: ellipse
   (element
     (command_line)))
 ================================================================================
-parameterize picture using expressions
+parameterized picture using expressions
 ================================================================================
 .PS
 a = 0.5; b = 1
@@ -1133,15 +1245,18 @@ rad = 2nd last circle.rad  # the radius of the 2nd last circle
     (primitive)
     (attribute_list
       (attribute
+        (name)
         (expr
           (variable)))
       (attribute
+        (name)
         (expr
           (variable)))))
   (element
     (primitive)
     (attribute_list
       (attribute
+        (name)
         (expr
           (expr
             (expr
@@ -1149,6 +1264,7 @@ rad = 2nd last circle.rad  # the radius of the 2nd last circle
           (expr
             (number))))
       (attribute
+        (name)
         (expr
           (expr
             (expr
@@ -1232,6 +1348,7 @@ box ht 1 wid 1 dotted with .sw at 0,0
       (attribute
         (text))
       (attribute
+        (name)
         (position
           (position_not_place
             (expr_pair
@@ -1246,6 +1363,7 @@ box ht 1 wid 1 dotted with .sw at 0,0
       (attribute
         (text))
       (attribute
+        (name)
         (position
           (position_not_place
             (expr_pair
@@ -1257,17 +1375,22 @@ box ht 1 wid 1 dotted with .sw at 0,0
     (primitive)
     (attribute_list
       (attribute
+        (name)
         (expr
           (number)))
       (attribute
+        (name)
         (expr
           (number)))
-      (attribute)
       (attribute
+        (name))
+      (attribute
+        (name)
         (path
           (relative_path
             (corner))))
       (attribute
+        (name)
         (position
           (position_not_place
             (expr_pair
@@ -1293,25 +1416,33 @@ spline from start of last line \
   (element
     (primitive)
     (attribute_list
-      (attribute)
       (attribute
+        (name))
+      (attribute
+        (name)
         (expr
           (number)))
-      (attribute)
       (attribute
+        (name))
+      (attribute
+        (name)
         (expr
           (number)))
       (attribute
+        (name)
         (expr
           (number)))
-      (attribute)
       (attribute
+        (name))
+      (attribute
+        (name)
         (expr
           (number)))))
   (element
     (primitive)
     (attribute_list
       (attribute
+        (name)
         (position
           (place
             (corner)
@@ -1323,15 +1454,20 @@ spline from start of last line \
             (variable))
           (expr
             (number))))
-      (attribute)
       (attribute
+        (name))
+      (attribute
+        (name)
         (expr
           (number)))
       (attribute
+        (name)
         (expr
           (number)))
-      (attribute)
       (attribute
+        (name))
+      (attribute
+        (name)
         (expr
           (number)))))
   (element
@@ -1366,7 +1502,8 @@ box "1"
         (attribute_list
           (attribute
             (text))
-          (attribute)))
+          (attribute
+            (name))))
       (element
         (primitive)
         (attribute_list
@@ -1374,10 +1511,12 @@ box "1"
             (text)))))
     (attribute_list
       (attribute
+        (name)
         (path
           (relative_path
             (corner))))
       (attribute
+        (name)
         (position
           (position_not_place
             (position
@@ -1395,8 +1534,10 @@ box "1"
     (primitive
       (text))
     (attribute_list
-      (attribute)
       (attribute
+        (name))
+      (attribute
+        (name)
         (position
           (place
             (nth_primitive
@@ -1486,6 +1627,7 @@ box dashed ht last [].ht+dw wid last [].wid+dw at last []
               (primitive)
               (attribute_list
                 (attribute
+                  (name)
                   (expr
                     (expr
                       (expr
@@ -1550,10 +1692,12 @@ box dashed ht last [].ht+dw wid last [].wid+dw at last []
             (element
               (primitive)
               (attribute_list
-                (attribute)
+                (attribute
+                  (name))
                 (attribute
                   (text))
                 (attribute
+                  (name)
                   (expr
                     (expr
                       (expr
@@ -1568,10 +1712,12 @@ box dashed ht last [].ht+dw wid last [].wid+dw at last []
                 (primitive))))
           (attribute_list
             (attribute
+              (name)
               (path
                 (relative_path
                   (corner))))
             (attribute
+              (name)
               (position
                 (position_not_place
                   (position
@@ -1592,11 +1738,13 @@ box dashed ht last [].ht+dw wid last [].wid+dw at last []
         (primitive)
         (attribute_list
           (attribute
+            (name)
             (position
               (place
                 (label)
                 (composite_label))))
           (attribute
+            (name)
             (position
               (position_not_place
                 (position
@@ -1614,11 +1762,13 @@ box dashed ht last [].ht+dw wid last [].wid+dw at last []
         (primitive)
         (attribute_list
           (attribute
+            (name)
             (position
               (place
                 (label)
                 (composite_label))))
           (attribute
+            (name)
             (position
               (position_not_place
                 (position
@@ -1636,11 +1786,13 @@ box dashed ht last [].ht+dw wid last [].wid+dw at last []
         (primitive)
         (attribute_list
           (attribute
+            (name)
             (position
               (place
                 (label)
                 (composite_label))))
           (attribute
+            (name)
             (position
               (position_not_place
                 (position
@@ -1658,11 +1810,13 @@ box dashed ht last [].ht+dw wid last [].wid+dw at last []
         (primitive)
         (attribute_list
           (attribute
+            (name)
             (position
               (place
                 (label)
                 (composite_label))))
           (attribute
+            (name)
             (position
               (position_not_place
                 (position
@@ -1679,8 +1833,10 @@ box dashed ht last [].ht+dw wid last [].wid+dw at last []
   (element
     (primitive)
     (attribute_list
-      (attribute)
       (attribute
+        (name))
+      (attribute
+        (name)
         (expr
           (expr
             (place
@@ -1690,6 +1846,7 @@ box dashed ht last [].ht+dw wid last [].wid+dw at last []
           (expr
             (variable))))
       (attribute
+        (name)
         (expr
           (expr
             (place
@@ -1699,6 +1856,7 @@ box dashed ht last [].ht+dw wid last [].wid+dw at last []
           (expr
             (variable))))
       (attribute
+        (name)
         (position
           (place
             (nth_primitive
@@ -1806,6 +1964,7 @@ for i = 0 to 2 * pi by 0.1 do {
             (text))
           (attribute_list
             (attribute
+              (name)
               (position
                 (position_not_place
                   (expr_pair
@@ -1822,6 +1981,7 @@ for i = 0 to 2 * pi by 0.1 do {
             (text))
           (attribute_list
             (attribute
+              (name)
               (position
                 (position_not_place
                   (expr_pair
@@ -1847,6 +2007,7 @@ for i = 0 to 2 * pi by 0.1 do {
             (text))
           (attribute_list
             (attribute
+              (name)
               (position
                 (position_not_place
                   (expr_pair
@@ -1934,6 +2095,7 @@ if (s = sin(i)) > 0.8 then { s = 0.8 }
             (text))
           (attribute_list
             (attribute
+              (name)
               (position
                 (position_not_place
                   (expr_pair
@@ -1976,9 +2138,11 @@ circle radius .05 at 0,0
     (primitive)
     (attribute_list
       (attribute
+        (name)
         (expr
           (number)))
       (attribute
+        (name)
         (position
           (position_not_place
             (expr_pair
@@ -1992,9 +2156,11 @@ circle radius .05 at 0,0
     (primitive)
     (attribute_list
       (attribute
+        (name)
         (expr
           (number)))
       (attribute
+        (name)
         (position
           (position_not_place
             (expr_pair
@@ -2008,9 +2174,11 @@ circle radius .05 at 0,0
     (primitive)
     (attribute_list
       (attribute
+        (name)
         (expr
           (number)))
       (attribute
+        (name)
         (position
           (position_not_place
             (expr_pair
@@ -2024,9 +2192,11 @@ circle radius .05 at 0,0
     (primitive)
     (attribute_list
       (attribute
+        (name)
         (expr
           (number)))
       (attribute
+        (name)
         (position
           (position_not_place
             (expr_pair
@@ -2113,6 +2283,7 @@ box invis wid 2*boxwid "ndtable:" with .e at Start.w
     (primitive)
     (attribute_list
       (attribute
+        (name)
         (expr
           (expr
             (expr
@@ -2134,8 +2305,10 @@ box invis wid 2*boxwid "ndtable:" with .e at Start.w
   (element
     (primitive)
     (attribute_list
-      (attribute)
       (attribute
+        (name))
+      (attribute
+        (name)
         (expr
           (expr
             (expr
@@ -2145,10 +2318,12 @@ box invis wid 2*boxwid "ndtable:" with .e at Start.w
       (attribute
         (text))
       (attribute
+        (name)
         (path
           (relative_path
             (corner))))
       (attribute
+        (name)
         (position
           (place
             (nth_primitive
@@ -2163,13 +2338,16 @@ box invis wid 2*boxwid "ndtable:" with .e at Start.w
       (primitive)
       (attribute_list
         (attribute
+          (name)
           (expr
             (number)))
         (attribute
+          (name)
           (path
             (relative_path
               (corner))))
         (attribute
+          (name)
           (position
             (position_not_place
               (position
@@ -2192,6 +2370,7 @@ box invis wid 2*boxwid "ndtable:" with .e at Start.w
       (primitive)
       (attribute_list
         (attribute
+          (name)
           (expr
             (number)))
         (attribute
@@ -2202,6 +2381,7 @@ box invis wid 2*boxwid "ndtable:" with .e at Start.w
       (primitive)
       (attribute_list
         (attribute
+          (name)
           (expr
             (number)))
         (attribute
@@ -2212,6 +2392,7 @@ box invis wid 2*boxwid "ndtable:" with .e at Start.w
       (primitive)
       (attribute_list
         (attribute
+          (name)
           (expr
             (number)))
         (attribute
@@ -2222,6 +2403,7 @@ box invis wid 2*boxwid "ndtable:" with .e at Start.w
       (primitive)
       (attribute_list
         (attribute
+          (name)
           (expr
             (number)))
         (attribute
@@ -2230,6 +2412,7 @@ box invis wid 2*boxwid "ndtable:" with .e at Start.w
     (primitive)
     (attribute_list
       (attribute
+        (name)
         (expr
           (number)))
       (attribute
@@ -2240,6 +2423,7 @@ box invis wid 2*boxwid "ndtable:" with .e at Start.w
       (primitive)
       (attribute_list
         (attribute
+          (name)
           (expr
             (number)))
         (attribute
@@ -2250,6 +2434,7 @@ box invis wid 2*boxwid "ndtable:" with .e at Start.w
       (primitive)
       (attribute_list
         (attribute
+          (name)
           (expr
             (number)))
         (attribute
@@ -2257,8 +2442,10 @@ box invis wid 2*boxwid "ndtable:" with .e at Start.w
   (element
     (primitive)
     (attribute_list
-      (attribute)
       (attribute
+        (name))
+      (attribute
+        (name)
         (position
           (place
             (nth_primitive
@@ -2270,18 +2457,23 @@ box invis wid 2*boxwid "ndtable:" with .e at Start.w
   (element
     (primitive)
     (attribute_list
-      (attribute)
       (attribute
+        (name))
+      (attribute
+        (name)
         (expr
           (number)))
       (attribute
+        (name)
         (position
           (place
             (nth_primitive
               (ordinal)
               (object_type)))))
-      (attribute)
       (attribute
+        (name))
+      (attribute
+        (name)
         (position
           (position_not_place
             (position
@@ -2297,18 +2489,23 @@ box invis wid 2*boxwid "ndtable:" with .e at Start.w
   (element
     (primitive)
     (attribute_list
-      (attribute)
       (attribute
+        (name))
+      (attribute
+        (name)
         (expr
           (number)))
       (attribute
+        (name)
         (position
           (place
             (nth_primitive
               (ordinal)
               (object_type)))))
-      (attribute)
       (attribute
+        (name))
+      (attribute
+        (name)
         (position
           (position_not_place
             (position
@@ -2324,8 +2521,10 @@ box invis wid 2*boxwid "ndtable:" with .e at Start.w
   (element
     (primitive)
     (attribute_list
-      (attribute)
       (attribute
+        (name))
+      (attribute
+        (name)
         (position
           (place
             (nth_primitive
@@ -2336,17 +2535,21 @@ box invis wid 2*boxwid "ndtable:" with .e at Start.w
   (element
     (primitive)
     (attribute_list
-      (attribute)
       (attribute
+        (name))
+      (attribute
+        (name)
         (expr
           (number)))
       (attribute
+        (name)
         (position
           (place
             (nth_primitive
               (ordinal)
               (object_type)))))
       (attribute
+        (name)
         (position
           (position_not_place
             (position
@@ -2360,6 +2563,7 @@ box invis wid 2*boxwid "ndtable:" with .e at Start.w
                 (expr
                   (number)))))))
       (attribute
+        (name)
         (position
           (position_not_place
             (position
@@ -2375,17 +2579,21 @@ box invis wid 2*boxwid "ndtable:" with .e at Start.w
   (element
     (primitive)
     (attribute_list
-      (attribute)
       (attribute
+        (name))
+      (attribute
+        (name)
         (expr
           (number)))
       (attribute
+        (name)
         (position
           (place
             (nth_primitive
               (ordinal)
               (object_type)))))
       (attribute
+        (name)
         (position
           (position_not_place
             (position
@@ -2399,6 +2607,7 @@ box invis wid 2*boxwid "ndtable:" with .e at Start.w
                 (expr
                   (number)))))))
       (attribute
+        (name)
         (position
           (position_not_place
             (position
@@ -2415,6 +2624,7 @@ box invis wid 2*boxwid "ndtable:" with .e at Start.w
     (primitive)
     (attribute_list
       (attribute
+        (name)
         (expr
           (expr
             (expr
@@ -2422,6 +2632,7 @@ box invis wid 2*boxwid "ndtable:" with .e at Start.w
           (expr
             (variable))))
       (attribute
+        (name)
         (position
           (place
             (label))))))
@@ -2431,17 +2642,21 @@ box invis wid 2*boxwid "ndtable:" with .e at Start.w
   (element
     (primitive)
     (attribute_list
-      (attribute)
       (attribute
+        (name))
+      (attribute
+        (name)
         (expr
           (number)))
       (attribute
+        (name)
         (position
           (place
             (nth_primitive
               (ordinal)
               (object_type)))))
       (attribute
+        (name)
         (position
           (position_not_place
             (position
@@ -2457,17 +2672,21 @@ box invis wid 2*boxwid "ndtable:" with .e at Start.w
   (element
     (primitive)
     (attribute_list
-      (attribute)
       (attribute
+        (name))
+      (attribute
+        (name)
         (expr
           (number)))
       (attribute
+        (name)
         (position
           (place
             (nth_primitive
               (ordinal)
               (object_type)))))
       (attribute
+        (name)
         (position
           (position_not_place
             (position
@@ -2488,10 +2707,12 @@ box invis wid 2*boxwid "ndtable:" with .e at Start.w
   (element
     (primitive)
     (attribute_list
-      (attribute)
+      (attribute
+        (name))
       (attribute
         (text))
       (attribute
+        (name)
         (position
           (position_not_place
             (position
@@ -2508,29 +2729,36 @@ box invis wid 2*boxwid "ndtable:" with .e at Start.w
   (element
     (primitive)
     (attribute_list
-      (attribute)
       (attribute
+        (name))
+      (attribute
+        (name)
         (position
           (place
             (nth_primitive
               (object_type))
             (corner))))
       (attribute
+        (name)
         (position
           (place
             (nth_primitive
               (object_type)))))
       (attribute
+        (name)
         (expr
           (number)))
       (attribute
+        (name)
         (expr
           (number)))))
   (element
     (primitive)
     (attribute_list
-      (attribute)
       (attribute
+        (name))
+      (attribute
+        (name)
         (expr
           (expr
             (expr
@@ -2540,10 +2768,12 @@ box invis wid 2*boxwid "ndtable:" with .e at Start.w
       (attribute
         (text))
       (attribute
+        (name)
         (path
           (relative_path
             (corner))))
       (attribute
+        (name)
         (position
           (place
             (label)
@@ -2607,16 +2837,20 @@ circle rad 0.05 at Paper + (0.055, -0.25)
     (element
       (primitive)
       (attribute_list
-        (attribute)
         (attribute
+          (name))
+        (attribute
+          (name)
           (position
             (place
               (corner)
               (label))))
-        (attribute)
+        (attribute
+          (name))
         (attribute
           (text))
-        (attribute))))
+        (attribute
+          (name)))))
   (element
     (primitive))
   (element
@@ -2625,11 +2859,13 @@ circle rad 0.05 at Paper + (0.055, -0.25)
       (primitive
         (text))
       (attribute_list
-        (attribute))))
+        (attribute
+          (name)))))
   (element
     (primitive)
     (attribute_list
       (attribute
+        (name)
         (position
           (position_not_place
             (position
@@ -2641,35 +2877,48 @@ circle rad 0.05 at Paper + (0.055, -0.25)
               (expr
                 (number))))))
       (attribute
-        (expr
-          (number)))
-      (attribute)
-      (attribute
-        (expr
-          (number)))
-      (attribute)
-      (attribute
+        (name)
         (expr
           (number)))
       (attribute
+        (name))
+      (attribute
+        (name)
         (expr
           (number)))
-      (attribute)
       (attribute
+        (name))
+      (attribute
+        (name)
+        (expr
+          (number)))
+      (attribute
+        (name)
+        (expr
+          (number)))
+      (attribute
+        (name))
+      (attribute
+        (name)
         (expr
           (expr
             (number))
           (expr
             (number))))
-      (attribute)
       (attribute
+        (name))
+      (attribute
+        (name)
         (expr
           (number)))
       (attribute
+        (name)
         (expr
           (number)))
-      (attribute)
       (attribute
+        (name))
+      (attribute
+        (name)
         (expr
           (number)))))
   (element
@@ -2686,20 +2935,25 @@ circle rad 0.05 at Paper + (0.055, -0.25)
   (element
     (primitive)
     (attribute_list
-      (attribute)
       (attribute
+        (name))
+      (attribute
+        (name)
         (position
           (place
             (label))))
       (attribute
+        (name)
         (expr
           (number)))))
   (element
     (primitive
       (text))
     (attribute_list
-      (attribute)
       (attribute
+        (name))
+      (attribute
+        (name)
         (position
           (position_not_place
             (position
@@ -2716,9 +2970,11 @@ circle rad 0.05 at Paper + (0.055, -0.25)
     (primitive)
     (attribute_list
       (attribute
+        (name)
         (expr
           (number)))
       (attribute
+        (name)
         (position
           (position_not_place
             (position
@@ -2736,9 +2992,11 @@ circle rad 0.05 at Paper + (0.055, -0.25)
     (primitive)
     (attribute_list
       (attribute
+        (name)
         (expr
           (number)))
       (attribute
+        (name)
         (position
           (position_not_place
             (position
@@ -2755,8 +3013,10 @@ circle rad 0.05 at Paper + (0.055, -0.25)
     (primitive
       (text))
     (attribute_list
-      (attribute)
       (attribute
+        (name))
+      (attribute
+        (name)
         (position
           (position_not_place
             (position

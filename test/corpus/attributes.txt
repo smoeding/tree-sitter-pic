@@ -14,18 +14,22 @@ box width 2.0 height 1
     (primitive)
     (attribute_list
       (attribute
+        (name)
         (expr
           (number)))
       (attribute
+        (name)
         (expr
           (number)))))
   (element
     (primitive)
     (attribute_list
       (attribute
+        (name)
         (expr
           (number)))
       (attribute
+        (name)
         (expr
           (number)))))
   (element
@@ -47,12 +51,14 @@ circle diameter 0.5
     (primitive)
     (attribute_list
       (attribute
+        (name)
         (expr
           (number)))))
   (element
     (primitive)
     (attribute_list
       (attribute
+        (name)
         (expr
           (number)))))
   (element
@@ -74,12 +80,14 @@ arc radius 0.5
     (primitive)
     (attribute_list
       (attribute
+        (name)
         (expr
           (number)))))
   (element
     (primitive)
     (attribute_list
       (attribute
+        (name)
         (expr
           (number)))))
   (element
@@ -102,6 +110,7 @@ box at last box.se + (1,0)
     (primitive)
     (attribute_list
       (attribute
+        (name)
         (position
           (position_not_place
             (expr_pair
@@ -114,6 +123,7 @@ box at last box.se + (1,0)
     (primitive)
     (attribute_list
       (attribute
+        (name)
         (position
           (place
             (nth_primitive
@@ -123,6 +133,7 @@ box at last box.se + (1,0)
     (primitive)
     (attribute_list
       (attribute
+        (name)
         (position
           (position_not_place
             (position
@@ -173,8 +184,10 @@ arc cw from 1/3 of the way \
   (element
     (primitive)
     (attribute_list
-      (attribute)
       (attribute
+        (name))
+      (attribute
+        (name)
         (position
           (position_not_place
             (expr
@@ -194,6 +207,7 @@ arc cw from 1/3 of the way \
                   (object_type))
                 (corner))))))
       (attribute
+        (name)
         (position
           (place
             (nth_primitive
@@ -217,19 +231,23 @@ box ht 0.5; box ht 0.75 with .sw at last box .se
     (primitive)
     (attribute_list
       (attribute
+        (name)
         (expr
           (number)))))
   (element
     (primitive)
     (attribute_list
       (attribute
+        (name)
         (expr
           (number)))
       (attribute
+        (name)
         (path
           (relative_path
             (corner))))
       (attribute
+        (name)
         (position
           (place
             (nth_primitive

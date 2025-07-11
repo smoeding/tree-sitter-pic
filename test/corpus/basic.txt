@@ -28,6 +28,7 @@ ellipse "PostScript"
     (primitive)
     (attribute_list
       (attribute
+        (name)
         (expr
           (number)))
       (attribute
@@ -41,6 +42,7 @@ ellipse "PostScript"
     (primitive)
     (attribute_list
       (attribute
+        (name)
         (expr
           (number)))
       (attribute
@@ -53,13 +55,15 @@ ellipse "PostScript"
           (escape_sequence)))
       (attribute
         (text))
-      (attribute)))
+      (attribute
+        (name))))
   (element
     (primitive))
   (element
     (primitive)
     (attribute_list
       (attribute
+        (name)
         (expr
           (number)))
       (attribute
@@ -229,15 +233,18 @@ box; box wid 1 ht 1; box same; box
     (primitive)
     (attribute_list
       (attribute
+        (name)
         (expr
           (number)))
       (attribute
+        (name)
         (expr
           (number)))))
   (element
     (primitive)
     (attribute_list
-      (attribute)))
+      (attribute
+        (name))))
   (element
     (primitive))
   (element
@@ -270,6 +277,7 @@ ellipse
     (primitive)
     (attribute_list
       (attribute
+        (name)
         (position
           (place
             (nth_primitive
@@ -317,8 +325,10 @@ arrow left  at 1/4 <B.w,B.sw>;
   (element
     (primitive)
     (attribute_list
-      (attribute)
       (attribute
+        (name))
+      (attribute
+        (name)
         (position
           (position_not_place
             (expr
@@ -338,8 +348,10 @@ arrow left  at 1/4 <B.w,B.sw>;
   (element
     (primitive)
     (attribute_list
-      (attribute)
       (attribute
+        (name))
+      (attribute
+        (name)
         (position
           (position_not_place
             (expr

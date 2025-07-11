@@ -101,8 +101,10 @@ box solid \
   (element
     (primitive)
     (attribute_list
-      (attribute)
-      (attribute)))
+      (attribute
+        (name))
+      (attribute
+        (name))))
   (element
     (command_line)))
 
@@ -155,42 +157,56 @@ spline from start of last line right 1 then down .5 left 1 then right 1
   (element
     (primitive)
     (attribute_list
-      (attribute)
       (attribute
+        (name))
+      (attribute
+        (name)
         (expr
           (number)))
-      (attribute)
       (attribute
+        (name))
+      (attribute
+        (name)
         (expr
           (number)))
       (attribute
+        (name)
         (expr
           (number)))
-      (attribute)
       (attribute
+        (name))
+      (attribute
+        (name)
         (expr
           (number)))))
   (element
     (primitive)
     (attribute_list
       (attribute
+        (name)
         (position
           (place
             (corner)
             (nth_primitive
               (object_type)))))
       (attribute
-        (expr
-          (number)))
-      (attribute)
-      (attribute
+        (name)
         (expr
           (number)))
       (attribute
+        (name))
+      (attribute
+        (name)
         (expr
           (number)))
-      (attribute)
       (attribute
+        (name)
+        (expr
+          (number)))
+      (attribute
+        (name))
+      (attribute
+        (name)
         (expr
           (number)))))
   (element
